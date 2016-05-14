@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_hmi_kiddos_model_Admission" modelAttribute="admission" path="/admissions" versionField="Version" z="nR1+7B0CBG6uKIJmOa9ANYSR08Y=">
+        <field:input disabled="false" field="feesExpected" id="c_com_hmi_kiddos_model_Admission_feesExpected" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input disabled="false" field="feesPaid" id="c_com_hmi_kiddos_model_Admission_feesPaid" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input disabled="false" field="feesDue" id="c_com_hmi_kiddos_model_Admission_feesDue" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:datetime dateTimePattern="${admission_admissiondate_date_format}" field="admissionDate" id="c_com_hmi_kiddos_model_Admission_admissionDate" z="VKCkkXLLBJ8R5KtXPyQzV77sasw="/>
+        <field:datetime dateTimePattern="${admission_joiningdate_date_format}" field="joiningDate" id="c_com_hmi_kiddos_model_Admission_joiningDate" z="rDztC1QekGHKRmQe7dFafS0iDjY="/>
+        <field:textarea field="notes" id="c_com_hmi_kiddos_model_Admission_notes" z="DfRNmFKyHJkBE1Xxl5iUB6fdvVQ="/>
+        <field:select field="child" id="c_com_hmi_kiddos_model_Admission_child" itemValue="id" items="${children}" path="/children" required="true" z="MG7PccQXZTIlgqFGxNpM/heuE58="/>
+        <field:select field="programs" id="c_com_hmi_kiddos_model_Admission_programs" itemValue="id" items="${programs}" multiple="true" path="/programs" required="true" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:select disabled="false" field="payments" id="c_com_hmi_kiddos_model_Admission_payments" itemValue="id" items="${payments}" multiple="true" path="/payments" z="user-managed"/>
+        <field:input field="discount" id="c_com_hmi_kiddos_model_Admission_discount" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
+        <field:select field="transportArrival" id="c_com_hmi_kiddos_model_Admission_transportArrival" itemValue="id" items="${transportations}" path="/transportations" z="US1pMnSAvtYsdA2AzcpO+2Hpx9c="/>
+        <field:select field="transportDeparture" id="c_com_hmi_kiddos_model_Admission_transportDeparture" itemValue="id" items="${transportations}" path="/transportations" z="glweeUAlmR8LMM1j8mngyb97R8s="/>
+    </form:update>
+</div>

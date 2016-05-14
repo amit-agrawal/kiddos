@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_hmi_kiddos_model_Program" items="${programs}" z="93RXlLkkiwajgS+P9kyi9N1csaE=">
+        <table:table data="${programs}" id="l_com_hmi_kiddos_model_Program" path="/programs" z="JtAC/LWbXN92xFp+uOc+hD+Jw/E=">
+            <table:column id="c_com_hmi_kiddos_model_Program_center" property="center" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_term" property="term" z="IgL6tWI6X5OJ4+fa5N49FbMFcNE="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_batch" property="batch" z="6CmU+ZvLYKQcyP528awm5k+emsg="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_type" property="type" z="rg9l6H90IW/8s5RHW9k9EiFPKyc="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_teacher" property="teacher" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Program_kidsCount" property="kidsCount" z="LFPPThoGY+wEaEv/Fgx+g4712Wg="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_children" property="children" z="VtMhpFDktLOu+rkAT7UxHHm9UCE="/>
+        </table:table>
+    </page:list>
+</div>

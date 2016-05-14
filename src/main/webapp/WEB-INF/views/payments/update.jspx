@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_hmi_kiddos_model_Payment" modelAttribute="payment" path="/payments" versionField="Version" z="Ix0xiSbkzhLFNjaqj+q0LOYA7o0=">
+        <field:input field="amount" id="c_com_hmi_kiddos_model_Payment_amount" max="999999" required="true" validationMessageCode="field_invalid_integer" z="+DWU/lcObhErf38ALhJIYSTaj3M="/>
+        <field:select field="paymentMedium" id="c_com_hmi_kiddos_model_Payment_paymentMedium" items="${paymentmediums}" path="paymentmediums" required="true" z="joMzIsenWO75GGnFZ6BNfizAgc4="/>
+        <field:datetime dateTimePattern="${payment_paymentdate_date_format}" field="paymentDate" id="c_com_hmi_kiddos_model_Payment_paymentDate" z="shSVcv/Ph2KgcSCIt8bGehwLxGo="/>
+        <field:select field="admissions" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${admissions}" multiple="true" path="/admissions" required="true" z="xXlab7XdswxtUNOH1ptwa+bXmM4="/>
+        <field:textarea field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+        <field:input field="receiptNumber" id="c_com_hmi_kiddos_model_Payment_receiptNumber" max="30" z="CVRL69oLwGRMucjA58PUdLhygEo="/>
+    </form:update>
+</div>

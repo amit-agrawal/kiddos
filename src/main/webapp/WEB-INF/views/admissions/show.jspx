@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_hmi_kiddos_model_Admission" object="${admission}" path="/admissions" z="eQ2VXU70HcpXeUH3aZqrd8G/06M=">
+        <field:display field="feesExpected" id="s_com_hmi_kiddos_model_Admission_feesExpected" object="${admission}" z="wi1KEKAzcrg2FKFr0Z+HAd0FTC0="/>
+        <field:display field="feesPaid" id="s_com_hmi_kiddos_model_Admission_feesPaid" object="${admission}" z="2twqFs1+dvwWv1bz7Q7KsoEYJfQ="/>
+        <field:display field="feesDue" id="s_com_hmi_kiddos_model_Admission_feesDue" object="${admission}" z="B0xjtELWAmnkm9frAPzNjYKa2bI="/>
+        <field:display calendar="true" dateTimePattern="${admission_admissiondate_date_format}" field="admissionDate" id="s_com_hmi_kiddos_model_Admission_admissionDate" object="${admission}" z="yrjA201jZdMWZJHwyPS8ttl9LOo="/>
+        <field:display calendar="true" dateTimePattern="${admission_joiningdate_date_format}" field="joiningDate" id="s_com_hmi_kiddos_model_Admission_joiningDate" object="${admission}" z="XYz1GH8mbg8bSl5dj4Y/ocCPH90="/>
+        <field:display field="notes" id="s_com_hmi_kiddos_model_Admission_notes" object="${admission}" z="ZaS2Ktw+NJclWcENMGKY8FmD0go="/>
+        <field:display field="child" id="s_com_hmi_kiddos_model_Admission_child" object="${admission}" z="u9fBL/Viv0JelSriH0nTHJhHfKE="/>
+        <field:display field="programs" id="s_com_hmi_kiddos_model_Admission_programs" object="${admission}" z="uPvcqapjjnIAs3MxKLXcIaReF/o="/>
+        <field:display field="payments" id="s_com_hmi_kiddos_model_Admission_payments" object="${admission}" z="tlTyoUjtZ1rm5VTKuvp2X2/Y0bs="/>
+        <field:display field="discount" id="s_com_hmi_kiddos_model_Admission_discount" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
+        <field:display field="transportArrival" id="s_com_hmi_kiddos_model_Admission_transportArrival" object="${admission}" z="tRalg8fdZFXgFGeu8Mh8pN3XT+U="/>
+        <field:display field="transportDeparture" id="s_com_hmi_kiddos_model_Admission_transportDeparture" object="${admission}" z="UKWQwMAnWBsagfPWgIo0DbULgEo="/>
+    </page:show>
+</div>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+<link href="http://localhost:8080/" rel="selenium.base"/>
+<title>Selenium test for AdmissionController</title>
+</head>
+<body>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <thead>
+            <tr>
+                <td colspan="3" rowspan="1">Selenium test for AdmissionController</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+                    <td>open</td>
+                    <td>http://localhost:8080/kiddos/admissions?form&amp;lang=en_IN</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_feesExpected_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_feesPaid_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_feesDue_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_admissionDate_id</td>
+                    <td>14 May, 2016</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_joiningDate_id</td>
+                    <td>14 May, 2016</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_notes_id</td>
+                    <td>someNotes1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_discount_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//input[@id = 'proceed']</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_feesExpected_feesExpected_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_feesPaid_feesPaid_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_feesDue_feesDue_id</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_admissionDate_admissionDate_id</td>
+                    <td>14 May, 2016</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_joiningDate_joiningDate_id</td>
+                    <td>14 May, 2016</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_notes_notes_id</td>
+                    <td>someNotes1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_com_hmi_kiddos_model_Admission_discount_discount_id</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+    </table>
+</body>
+</html>

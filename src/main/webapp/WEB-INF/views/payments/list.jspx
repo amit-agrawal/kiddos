@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_hmi_kiddos_model_Payment" items="${payments}" z="0qKrNr37o3G9jWAqSNejSSUvQm4=">
+        <table:table data="${payments}" id="l_com_hmi_kiddos_model_Payment" path="/payments" z="Jl76rH9SNEfEX5FONDxHZ2LZLbs=">
+            <table:column id="c_com_hmi_kiddos_model_Payment_amount" property="amount" z="tcAVXAyQwSXVsbalyRMnv8/PGOE="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_paymentMedium" property="paymentMedium" z="mgqdYUN6ooSrkw3tNsraIaLlFkk="/>
+            <table:column calendar="true" dateTimePattern="${payment_paymentdate_date_format}" id="c_com_hmi_kiddos_model_Payment_paymentDate" property="paymentDate" z="OjRXSvfurv3devKoUTkqJA/niq8="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_admissions" property="admissions" z="AqTi/MdlZnRXxZVa8tMwiKRjy1o="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_transactionNumber" property="transactionNumber" z="yS5RfrPA5ZY5A4BTH+8qrKEL8wk="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_receiptNumber" property="receiptNumber" z="uqC4274SKQXjjxwn5NuFc4jb6Og="/>
+        </table:table>
+    </page:list>
+</div>

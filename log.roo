@@ -1,0 +1,301 @@
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-08 15:20:45
+project setup --topLevelPackage com.hmi.kiddos
+jpa setup --provider HIBERNATE --database MYSQL 
+logging setup --level DEBUG 
+enum type --class ~.model.Centers
+enum constant --name Powai
+enum constant --name Bhandup
+enum type --class ~.model.Department
+enum constant --name Teacher
+enum constant --name Nanny
+enum constant --name Admin
+enum type --class ~.model.Gender
+enum constant --name Male
+enum constant --name Female
+enum type --class ~.model.ProgramTypes
+enum constant --name PLAY_SCHOOL
+enum constant --name NURSERY
+enum constant --name JR_KG
+enum constant --name DAY_CARE
+enum constant --name SUMMERCAMP
+enum type --class ~.model.ProgramSubTypes
+enum constant --name FULL_DAY_DC
+enum constant --name MORNING_HALF_DAY_DC
+enum constant --name EVENING_HALF_DAY_DC
+enum constant --name QUARTER_DAY_DC
+enum constant --name ADHOC_DC
+enum constant --name NIGHT_DC
+enum constant --name INFANT_FULL_DAY_DC
+enum constant --name INFANT_MORNING_HALF_DAY_DC
+enum constant --name INFANT_EVENING_HALF_DAY_DC
+enum constant --name INFANT_QUARTER_DAY_DC
+enum type --class ~.model.PaymentMedium
+enum constant --name CASH
+enum constant --name CHEQUE
+enum constant --name ONLINE
+enum type --class ~.model.Batch
+enum constant --name MORNING
+enum constant --name AFTERNOON
+enum constant --name LATE_AFTERNOON
+entity jpa --class ~.model.UserRole --testAutomatically 
+field string --fieldName roleName --notNull --sizeMax 20
+field string --fieldName notes --sizeMax 400
+entity jpa --class ~.model.Staff --testAutomatically 
+field string --fieldName firstName --notNull --sizeMax 20
+field string --fieldName middleName --sizeMax 20
+field string --fieldName lastName --notNull --sizeMax 20
+field string --fieldName password --sizeMax 20
+field enum --fieldName gender --type ~.model.Gender
+field string --fieldName emailOne --sizeMax 30
+field string --fieldName phone --sizeMax 20
+field string --fieldName phoneHome --sizeMax 20
+field string --fieldName address --sizeMax 200
+field string --fieldName pincode --sizeMax 6 
+field enum --fieldName center --type ~.model.Centers
+field enum --fieldName department --type ~.model.Department
+field date --fieldName dob --type java.util.Calendar
+field string --fieldName notes --sizeMax 400
+field boolean --fieldName enabled --notNull true
+entity jpa --class ~.model.Child --testAutomatically 
+field string --fieldName firstName --notNull --sizeMax 20
+field string --fieldName middleName --sizeMax 20
+field string --fieldName lastName --notNull --sizeMax 20
+field enum --fieldName gender --type ~.model.Gender
+field string --fieldName fatherName --sizeMax 30
+field string --fieldName motherName --sizeMax 30
+field string --fieldName fatherOrganization --sizeMax 20
+field string --fieldName motherOrganization --sizeMax 20
+field string --fieldName emailOne --sizeMax 30
+field string --fieldName emailTwo --sizeMax 30
+field string --fieldName emailThree --sizeMax 30
+field string --fieldName phoneFather --sizeMax 20
+field string --fieldName phoneMother --sizeMax 20
+field string --fieldName phoneHome --sizeMax 20
+field string --fieldName address --sizeMax 200
+field string --fieldName pincode --sizeMax 6 
+field string --fieldName bloodGroup --sizeMax 20
+field string --fieldName allergy --sizeMax 150
+field string --fieldName nationality --sizeMax 25
+field date --fieldName dob --type java.util.Calendar
+field string --fieldName notes --sizeMax 400
+entity jpa --class ~.model.Program --testAutomatically 
+field number --fieldName programYear --type java.lang.Integer --min 2010 --max 2050 
+field number --fieldName programMonth --type java.lang.Integer --min 1 --max 12 
+field enum --fieldName programType --type ~.model.ProgramTypes
+field enum --fieldName programSubType --type ~.model.ProgramSubTypes
+field string --fieldName term
+field string --fieldName timings
+field string --fieldName sectionName 
+field string --fieldName batch
+field enum --fieldName center --type ~.model.Centers
+field number --fieldName fees --type java.lang.Integer --min 1 --max 999999 
+field string --fieldName notes 
+entity jpa --class ~.model.Payment --testAutomatically 
+field number --fieldName amount --type java.lang.Integer --max 999999 
+field enum paymentMedium --type ~.model.PaymentMedium
+field date --fieldName paymentDate --type java.util.Calendar
+field string referenceId --sizeMax 50 
+field string receiptId --sizeMax 30
+entity jpa --class ~.model.Admission --testAutomatically 
+field date --fieldName admissionDate --type java.util.Calendar
+field string --fieldName term
+field enum --fieldName batch --type ~.model.Batch
+field boolean --fieldName transport 
+field boolean --fieldName feesDue 
+field number --fieldName feesDueAmount --type java.lang.Integer --max 999999 
+field boolean --fieldName feesPaid
+field string notes --sizeMax 500
+field reference --fieldName child --type com.hmi.kiddos.model.Child --class ~.model.Admission
+field set --fieldName admissions --type ~.model.Admission --cardinality ONE_TO_MANY --class ~.model.Child
+field reference --fieldName program --type com.hmi.kiddos.model.Program --class ~.model.Admission
+field set --fieldName admissions --type ~.model.Admission --cardinality ONE_TO_MANY --class ~.model.Program
+field set --fieldName payments --type ~.model.Payment --cardinality ONE_TO_MANY --class ~.model.Admission
+field reference --fieldName admission --type com.hmi.kiddos.model.Admission --class ~.model.Payment
+field set --fieldName roles --type ~.model.UserRole --cardinality MANY_TO_MANY --class ~.model.Staff
+field set --fieldName users --type ~.model.Staff --cardinality MANY_TO_MANY --class ~.model.UserRole
+web mvc setup
+web mvc all --package ~.controllers
+email sender setup --hostServer smtp.gmail.com --username sonia@thehappyminds.com --password homail21 --port 587 --protocol SMTP
+field email template --class ~.controllers.AdmissionController
+security setup
+// script --file ../scriptModel.txt
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-08 15:28:30
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-08 15:28:32
+perform tests
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-08 16:34:34
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-08 16:34:47
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-08 17:22:27
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-08 17:22:40
+perform tests
+perform tests
+backup
+perform tests
+enum type --class ~.model.PreSchoolSessions
+enum type --class ~.model.PreSchoolTerms
+enum constant --name Term_1
+enum constant --name Term_2
+enum constant --name Term_3
+enum constant --name Term_4
+enum type --class ~.model.PreSchoolSessions
+enum constant --name Session_2015_16
+enum constant --name Session_2016_17
+enum constant --name Session_2017_18
+perform tests
+perform tests
+perform tests
+// [failed] test integration
+enum type --class ~.model.Sections
+enum constant --name A
+enum constant --name B
+enum constant --name C
+perform tests
+perform tests
+perform tests
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-08 23:56:22
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-09 18:31:58
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-09 18:39:28
+perform tests
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-09 19:40:19
+backup
+// [failed] addon repository add --url http://host/repo/index.xml
+// [failed] addon repository add --url https://github.com/spring-projects/spring-roo
+addon suite list --repository http://host/repo/index.xml
+addon suite list --repository https://github.com/spring-projects/spring-roo
+addon repository add --url http://spring-roo-repository.springsource.org/repository.xml
+addon suite list --repository http://spring-roo-repository.springsource.org/repository.xml
+addon search --requiresCommand no
+addon search --requiresCommand gwt
+addon search --requiresCommand *
+addon search --requiresCommand *gwt*
+addon repository add --url http://repo.spring.io/spring-roo/index.xml
+addon suite list --repository http://repo.spring.io/spring-roo/index.xml
+!g lb
+addon list --repository http://repo.spring.io/spring-roo/index.xml
+backup
+perform tests
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-09 23:15:01
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-09 23:15:22
+perform tests
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-10 00:24:46
+perform tests
+perform tests
+backup
+// [failed] field string --fieldName password --class com.healthline.ktm.domain.Person
+// [failed] field string --fieldName password --class com.hmi.kiddos.model.Staff
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-11 21:53:03
+backup
+backup
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-11 22:37:27
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-11 22:37:39
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-11 22:40:50
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-11 22:41:04
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-11 22:46:34
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-11 22:46:48
+perform tests
+backup
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-12 02:40:55
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-12 02:41:14
+perform tests
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-12 19:39:06
+perform tests
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-12 20:46:37
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-12 20:46:53
+perform tests
+entity jpa --class ~.model.Transport --testAutomatically
+field string --fieldName driverName --notNull --sizeMax 80
+field string --fieldName notes --sizeMax 400
+field string --fieldName van --sizeMax 80
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+backup
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-12 22:33:22
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-12 22:33:54
+perform tests
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-12 23:53:11
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-12 23:53:28
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-12 23:55:33
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-12 23:56:51
+perform tests
+perform tests
+perform tests
+backup
+// [failed] entity jpa --class ~.model.Transport --testAutomatically
+entity jpa --class ~.model.Transportation --testAutomatically
+field string --fieldName driverName --notNull --sizeMax 80
+field string --fieldName notes --sizeMax 400
+field string --fieldName van --sizeMax 80
+perform tests
+perform tests
+web mvc controller --class ~.controller.TransportationController
+web mvc controller --class ~.controllers.TransportationController
+development mode
+logging setup --level DEBUG
+perform tests
+perform tests
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-13 21:33:53
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-13 21:34:16
+field number --fieldName discount --type int --class ~.model.Admission
+perform tests
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-13 23:07:22
+backup
+backup
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-14 13:30:30
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-14 13:34:15
+perform tests
+perform tests
+web mvc all --package com.hmi.kiddos.controllers
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-14 16:58:58
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-14 16:59:22
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-14 17:28:57
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-14 17:32:36
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-14 17:35:15
+perform tests
+// [failed] test integration --entity ~.model.Admission
+test integration --entity ~.model.Program
+test integration --entity ~.model.Transportation
+test integration --entity ~.model.Child
+// [failed] selenium test --controller ~.controllers.AdmissionController
+// [failed] selenium test --controller ~.controllers.AdmissionController
+selenium test --controller ~.controllers.ChildController
+web mvc controller --class ~.controllers.AdmissionController
+// [failed] selenium test --controller ~.controllers.AdmissionController
+web mvc controller --class ~.controllers.AdmissionController
+// [failed] selenium test --controller ~.controllers.AdmissionController
+focus --class ~.model.Admission
+web mvc controller --class ~.controllers.AdmissionController
+web mvc update tags 
+web mvc all --package ~.controllers
+test integration --entity ~.model.Admission
+selenium test --controller ~.controllers.AdmissionController
+backup
+backup
+quit
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log closed at 2016-05-14 23:24:22
+// Spring Roo 2.0.0.M1 [rev 33e5d76] log opened at 2016-05-14 23:24:48

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_hmi_kiddos_model_Transportation" modelAttribute="transportation" path="/transportations" render="${empty dependencies}" z="fV9ZhmALs2EZte9MIdaf5eNAgyQ=">
+        <field:textarea field="driverName" id="c_com_hmi_kiddos_model_Transportation_driverName" required="true" z="dMLEOCGQMSbIBnu9Pn+lkRXeHdc="/>
+        <field:textarea field="notes" id="c_com_hmi_kiddos_model_Transportation_notes" z="6ejINbLnjLAuD3TxRLDyWtzle+g="/>
+        <field:textarea field="van" id="c_com_hmi_kiddos_model_Transportation_van" z="zVWH1gCS2XIp7E7hnRS63iW7ZIY="/>
+        <field:simple field="departureAdmissions" id="c_com_hmi_kiddos_model_Transportation_departureAdmissions" messageCode="entity_reference_not_managed" messageCodeAttribute="Admission" z="/P1RHfA1ytIL85AEEtz0mE3ZLhw="/>
+        <field:simple field="arrivalAdmissions" id="c_com_hmi_kiddos_model_Transportation_arrivalAdmissions" messageCode="entity_reference_not_managed" messageCodeAttribute="Admission" z="NOJT769bT0rSRQJZ6IiwlRhuMX0="/>
+        <field:input field="arrivalKidsCount" id="c_com_hmi_kiddos_model_Transportation_arrivalKidsCount" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="departureKidsCount" id="c_com_hmi_kiddos_model_Transportation_departureKidsCount" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="departureChildren" id="c_com_hmi_kiddos_model_Transportation_departureChildren" z="9y86jF2/cGSCwaFN0A/LDSzoWxE="/>
+        <field:input field="arrivalChildren" id="c_com_hmi_kiddos_model_Transportation_arrivalChildren" z="6dAY22i6dF6d2IxSe51xgcs58Gw="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Transportation" render="${not empty dependencies}" z="7JJysCGUylcPO/hRUf2uI29MkmQ="/>
+</div>
