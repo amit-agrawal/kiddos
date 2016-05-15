@@ -10,7 +10,6 @@
         <table:table data="${transportation.allChildren}" id="l_com_hmi_kiddos_model_Child" path="/children" z="user-managed">
             <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
             <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_age" property="age" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
             <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
             <table:column id="c_com_hmi_kiddos_model_Child_phoneMother" property="phoneMother" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
             <table:column id="c_com_hmi_kiddos_model_Child_phoneFather" property="phoneFather" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
