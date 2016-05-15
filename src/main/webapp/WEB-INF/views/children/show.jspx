@@ -7,15 +7,15 @@
         <field:display field="middleName" id="s_com_hmi_kiddos_model_Child_middleName" object="${child}" z="R/RbbUoE3Rvv+GkjVzpOkionUFA="/>
         <field:display field="lastName" id="s_com_hmi_kiddos_model_Child_lastName" object="${child}" z="YqNA7j2bniQgeM26wSjEleb7mYE="/>
         <field:display field="gender" id="s_com_hmi_kiddos_model_Child_gender" object="${child}" z="kUjydTlxLreb/UaVEGGLR0wZTDk="/>
-        <field:display field="fatherName" id="s_com_hmi_kiddos_model_Child_fatherName" object="${child}" z="bwNcBE7pTSLuaEHigvnQ5NN2FHE="/>
         <field:display field="motherName" id="s_com_hmi_kiddos_model_Child_motherName" object="${child}" z="ii+h57qe7ZKJ4+XrI5GTFli5cEk="/>
-        <field:display field="fatherOrganization" id="s_com_hmi_kiddos_model_Child_fatherOrganization" object="${child}" z="xTlIaAtjT4jB+sHQB9pZCPaQ374="/>
+        <field:display field="fatherName" id="s_com_hmi_kiddos_model_Child_fatherName" object="${child}" z="bwNcBE7pTSLuaEHigvnQ5NN2FHE="/>
         <field:display field="motherOrganization" id="s_com_hmi_kiddos_model_Child_motherOrganization" object="${child}" z="2Kra7xs6afNyNPTBDnGpsu8Qj4s="/>
+        <field:display field="fatherOrganization" id="s_com_hmi_kiddos_model_Child_fatherOrganization" object="${child}" z="xTlIaAtjT4jB+sHQB9pZCPaQ374="/>
         <field:display field="emailOne" id="s_com_hmi_kiddos_model_Child_emailOne" object="${child}" z="xCXISWqKhKzQTFyfBGcsjTutuCw="/>
         <field:display field="emailTwo" id="s_com_hmi_kiddos_model_Child_emailTwo" object="${child}" z="ng9kqdMnzXtZpVt4Sx4xYHYUROM="/>
         <field:display field="emailThree" id="s_com_hmi_kiddos_model_Child_emailThree" object="${child}" z="pVkUPhzEO1Rr7H/fEO5GeVsWPAo="/>
-        <field:display field="phoneFather" id="s_com_hmi_kiddos_model_Child_phoneFather" object="${child}" z="FMeGlUIjDOuYZdcWfVlWOkAAhiw="/>
         <field:display field="phoneMother" id="s_com_hmi_kiddos_model_Child_phoneMother" object="${child}" z="cr0IxU2neFArPj7BR2kHbVbGXwI="/>
+        <field:display field="phoneFather" id="s_com_hmi_kiddos_model_Child_phoneFather" object="${child}" z="FMeGlUIjDOuYZdcWfVlWOkAAhiw="/>
         <field:display field="phoneHome" id="s_com_hmi_kiddos_model_Child_phoneHome" object="${child}" z="ZbTcycbSn9bjiDYOSEliWqKLv8E="/>
         <field:display field="address" id="s_com_hmi_kiddos_model_Child_address" object="${child}" z="MI6r0xXaugfPUZxC6zlNY6EB7ZE="/>
         <field:display field="pincode" id="s_com_hmi_kiddos_model_Child_pincode" object="${child}" z="6Y8AGpmB/LGHs1yoPG91uk5tXCw="/>

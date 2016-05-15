@@ -10,7 +10,6 @@
             <table:column id="c_com_hmi_kiddos_model_Program_type" property="type" z="rg9l6H90IW/8s5RHW9k9EiFPKyc="/>
             <table:column id="c_com_hmi_kiddos_model_Program_teacher" property="teacher" z="user-managed"/>
             <table:column id="c_com_hmi_kiddos_model_Program_kidsCount" property="kidsCount" z="LFPPThoGY+wEaEv/Fgx+g4712Wg="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_children" property="children" z="VtMhpFDktLOu+rkAT7UxHHm9UCE="/>
         </table:table>
     </page:list>
 </div>

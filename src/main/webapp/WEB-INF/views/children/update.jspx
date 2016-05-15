@@ -7,15 +7,15 @@
         <field:input field="middleName" id="c_com_hmi_kiddos_model_Child_middleName" max="30" z="YGKaYemGlz2b8OHDyvIvUI4BIjk="/>
         <field:input field="lastName" id="c_com_hmi_kiddos_model_Child_lastName" max="30" required="true" z="7UuobgsGwzkh4AEn/3m4TKO7n6s="/>
         <field:select field="gender" id="c_com_hmi_kiddos_model_Child_gender" items="${genders}" path="genders" z="PQZSDARFbL2FXSpVZuSXITgmaJo="/>
-        <field:textarea field="fatherName" id="c_com_hmi_kiddos_model_Child_fatherName" z="TOqYpQz3XGyLXp2knCFRMhKzyCY="/>
         <field:textarea field="motherName" id="c_com_hmi_kiddos_model_Child_motherName" z="QtKGy/Sb4XzKyfvxwYqoP7Nrsaw="/>
-        <field:textarea field="fatherOrganization" id="c_com_hmi_kiddos_model_Child_fatherOrganization" z="jyqL241p5lH1T6uYppxtIfqT360="/>
+        <field:textarea field="fatherName" id="c_com_hmi_kiddos_model_Child_fatherName" z="TOqYpQz3XGyLXp2knCFRMhKzyCY="/>
         <field:textarea field="motherOrganization" id="c_com_hmi_kiddos_model_Child_motherOrganization" z="EcxmJneWZrZvpvJe3vX+U2++jP4="/>
+        <field:textarea field="fatherOrganization" id="c_com_hmi_kiddos_model_Child_fatherOrganization" z="jyqL241p5lH1T6uYppxtIfqT360="/>
         <field:textarea field="emailOne" id="c_com_hmi_kiddos_model_Child_emailOne" validationMessageCode="field_invalid_email" z="m+LlPcEqa2FL63wW2URPgNr0mBk="/>
         <field:textarea field="emailTwo" id="c_com_hmi_kiddos_model_Child_emailTwo" validationMessageCode="field_invalid_email" z="v9096PH8dWrMhUtnjGvxQN9tqGg="/>
         <field:textarea field="emailThree" id="c_com_hmi_kiddos_model_Child_emailThree" validationMessageCode="field_invalid_email" z="oq7m0+Byo/dFci3N+jvbW47dYDQ="/>
-        <field:input field="phoneFather" id="c_com_hmi_kiddos_model_Child_phoneFather" max="30" z="11ZZqIlRYOwApXYDFSs1YBTeIWk="/>
         <field:input field="phoneMother" id="c_com_hmi_kiddos_model_Child_phoneMother" max="30" z="gA/TAIyegSQsJG5bVV4oPp0SJg4="/>
+        <field:input field="phoneFather" id="c_com_hmi_kiddos_model_Child_phoneFather" max="30" z="11ZZqIlRYOwApXYDFSs1YBTeIWk="/>
         <field:input field="phoneHome" id="c_com_hmi_kiddos_model_Child_phoneHome" max="30" z="rk9YKT/VIii/1tC3eGM5dfjBuYE="/>
         <field:textarea field="address" id="c_com_hmi_kiddos_model_Child_address" z="WdRLWl+vI7XihoT8UDL4mzvnK5g="/>
         <field:input field="pincode" id="c_com_hmi_kiddos_model_Child_pincode" max="6" z="LgLwAQws7s5/+n0TigKiIJ2hGb4="/>
@@ -24,7 +24,7 @@
         <field:textarea field="nationality" id="c_com_hmi_kiddos_model_Child_nationality" z="QSoLcRtbL2rlNgOBO4kDfXoxWFs="/>
         <field:datetime dateTimePattern="${child_dob_date_format}" field="dob" id="c_com_hmi_kiddos_model_Child_dob" z="1xkWvEb9yPOUgGpfEhEH1f862sU="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Child_notes" z="FiwJNs2G/P6e8QHTrM7zV7DN16s="/>
-        <field:simple disabled="true" field="admissions" id="c_com_hmi_kiddos_model_Child_admissions" messageCode="entity_reference_not_managed" messageCodeAttribute="Admission" z="user-managed"/>
+        <field:simple field="admissions" id="c_com_hmi_kiddos_model_Child_admissions" messageCode="entity_reference_not_managed" messageCodeAttribute="Admission" z="user-managed"/>
         <field:input disabled="true" field="age" id="c_com_hmi_kiddos_model_Child_age" z="user-managed"/>
         <field:input disabled="true" field="programs" id="c_com_hmi_kiddos_model_Child_programs" z="user-managed"/>
         <field:input disabled="true" field="transportations" id="c_com_hmi_kiddos_model_Child_transportations" z="user-managed"/>

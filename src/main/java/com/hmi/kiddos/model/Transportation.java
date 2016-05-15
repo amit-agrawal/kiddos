@@ -72,6 +72,25 @@ public class Transportation {
 	}
 
     @Transient
+    private Integer allKidsCount = 0;
+	
+	public Integer getAllKidsCount() {
+		return getAllChildren().size();
+	}
+
+	@Transient
+    private Set<Child> allChildren = new HashSet<Child>();
+
+	public Set<Child> getAllChildren() {
+		Set<Child> childrenSet = new HashSet<Child>();
+		for(Admission admission: arrivalAdmissions)
+			childrenSet.add(admission.getChild());
+		for(Admission admission: departureAdmissions)
+			childrenSet.add(admission.getChild());
+		return childrenSet;
+	}
+
+    @Transient
     private Integer arrivalKidsCount = 0;
 	
 	public Integer getArrivalKidsCount() {
