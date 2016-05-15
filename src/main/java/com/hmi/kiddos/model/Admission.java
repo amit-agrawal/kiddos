@@ -43,7 +43,12 @@ public class Admission {
             }
             if (sc) {
                 log.info("adjusting fees for SC");
-                if (feesExpected == 1900) feesExpected = 3800; else if (feesExpected == 5700) feesExpected = 5800; else if (feesExpected == 7600) feesExpected = 5800;
+                if (feesExpected == 1700) 
+                	feesExpected = 3400; 
+                else if (feesExpected == 5100) 
+                	feesExpected = 5800; 
+                else if (feesExpected == 6800) 
+                	feesExpected = 5800;
             }
         }
         log.info("Fees calculated: " + feesExpected + " , discount: " + discount);
@@ -109,6 +114,18 @@ public class Admission {
     public String toString() {
         return child.toString() + ", " + programs.toString();
     }
+
+	@Transient
+    private Set<Program> activePrograms = new HashSet<Program>();
+	
+	public Set<Program> getActivePrograms() {
+		Set<Program> programSet = new HashSet<Program>();
+		for(Program program: programs) {
+			if (program.getDueDate().after(Calendar.getInstance()))
+				programSet.add(program);
+		}
+		return programSet;
+	}
 
     /**
      */
