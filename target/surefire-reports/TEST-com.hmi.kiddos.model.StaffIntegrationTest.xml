@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="9" failures="0" name="com.hmi.kiddos.model.StaffIntegrationTest" time="0.316" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="com.hmi.kiddos.model.StaffIntegrationTest" time="0.488" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="D:\java\jre\bin"/>
@@ -41,11 +41,10 @@
     <property name="file.encoding" value="Cp1252"/>
     <property name="user.name" value="Dell"/>
     <property name="java.class.path" value="D:\apache-maven-3.3.9\bin\..\boot\plexus-classworlds-2.5.2.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="debug"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="D:\java\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -X install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -64,13 +63,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFindStaffEntries" time="0.032"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFlush" time="0.013"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testPersist" time="0.057"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testMarkerMethod" time="0.008"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testMergeUpdate" time="0.024"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFindStaff" time="0.017"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testCountStaffs" time="0.019"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testRemove" time="0.126"/>
-  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFindAllStaffs" time="0.02"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFindStaffEntries" time="0.031"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFlush" time="0.011"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testPersist" time="0.162"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testMarkerMethod" time="0.019"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testMergeUpdate" time="0.038"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFindStaff" time="0.03"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testCountStaffs" time="0.041"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testRemove" time="0.111"/>
+  <testcase classname="com.hmi.kiddos.model.StaffIntegrationTest" name="testFindAllStaffs" time="0.045"/>
 </testsuite>

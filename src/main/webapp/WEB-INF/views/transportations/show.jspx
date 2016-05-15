@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Transportation" object="${transportation}" path="/transportations" z="user-managed">
@@ -7,10 +7,24 @@
         <field:display field="notes" id="s_com_hmi_kiddos_model_Transportation_notes" object="${transportation}" z="EFIMGzYmPQFQTo+30C7xS4wzt4A="/>
         <field:display field="van" id="s_com_hmi_kiddos_model_Transportation_van" object="${transportation}" z="lyuIw8+rrZgUgvWsiVkkFMOTclw="/>
         <field:display field="arrivalKidsCount" id="s_com_hmi_kiddos_model_Transportation_arrivalKidsCount" object="${transportation}" z="2Urah7avAJY/cT6tOs19GnF/4To="/>
+        <table:table data="${transportation.arrivalChildren}" id="l_com_hmi_kiddos_model_Child" path="/children" z="user-managed">
+            <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Child_age" property="age" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Child_phoneMother" property="phoneMother" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_phoneFather" property="phoneFather" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_phoneHome" property="phoneHome" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+        </table:table>
         <field:display field="departureKidsCount" id="s_com_hmi_kiddos_model_Transportation_departureKidsCount" object="${transportation}" z="sewzFmYiP1YNaNjdi+uMzYAnTGg="/>
-        <field:display field="arrivalAdmissions" id="s_com_hmi_kiddos_model_Transportation_arrivalAdmissions" object="${transportation}" z="user-managed"/>
-        <field:display field="departureAdmissions" id="s_com_hmi_kiddos_model_Transportation_departureAdmissions" object="${transportation}" z="user-managed"/>
-        <field:display field="departureChildren" id="s_com_hmi_kiddos_model_Transportation_departureChildren" object="${transportation}" z="LrvZuzX7pe6tV8Y2JjWF64XJARk="/>
-        <field:display field="arrivalChildren" id="s_com_hmi_kiddos_model_Transportation_arrivalChildren" object="${transportation}" z="8PERXp82LtyvRBttwCiHvfa72oA="/>
+        <table:table data="${transportation.departureChildren}" id="l_com_hmi_kiddos_model_Child" path="/children" z="user-managed">
+            <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Child_age" property="age" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Child_phoneMother" property="phoneMother" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_phoneFather" property="phoneFather" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_phoneHome" property="phoneHome" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+        </table:table>
     </page:show>
 </div>

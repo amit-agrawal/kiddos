@@ -7,12 +7,9 @@
             <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="YrQ5eXSccp+gvv54OivJOUu+5As="/>
             <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="A3cHdgA/NVxRPj2sq/MkyeFQgEM="/>
             <table:column id="c_com_hmi_kiddos_model_Child_age" property="age" z="PEBGcO+JtRDZnIBAd2+0LbF35oE="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_motherName" property="motherName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_admissions" property="admissions" z="user-managed"/>
             <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_middleName" property="middleName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
             <table:column id="c_com_hmi_kiddos_model_Child_programs" property="programs" z="2NluAEMbroj+X+rjm9xYJGmaB9Y="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_transportations" property="transportations" z="WQPF47vnoUk6WItvXw24CqVSNm8="/>
         </table:table>
     </page:list>
 </div>
+	

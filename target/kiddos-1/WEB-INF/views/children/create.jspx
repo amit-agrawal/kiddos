@@ -2,7 +2,7 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_com_hmi_kiddos_model_Child" modelAttribute="child" path="/children" render="${empty dependencies}" z="vGm3Ql7iAUrQjNVxFfdfPec4+9A=">
+    <form:create id="fc_com_hmi_kiddos_model_Child" modelAttribute="child" path="/children" render="${empty dependencies}" z="user-managed">
         <field:input field="firstName" id="c_com_hmi_kiddos_model_Child_firstName" max="30" required="true" z="fPZ5RfoQJkbG7PRxHBah/v/MH7M="/>
         <field:input field="middleName" id="c_com_hmi_kiddos_model_Child_middleName" max="30" z="YGKaYemGlz2b8OHDyvIvUI4BIjk="/>
         <field:input field="lastName" id="c_com_hmi_kiddos_model_Child_lastName" max="30" required="true" z="7UuobgsGwzkh4AEn/3m4TKO7n6s="/>
@@ -24,10 +24,6 @@
         <field:textarea field="nationality" id="c_com_hmi_kiddos_model_Child_nationality" z="QSoLcRtbL2rlNgOBO4kDfXoxWFs="/>
         <field:datetime dateTimePattern="${child_dob_date_format}" field="dob" id="c_com_hmi_kiddos_model_Child_dob" z="1xkWvEb9yPOUgGpfEhEH1f862sU="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Child_notes" z="FiwJNs2G/P6e8QHTrM7zV7DN16s="/>
-        <field:simple field="admissions" id="c_com_hmi_kiddos_model_Child_admissions" messageCode="entity_reference_not_managed" messageCodeAttribute="Admission" z="3k/CKWXHbhoNsczEEqrPiaW2Qns="/>
-        <field:input field="age" id="c_com_hmi_kiddos_model_Child_age" render="false" z="user-managed"/>
-        <field:input field="programs" id="c_com_hmi_kiddos_model_Child_programs" render="false" z="user-managed"/>
-        <field:input field="transportations" id="c_com_hmi_kiddos_model_Child_transportations" z="uodxCcEIQXvMNVLAWImdduSImW4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Child" render="${not empty dependencies}" z="rL1ZaT6lxDdTbQM9+Rcw2lUJkmc="/>
 </div>

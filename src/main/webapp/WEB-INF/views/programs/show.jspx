@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_com_hmi_kiddos_model_Program" object="${program}" path="/programs" z="yC+K3glhcfqCMcodjOK24ght3DE=">
+    <page:show id="ps_com_hmi_kiddos_model_Program" object="${program}" path="/programs" z="user-managed">
         <field:display field="center" id="s_com_hmi_kiddos_model_Program_center" object="${program}" z="hbj4iEDf/sPwLfy0mrtrVWyfw+Q="/>
         <field:display field="fees" id="s_com_hmi_kiddos_model_Program_fees" object="${program}" z="3Uf/qa88ubsnp/ybgytc3nDbPX8="/>
         <field:display field="notes" id="s_com_hmi_kiddos_model_Program_notes" object="${program}" z="gCz8V1WwwZvk6ikVOqUPYTGx2lU="/>
@@ -13,10 +13,12 @@
         <field:display field="teacher" id="s_com_hmi_kiddos_model_Program_teacher" object="${program}" z="SpE2tvodHAMtrbvA7DRwzdayk9o="/>
         <field:display field="kidsCount" id="s_com_hmi_kiddos_model_Program_kidsCount" object="${program}" z="g5XOBUuwDC5jw5Bg8GKNSZsQWw4="/>
         <table:table data="${program.children}" id="l_com_hmi_kiddos_model_Child" path="/children" z="user-managed">
-            <table:column id="c_com_hmi_kiddos_model_Child_motherName" property="motherName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Child_age" property="age" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
             <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
+            <table:column id="c_com_hmi_kiddos_model_Child_motherName" property="motherName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
+            <table:column id="c_com_hmi_kiddos_model_Child_fatherName" property="fatherName" z="user-managed"/>
         </table:table>
-        <field:display field="children" id="s_com_hmi_kiddos_model_Program_children" object="${program}" z="DjaUmv551yDGWNxV78cN2RwM9aY="/>
-        <field:display field="admissions" id="s_com_hmi_kiddos_model_Program_admissions" object="${program}" z="c94dlAf4iszkfcV37/oG8ViypD0="/>
     </page:show>
 </div>

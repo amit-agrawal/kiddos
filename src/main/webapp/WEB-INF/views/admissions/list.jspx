@@ -11,8 +11,6 @@
             <table:column id="c_com_hmi_kiddos_model_Admission_feesExpected" property="feesExpected" z="AhejQpAWjhQBR1dvGlq/cpNowKQ="/>
             <table:column id="c_com_hmi_kiddos_model_Admission_feesDue" property="feesDue" z="55hcZwg/llhX71d1HMBfnUELH98="/>
             <table:column id="c_com_hmi_kiddos_model_Admission_transportDeparture" property="transportDeparture" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_feesPaid" property="feesPaid" z="+wDGv+O+WrO2WV7lGlpjnXxNtXM="/>
-            <table:column calendar="true" dateTimePattern="${admission_admissiondate_date_format}" id="c_com_hmi_kiddos_model_Admission_admissionDate" property="admissionDate" z="ZKVN0n3hU7+cMT5fP3iBsJM2Nbw="/>
             <table:column id="c_com_hmi_kiddos_model_Admission_transportArrival" property="transportArrival" z="e9ujU7jHEhhdk4nhKllVhfojLHI="/>
         </table:table>
     </page:list>
