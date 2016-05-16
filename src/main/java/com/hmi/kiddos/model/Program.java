@@ -1,4 +1,5 @@
 package com.hmi.kiddos.model;
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
 import org.springframework.roo.addon.javabean.annotations.RooToString;
@@ -11,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import java.util.Calendar;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -22,7 +23,8 @@ import javax.persistence.Transient;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class Program {	
+@Audited
+public class Program implements Comparable {	
 	@Transient
     private Integer kidsCount = 0;
 	
@@ -31,10 +33,10 @@ public class Program {
 	}
 	
 	@Transient
-    private Set<Child> children = new HashSet<Child>();
+    private Set<Child> children = new TreeSet<Child>();
 	
 	public Set<Child> getChildren() {
-		Set<Child> childrenSet = new HashSet<Child>();
+		Set<Child> childrenSet = new TreeSet<Child>();
 		for(Admission admission: admissions)
 			childrenSet.add(admission.getChild());
 		return childrenSet;
@@ -91,7 +93,7 @@ public class Program {
     /**
      */
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "programs")
-    private Set<Admission> admissions = new HashSet<Admission>();
+    private Set<Admission> admissions = new TreeSet<Admission>();
     
     public String toString() {
 		String output = type + " : " + term;
@@ -99,4 +101,10 @@ public class Program {
 			output = output + " : " + batch;
     	return output;
     }
+    
+	@Override
+	public int compareTo(Object other) {
+		return this.toString().compareToIgnoreCase(other.toString());
+	}
+
 }

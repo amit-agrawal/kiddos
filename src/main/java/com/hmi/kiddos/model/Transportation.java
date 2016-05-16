@@ -1,9 +1,10 @@
 package com.hmi.kiddos.model;
+import org.hibernate.envers.Audited;
 import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
 import org.springframework.roo.addon.javabean.annotations.RooToString;
 import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,7 +16,8 @@ import javax.validation.constraints.Size;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class Transportation {
+@Audited
+public class Transportation implements Comparable {
 
     @Override
 	public String toString() {
@@ -44,28 +46,28 @@ public class Transportation {
     /**
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportDeparture")
-     private Set<Admission> departureAdmissions = new HashSet<Admission>();
+     private Set<Admission> departureAdmissions = new TreeSet<Admission>();
 
 	/**
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportArrival")
-    private Set<Admission> arrivalAdmissions = new HashSet<Admission>();
+    private Set<Admission> arrivalAdmissions = new TreeSet<Admission>();
 
 	@Transient
-    private Set<Child> departureChildren = new HashSet<Child>();
+    private Set<Child> departureChildren = new TreeSet<Child>();
 	
 	public Set<Child> getDepartureChildren() {
-		Set<Child> childrenSet = new HashSet<Child>();
+		Set<Child> childrenSet = new TreeSet<Child>();
 		for(Admission admission: departureAdmissions)
 			childrenSet.add(admission.getChild());
 		return childrenSet;
 	}
 	
 	@Transient
-    private Set<Child> arrivalChildren = new HashSet<Child>();
+    private Set<Child> arrivalChildren = new TreeSet<Child>();
 
 	public Set<Child> getArrivalChildren() {
-		Set<Child> childrenSet = new HashSet<Child>();
+		Set<Child> childrenSet = new TreeSet<Child>();
 		for(Admission admission: arrivalAdmissions)
 			childrenSet.add(admission.getChild());
 		return childrenSet;
@@ -79,10 +81,10 @@ public class Transportation {
 	}
 
 	@Transient
-    private Set<Child> allChildren = new HashSet<Child>();
+    private Set<Child> allChildren = new TreeSet<Child>();
 
 	public Set<Child> getAllChildren() {
-		Set<Child> childrenSet = new HashSet<Child>();
+		Set<Child> childrenSet = new TreeSet<Child>();
 		for(Admission admission: arrivalAdmissions)
 			childrenSet.add(admission.getChild());
 		for(Admission admission: departureAdmissions)
@@ -104,5 +106,9 @@ public class Transportation {
 		return departureAdmissions.size();
 	}
 
+	@Override
+	public int compareTo(Object other) {
+		return this.toString().compareToIgnoreCase(other.toString());
+	}
 
 }

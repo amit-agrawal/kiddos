@@ -16,8 +16,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Locale;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -26,7 +27,8 @@ import javax.persistence.OneToMany;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class Child {
+@Audited
+public class Child implements Comparable {
 
 	@Transient
 	private String age;
@@ -140,10 +142,10 @@ public class Child {
     private String notes;
 
     @Transient
-    private Set<Transportation> transportations = new HashSet<Transportation>();
+    private Set<Transportation> transportations = new TreeSet<Transportation>();
     
     public Set<Transportation> getTransportations() {
-    	Set<Transportation> transportationSet = new HashSet<Transportation>();
+    	Set<Transportation> transportationSet = new TreeSet<Transportation>();
 		for(Admission admission: admissions) {
 			transportationSet.add(admission.getTransportArrival());
 			transportationSet.add(admission.getTransportDeparture());
@@ -152,10 +154,10 @@ public class Child {
     }
     
     @Transient
-    private Set<Program> programs = new HashSet<Program>();
+    private Set<Program> programs = new TreeSet<Program>();
     
     public Set<Program> getPrograms() {
-		Set<Program> programSet = new HashSet<Program>();
+		Set<Program> programSet = new TreeSet<Program>();
 		for(Admission admission: admissions)
 			programSet.addAll(admission.getPrograms());
 		return programSet;
@@ -164,7 +166,7 @@ public class Child {
     /**
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "child")
-    private Set<Admission> admissions = new HashSet<Admission>();
+    private Set<Admission> admissions = new TreeSet<Admission>();
     
     private LocalDate getDobAsLocalDate() {
     	ZonedDateTime zdt = ZonedDateTime.ofInstant(dob.toInstant(), ZoneId.systemDefault());
@@ -193,5 +195,10 @@ public class Child {
 		}
     	return output;
     }
+
+	@Override
+	public int compareTo(Object other) {
+		return this.toString().compareToIgnoreCase(other.toString());
+	}
 
 }

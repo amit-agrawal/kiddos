@@ -10,8 +10,10 @@ import javax.persistence.Enumerated;
 import java.util.Calendar;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
@@ -21,7 +23,8 @@ import javax.persistence.PreUpdate;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class Staff {
+@Audited
+public class Staff implements Comparable {
 
     /**
      */
@@ -103,7 +106,7 @@ public class Staff {
     /**
      */
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<UserRole> roles = new HashSet<UserRole>();
+    private Set<UserRole> roles = new TreeSet<UserRole>();
     
     @PrePersist
     @PreUpdate
@@ -121,4 +124,11 @@ public class Staff {
 		output = output + lastName;
     	return output;
     }
+
+	@Override
+	public int compareTo(Object other) {
+		return this.toString().compareToIgnoreCase(other.toString());
+	}
+
 }
+

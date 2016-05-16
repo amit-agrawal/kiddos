@@ -9,11 +9,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 
 import java.util.Calendar;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Size;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ import javax.persistence.ManyToOne;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
+@Audited
 public class Payment {
 
     /**
@@ -55,7 +58,7 @@ public class Payment {
      */
     @NotNull
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Admission> admissions = new HashSet<Admission>();
+    private Set<Admission> admissions = new TreeSet<Admission>();
 
 	@Override
 	public String toString() {

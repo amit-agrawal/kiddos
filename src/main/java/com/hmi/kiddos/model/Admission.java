@@ -1,9 +1,10 @@
 package com.hmi.kiddos.model;
 import java.util.Calendar;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -12,6 +13,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.apache.log4j.Logger;
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
 import org.springframework.roo.addon.javabean.annotations.RooToString;
@@ -20,7 +22,8 @@ import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRe
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class Admission {
+@Audited
+public class Admission implements Comparable {
 
     private static Logger log = Logger.getLogger(Admission.class);
 
@@ -104,22 +107,22 @@ public class Admission {
      */
     @NotNull
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Program> programs = new HashSet<Program>();
+    private Set<Program> programs = new TreeSet<Program>();
 
     /**
      */
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "admissions")
-    private Set<Payment> payments = new HashSet<Payment>();
+    private Set<Payment> payments = new TreeSet<Payment>();
 
     public String toString() {
         return child.toString() + ", " + programs.toString();
     }
 
 	@Transient
-    private Set<Program> activePrograms = new HashSet<Program>();
+    private Set<Program> activePrograms = new TreeSet<Program>();
 	
 	public Set<Program> getActivePrograms() {
-		Set<Program> programSet = new HashSet<Program>();
+		Set<Program> programSet = new TreeSet<Program>();
 		for(Program program: programs) {
 			if (program.getDueDate().after(Calendar.getInstance()))
 				programSet.add(program);
@@ -137,5 +140,12 @@ public class Admission {
 
 	public Transportation getTransportDeparture() {
 		return transportDeparture;
+	}	@Override
+
+	public int compareTo(Object other) {
+		return this.toString().compareToIgnoreCase(other.toString());
 	}
+
+
+
 }
