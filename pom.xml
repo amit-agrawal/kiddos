@@ -353,7 +353,13 @@
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-envers</artifactId>
     		<version>4.3.10.Final</version>
- 	</dependency>
+ 		</dependency>
+ 			<!-- Jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.10</version>
+		</dependency>
     </dependencies>
     <build>
         <plugins>
