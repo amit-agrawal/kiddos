@@ -62,7 +62,7 @@ public class ChildIntegrationTest {
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<Child> result = Child.findChildEntries(firstResult, maxResults);
+        List<Child> result = Child.findChildEntries(firstResult, maxResults, "SC");
         Assert.assertNotNull("Find entries method for 'Child' illegally returned null", result);
         Assert.assertEquals("Find entries method for 'Child' returned an incorrect number of entries", count, result.size());
     }

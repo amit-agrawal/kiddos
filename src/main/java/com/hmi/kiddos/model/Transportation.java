@@ -19,13 +19,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Configurable
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"driverName", "van", "notes"})})
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord

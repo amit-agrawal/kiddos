@@ -10,8 +10,8 @@
             <table:column id="c_com_hmi_kiddos_model_Admission_programs" property="programs" z="user-defined"/>
             <table:column id="c_com_hmi_kiddos_model_Admission_feesExpected" property="feesExpected" z="AhejQpAWjhQBR1dvGlq/cpNowKQ="/>
             <table:column id="c_com_hmi_kiddos_model_Admission_feesDue" property="feesDue" z="55hcZwg/llhX71d1HMBfnUELH98="/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_transportDeparture" property="transportDeparture" z="user-managed"/>
             <table:column id="c_com_hmi_kiddos_model_Admission_transportArrival" property="transportArrival" z="e9ujU7jHEhhdk4nhKllVhfojLHI="/>
+            <table:column id="c_com_hmi_kiddos_model_Admission_transportDeparture" property="transportDeparture" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

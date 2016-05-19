@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -29,10 +30,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 @Configurable
 @Entity
 @RooJavaBean
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"firstName", "middleName", "lastName"})})
 @RooToString
 @RooJpaActiveRecord
 @Audited

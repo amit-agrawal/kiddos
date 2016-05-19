@@ -252,7 +252,7 @@ public class ChildDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = Child.findChildEntries(from, to);
+        data = Child.findChildEntries(from, to, null);
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Child' illegally returned null");
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:display="urn:jsptld:http://displaytag.sf.net" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Transportation" object="${transportation}" path="/transportations" z="user-managed">
@@ -7,13 +7,15 @@
         <field:display field="notes" id="s_com_hmi_kiddos_model_Transportation_notes" object="${transportation}" z="EFIMGzYmPQFQTo+30C7xS4wzt4A="/>
         <field:display field="van" id="s_com_hmi_kiddos_model_Transportation_van" object="${transportation}" z="lyuIw8+rrZgUgvWsiVkkFMOTclw="/>
         <field:display field="allKidsCount" id="s_com_hmi_kiddos_model_Transportation_allKidsCount" object="${transportation}" z="2Urah7avAJY/cT6tOs19GnF/4To="/>
-        <table:table data="${transportation.allChildren}" id="l_com_hmi_kiddos_model_Child" path="/children" z="user-managed">
-            <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_phoneMother" property="phoneMother" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_phoneFather" property="phoneFather" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_phoneHome" property="phoneHome" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-        </table:table>
     </page:show>
+
+		<display:table id="l_com_hmi_kiddos_model_Child" name="${transportation.allChildren}" requestURI="/transportations/${transportation.id}" pagesize="100">
+			<display:column property="firstName" title="First Name" sortable="true"/>
+			<display:column property="lastName" title="Last Name" sortable="true"/>
+			<display:column property="address" title="Address" sortable="true"/>
+			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
+			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
+			<display:column property="phoneHome" title="Phone Other" sortable="true"/>
+		</display:table>
+
 </div>

@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import java.time.*;
 import java.time.Month;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -234,7 +236,7 @@ public class Child implements Comparable {
         return entityManager().createQuery("SELECT o FROM Child o", Child.class).getResultList();
     }
 
-	public static List<Child> findAllChildren(String sortFieldName, String sortOrder) {
+	public static List<Child> findAllChildren(String sortFieldName, String sortOrder, String type) {
         String jpaQuery = "SELECT o FROM Child o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
@@ -250,11 +252,40 @@ public class Child implements Comparable {
         return entityManager().find(Child.class, id);
     }
 
-	public static List<Child> findChildEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Child o", Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-    }
+	public static List<Child> findChildEntries(int firstResult, int maxResults, String type) {
+        List<Child> children = entityManager().createQuery("SELECT o FROM Child o", Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return getFilteredListBasedUponProgram(type, children);
+	}
 
-	public static List<Child> findChildEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+	private static List<Child> getFilteredListBasedUponProgram(String type, List<Child> children) {
+		List<Child> newList = new ArrayList<Child>();
+        if (type != null) {
+        	for (Child child : children)
+        	{
+        	    if (child.hasProgram(type))
+        	    {
+        	        newList.add(child);
+        	    }
+        	}
+        }
+		return newList;
+	}
+
+	private boolean hasProgram(String type) {
+		Set<Program> programs = getPrograms();
+		boolean hasProgram = false;
+		for(Program program : programs) {
+			if (program.getType().equals(type)) {
+				hasProgram = true;
+				break;
+			}
+		}
+		
+		return hasProgram;
+	}
+
+	public static List<Child> findChildEntries(int firstResult, 
+			int maxResults, String sortFieldName, String sortOrder, String type) {
         String jpaQuery = "SELECT o FROM Child o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;

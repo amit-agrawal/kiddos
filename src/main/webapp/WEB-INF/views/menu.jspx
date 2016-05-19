@@ -11,10 +11,6 @@
             <menu:item id="i_program_new" messageCode="global_menu_new" url="/programs?form" z="zDcnKu0MxAKfjglkepWRPV+CgbM="/>
             <menu:item id="i_program_list" messageCode="global_menu_list" url="/programs?page=1&amp;size=${empty param.size ? 100 : param.size}" z="user-managed"/>
         </menu:category>
-        <menu:category id="c_userrole" z="C4C1ZBdes4PUIjEM3Ajwwhn1EwA=">
-            <menu:item id="i_userrole_new" messageCode="global_menu_new" url="/userroles?form" z="qYpuuJuPupoYjD8LM0ISnxylj4o="/>
-            <menu:item id="i_userrole_list" messageCode="global_menu_list" url="/userroles?page=1&amp;size=${empty param.size ? 100 : param.size}" z="user-managed"/>
-        </menu:category>
         <menu:category id="c_staff" z="WEqNUFcSQYoW/mQULTlPjM/nWNU=">
             <menu:item id="i_staff_new" messageCode="global_menu_new" url="/staffs?form" z="H2VWxcFT9MZjwJqkdaMj688QtI4="/>
             <menu:item id="i_staff_list" messageCode="global_menu_list" url="/staffs?page=1&amp;size=${empty param.size ? 100 : param.size}" z="user-managed"/>
@@ -26,6 +22,10 @@
         <menu:category id="c_child" z="Umebzxknrpx6gCK6XVpuR+8kMBw=">
             <menu:item id="i_child_new" messageCode="global_menu_new" url="/children?form" z="Z0oDvepNCuVm3tF2neiHstdqD9k="/>
             <menu:item id="i_child_list" messageCode="global_menu_list" url="/children?page=1&amp;size=${empty param.size ? 100 : param.size}" z="user-managed"/>
+         <!--   <menu:item id="i_child_sc_list" messageCode="global_menu_list" url="/children?page=1&amp;type=SC&amp;size=${empty param.size ? 100 : param.size}" />
+            <menu:item id="i_child_dc_list" messageCode="global_menu_list" url="/children?page=1&amp;type=DC&amp;size=${empty param.size ? 100 : param.size}" z="user-managed"/>
+            <menu:item id="i_child_ps_list" messageCode="global_menu_list" url="/children?page=1&amp;type=PS&amp;size=${empty param.size ? 100 : param.size}" z="user-managed"/>
+            -->
         </menu:category>
         <menu:category id="c_admission" z="Poe6vXYlIQ6amv1SRE7ApYKCEu4=">
             <menu:item id="i_admission_new" messageCode="global_menu_new" url="/admissions?form" z="LPZUuok7ERI+pQOgnqsVragag3A="/>
