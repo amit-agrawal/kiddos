@@ -238,7 +238,7 @@ public class Child implements Comparable {
 
 	public static List<Child> findAllChildren(String sortFieldName, String sortOrder, String type) {
         String jpaQuery = "SELECT o FROM Child o";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+        if (sortFieldName != null) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
@@ -287,7 +287,7 @@ public class Child implements Comparable {
 	public static List<Child> findChildEntries(int firstResult, 
 			int maxResults, String sortFieldName, String sortOrder, String type) {
         String jpaQuery = "SELECT o FROM Child o";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+        if (sortFieldName != null) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;

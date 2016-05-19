@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:display="urn:jsptld:http://displaytag.sf.net" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Program" object="${program}" path="/programs" z="user-managed">
@@ -12,13 +12,23 @@
         <field:display field="type" id="s_com_hmi_kiddos_model_Program_type" object="${program}" z="9SpHRVg8uC9NFOdtwwPDK/wrQkI="/>
         <field:display field="teacher" id="s_com_hmi_kiddos_model_Program_teacher" object="${program}" z="SpE2tvodHAMtrbvA7DRwzdayk9o="/>
         <field:display field="kidsCount" id="s_com_hmi_kiddos_model_Program_kidsCount" object="${program}" z="g5XOBUuwDC5jw5Bg8GKNSZsQWw4="/>
-        <table:table data="${program.children}" id="l_com_hmi_kiddos_model_Child" path="/children" z="user-managed">
-            <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="firstName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="lastName" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_age" property="age" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_address" property="address" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_motherName" property="motherName" z="uOVC7EWUO6f2qWLWS7EJVOYxyK8="/>
-            <table:column id="c_com_hmi_kiddos_model_Child_fatherName" property="fatherName" z="user-managed"/>
-        </table:table>
+
+		<display:table id="l_com_hmi_kiddos_model_Child" name="${program.children}" requestURI="/programs/${program.id}" pagesize="100" export="true">
+
+			<display:column property="firstName" title="First Name" sortable="true"/>
+			<display:column property="lastName" title="Last Name" sortable="true"/>
+			<display:column property="age" title="Age" sortable="true"/>
+			<display:column property="motherName" title="Mother Name" sortable="true"/>
+			<display:column property="fatherName" title="Father Name" sortable="true"/>
+			<display:column property="address" title="Address" sortable="true"/>
+			<display:setProperty name="export.pdf.filename" value="${program.type}_${program.term}_${program.batch}_kids.pdf"/>
+			<display:setProperty name="export.csv.filename" value="${program.type}_${program.term}_${program.batch}_kids.csv"/>
+
+			<display:setProperty name="export.pdf" value="true" />
+            <display:setProperty name="export.xml" value="false" />
+            <display:setProperty name="export.excel" value="false" />
+
+		</display:table>
+
     </page:show>
 </div>

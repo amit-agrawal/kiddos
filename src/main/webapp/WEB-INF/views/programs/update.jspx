@@ -6,13 +6,13 @@
         <field:select field="center" id="c_com_hmi_kiddos_model_Program_center" items="${centerses}" path="centerses" z="ec84dPEq80gcWM5NePqzdCkUCVg="/>
         <field:input field="fees" id="c_com_hmi_kiddos_model_Program_fees" max="999999" min="1" required="true" validationMessageCode="field_invalid_integer" z="7zrjSvrEEoitttUWZLcaaU2t9fM="/>
         <field:input field="notes" id="c_com_hmi_kiddos_model_Program_notes" z="bilUl+hAzf6r38RKFDxK6/2i97A="/>
-        <field:select disabled="false" field="admissions" id="c_com_hmi_kiddos_model_Program_admissions" itemValue="id" items="${admissions}" multiple="true" path="/admissions" z="user-managed"/>
+        <field:select render="false" field="admissions" id="c_com_hmi_kiddos_model_Program_admissions" itemValue="id" items="${admissions}" multiple="true" path="/admissions" z="user-managed"/>
         <field:datetime dateTimePattern="${program_duedate_date_format}" field="dueDate" id="c_com_hmi_kiddos_model_Program_dueDate" z="4xhPrhID4pSX+5JdJVbEL1MSggw="/>
         <field:input field="term" id="c_com_hmi_kiddos_model_Program_term" required="true" z="5Td9qhnz5CcdWGJMhcjB2hr9LP8="/>
         <field:input field="batch" id="c_com_hmi_kiddos_model_Program_batch" z="k91dNdv52W63gQl0I073wxapcRQ="/>
         <field:input field="type" id="c_com_hmi_kiddos_model_Program_type" required="true" z="xq1kndd0gXDqfM1FoXsBMStODBY="/>
         <field:select field="teacher" id="c_com_hmi_kiddos_model_Program_teacher" itemValue="id" items="${staffs}" path="/staffs" z="NVXq4GQIeShtm7zDM50euPOw93E="/>
-        <field:input field="kidsCount" id="c_com_hmi_kiddos_model_Program_kidsCount" validationMessageCode="field_invalid_integer" z="YIjNyN7BhdTQrW0ueNuP6Neby/o="/>
-        <field:input field="children" id="c_com_hmi_kiddos_model_Program_children" z="4UmpJ3J2ruU8t9ctxrjmSg1RdLQ="/>
+        <field:input render="false" disabled="true" field="kidsCount" id="c_com_hmi_kiddos_model_Program_kidsCount" validationMessageCode="field_invalid_integer" z="YIjNyN7BhdTQrW0ueNuP6Neby/o="/>
+        <field:input disabled="true" render="false" field="children" id="c_com_hmi_kiddos_model_Program_children" z="4UmpJ3J2ruU8t9ctxrjmSg1RdLQ="/>
     </form:update>
 </div>
