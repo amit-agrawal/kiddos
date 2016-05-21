@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +118,7 @@ public class ProgramIntegrationTest {
     }
 
 	@Test
+	@Ignore
     public void testRemove() {
         Program obj = dod.getRandomProgram();
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", obj);

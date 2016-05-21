@@ -45,7 +45,7 @@ public class UserRole {
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private Set<Staff> users = new TreeSet<Staff>();
 
 	public String toString() {

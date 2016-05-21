@@ -180,7 +180,7 @@ public class Child implements Comparable {
     
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "child")
+    @OneToMany(mappedBy = "child")
     private Set<Admission> admissions = new TreeSet<Admission>();
     
     private LocalDate getDobAsLocalDate() {
@@ -229,11 +229,11 @@ public class Child implements Comparable {
     }
 
 	public static long countChildren() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Child o", Long.class).getSingleResult();
+        return entityManager().createQuery("SELECT COUNT(o) FROM Child o order by o.id desc ", Long.class).getSingleResult();
     }
 
 	public static List<Child> findAllChildren() {
-        return entityManager().createQuery("SELECT o FROM Child o", Child.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Child o order by o.id desc ", Child.class).getResultList();
     }
 
 	public static List<Child> findAllChildren(String sortFieldName, String sortOrder, String type) {
@@ -244,6 +244,9 @@ public class Child implements Comparable {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
+        else {
+        	jpaQuery = jpaQuery + " order by o.id desc ";
+        }
         return entityManager().createQuery(jpaQuery, Child.class).getResultList();
     }
 
@@ -253,7 +256,7 @@ public class Child implements Comparable {
     }
 
 	public static List<Child> findChildEntries(int firstResult, int maxResults, String type) {
-        List<Child> children = entityManager().createQuery("SELECT o FROM Child o", Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        List<Child> children = entityManager().createQuery("SELECT o FROM Child o  order by o.id desc ", Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
         return getFilteredListBasedUponProgram(type, children);
 	}
 
@@ -292,6 +295,9 @@ public class Child implements Comparable {
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
+        }
+        else {
+        	jpaQuery = jpaQuery +  " order by o.id desc";
         }
         return entityManager().createQuery(jpaQuery, Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }

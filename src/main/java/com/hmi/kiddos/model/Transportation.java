@@ -61,12 +61,12 @@ public class Transportation implements Comparable {
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportDeparture")
+    @OneToMany(mappedBy = "transportDeparture")
      private Set<Admission> departureAdmissions = new TreeSet<Admission>();
 
 	/**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportArrival")
+    @OneToMany(mappedBy = "transportArrival")
     private Set<Admission> arrivalAdmissions = new TreeSet<Admission>();
 
 	@Transient

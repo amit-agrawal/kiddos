@@ -108,7 +108,7 @@ public class Program implements Comparable {
     
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "programs")
+    @ManyToMany(mappedBy = "programs")
     private Set<Admission> admissions = new TreeSet<Admission>();
     
     public String toString() {

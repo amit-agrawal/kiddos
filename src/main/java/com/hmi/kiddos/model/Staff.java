@@ -120,7 +120,7 @@ public class Staff implements Comparable {
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private Set<UserRole> roles = new TreeSet<UserRole>();
     
     @PrePersist

@@ -84,10 +84,10 @@ public class Admission implements Comparable {
     @DateTimeFormat(style = "M-")
     private Calendar joiningDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Transportation transportArrival;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Transportation transportDeparture;
 
     /**
@@ -104,12 +104,12 @@ public class Admission implements Comparable {
     /**
      */
     @NotNull
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private Set<Program> programs = new TreeSet<Program>();
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "admissions")
+    @ManyToMany(mappedBy = "admissions")
     private Set<Payment> payments = new TreeSet<Payment>();
 
     public String toString() {
@@ -188,7 +188,7 @@ public class Admission implements Comparable {
     }
 
 	public static List<Admission> findAllAdmissions() {
-        return entityManager().createQuery("SELECT o FROM Admission o", Admission.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Admission o order by o.id desc ", Admission.class).getResultList();
     }
 
 	public static List<Admission> findAllAdmissions(String sortFieldName, String sortOrder) {
@@ -199,6 +199,9 @@ public class Admission implements Comparable {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
+        else {
+        	jpaQuery = jpaQuery + " order by o.id desc ";
+        }
         return entityManager().createQuery(jpaQuery, Admission.class).getResultList();
     }
 
@@ -208,7 +211,7 @@ public class Admission implements Comparable {
     }
 
 	public static List<Admission> findAdmissionEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Admission o", Admission.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Admission o order by o.id desc ", Admission.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
 	public static List<Admission> findAdmissionEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
@@ -218,6 +221,9 @@ public class Admission implements Comparable {
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
+        }
+        else {
+        	jpaQuery = jpaQuery + " order by o.id desc ";
         }
         return entityManager().createQuery(jpaQuery, Admission.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }

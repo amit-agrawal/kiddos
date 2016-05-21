@@ -69,7 +69,7 @@ public class Payment {
     /**
      */
     @NotNull
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private Set<Admission> admissions = new TreeSet<Admission>();
 
 	@Override
