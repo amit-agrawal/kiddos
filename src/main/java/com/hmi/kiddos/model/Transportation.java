@@ -302,5 +302,14 @@ public class Transportation implements Comparable {
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar creationTS;
 
+	public static List<Transportation> findAllDropTransportations() {
+        String jpaQuery = "SELECT o FROM Transportation o where van in ('N.A.', 'Drop') ";
+        return entityManager().createQuery(jpaQuery, Transportation.class).getResultList();
+	}
+
+	public static List<Transportation> findAllPickupTransportations() {
+        String jpaQuery = "SELECT o FROM Transportation o where van in ('N.A.', 'Pickup') ";
+        return entityManager().createQuery(jpaQuery, Transportation.class).getResultList();
+	}
 
 }

@@ -1,30 +1,18 @@
 package com.hmi.kiddos.model;
-import org.hibernate.envers.Audited;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
-import org.springframework.roo.addon.javabean.annotations.RooToString;
-import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
-import org.springframework.transaction.annotation.Transactional;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.TreeSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -32,6 +20,17 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.envers.Audited;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
+import org.springframework.roo.addon.javabean.annotations.RooToString;
+import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
 @Entity
@@ -141,6 +140,10 @@ public class Program implements Comparable {
 
 	public static List<Program> findAllPrograms() {
         return entityManager().createQuery("SELECT o FROM Program o", Program.class).getResultList();
+    }
+
+	public static List<Program> findAllActivePrograms() {
+        return entityManager().createQuery("SELECT o FROM Program o where due_date > current_date order by type, term, batch", Program.class).getResultList();
     }
 
 	public static List<Program> findAllPrograms(String sortFieldName, String sortOrder) {

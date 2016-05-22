@@ -47,6 +47,16 @@ public class TransportationIntegrationTest {
     }
 
 	@Test
+    public void testFindAllDropTransportations() {
+        Assert.assertNotNull("Data on demand for 'Transportation' failed to initialize correctly", dod.getRandomTransportation());
+        long count = Transportation.countTransportations();
+        Assert.assertTrue("Too expensive to perform a find all test for 'Transportation', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
+        List<Transportation> result = Transportation.findAllDropTransportations();
+        Assert.assertNotNull("Find all method for 'Transportation' illegally returned null", result);
+        Assert.assertTrue("Find all method for 'Transportation' failed to return any data", result.size() > 0);
+    }
+
+	@Test
     public void testFindAllTransportations() {
         Assert.assertNotNull("Data on demand for 'Transportation' failed to initialize correctly", dod.getRandomTransportation());
         long count = Transportation.countTransportations();

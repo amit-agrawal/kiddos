@@ -56,6 +56,17 @@ public class ProgramIntegrationTest {
         Assert.assertTrue("Find all method for 'Program' failed to return any data", result.size() > 0);
     }
 
+
+	@Test
+    public void testFindAllActivePrograms() {
+        Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
+        long count = Program.countPrograms();
+        Assert.assertTrue("Too expensive to perform a find all test for 'Program', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
+        List<Program> result = Program.findAllActivePrograms();
+        Assert.assertNotNull("Find all method for 'Program' illegally returned null", result);
+        Assert.assertTrue("Find all method for 'Program' failed to return any data", result.size() > 0);
+    }
+
 	@Test
     public void testFindProgramEntries() {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
