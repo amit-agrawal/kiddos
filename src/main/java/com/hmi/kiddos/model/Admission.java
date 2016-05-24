@@ -52,8 +52,8 @@ public class Admission implements Comparable {
                 	feesExpected = 5800;
             }
         }
-        log.info("Fees calculated: " + feesExpected + " , discount: " + discount);
-        feesExpected = feesExpected - discount;
+        log.info("Fees calculated: " + feesExpected + " , discount: " + discount + " admission fee: " + admissionFee);
+        feesExpected = feesExpected - discount + admissionFee;
         return feesExpected;
     }
 
@@ -131,6 +131,18 @@ public class Admission implements Comparable {
     /**
      */
     private int discount;
+
+    /**
+     */
+    private int admissionFee;
+
+	public int getAdmissionFee() {
+		return admissionFee;
+	}
+
+	public void setAdmissionFee(int admissionFee) {
+		this.admissionFee = admissionFee;
+	}
 
 	public Transportation getTransportArrival() {
 		return transportArrival;

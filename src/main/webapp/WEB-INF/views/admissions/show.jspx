@@ -13,6 +13,7 @@
         <field:display field="programs" id="s_com_hmi_kiddos_model_Admission_programs" object="${admission}" z="uPvcqapjjnIAs3MxKLXcIaReF/o="/>
         <field:display field="payments" id="s_com_hmi_kiddos_model_Admission_payments" object="${admission}" z="tlTyoUjtZ1rm5VTKuvp2X2/Y0bs="/>
         <field:display field="discount" id="s_com_hmi_kiddos_model_Admission_discount" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
+        <field:display field="admissionFee" id="s_com_hmi_kiddos_model_Admission_admissionFee" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
         <field:display field="transportArrival" id="s_com_hmi_kiddos_model_Admission_transportArrival" object="${admission}" z="tRalg8fdZFXgFGeu8Mh8pN3XT+U="/>
         <field:display field="transportDeparture" id="s_com_hmi_kiddos_model_Admission_transportDeparture" object="${admission}" z="UKWQwMAnWBsagfPWgIo0DbULgEo="/>
     </page:show>

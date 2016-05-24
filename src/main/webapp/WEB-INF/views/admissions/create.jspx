@@ -13,6 +13,7 @@
         <field:select field="programs" id="c_com_hmi_kiddos_model_Admission_programs" itemValue="id" items="${activePrograms}" multiple="true" path="/programs" required="true" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:select field="payments" id="c_com_hmi_kiddos_model_Admission_payments" itemValue="id" items="${payments}" multiple="true" path="/payments" render="false" z="user-managed"/>
         <field:input field="discount" id="c_com_hmi_kiddos_model_Admission_discount" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
+        <field:input field="admissionFee" id="c_com_hmi_kiddos_model_Admission_admissionFee" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
         <field:select field="transportArrival" id="c_com_hmi_kiddos_model_Admission_transportArrival" itemValue="id" items="${pickupTransportations}" path="/transportations" z="US1pMnSAvtYsdA2AzcpO+2Hpx9c="/>
         <field:select field="transportDeparture" id="c_com_hmi_kiddos_model_Admission_transportDeparture" itemValue="id" items="${dropTransportations}" path="/transportations" z="glweeUAlmR8LMM1j8mngyb97R8s="/>
     </form:create>
