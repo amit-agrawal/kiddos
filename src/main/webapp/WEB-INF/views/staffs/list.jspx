@@ -8,8 +8,8 @@
             <table:column id="c_com_hmi_kiddos_model_Staff_middleName" property="middleName" z="z3wqS3b/2+be0WXddBncIdHpCb0="/>
             <table:column id="c_com_hmi_kiddos_model_Staff_lastName" property="lastName" z="EcOlVMlqRGFQO/9DBxbzfpeYXbk="/>
             <table:column id="c_com_hmi_kiddos_model_Staff_emailOne" property="emailOne" z="KMN/NnOzgqvXTDEC9GIEjrM+JeY="/>
-            <table:column id="c_com_hmi_kiddos_model_Staff_password" property="password" z="t9uGwF/T7ffBgY4mS6M5FG2q+8c="/>
-            <table:column id="c_com_hmi_kiddos_model_Staff_gender" property="gender" z="zO1P70OsdvgaNgOX8jwMgaqnmFs="/>
+            <table:column id="c_com_hmi_kiddos_model_Staff_phone" property="phone" z="KMN/NnOzgqvXTDEC9GIEjrM+JeY="/>
+            <table:column id="c_com_hmi_kiddos_model_Staff_phoneHome" property="phoneHome" z="KMN/NnOzgqvXTDEC9GIEjrM+JeY="/>
         </table:table>
     </page:list>
 </div>

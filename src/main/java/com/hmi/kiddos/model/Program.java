@@ -44,7 +44,7 @@ public class Program implements Comparable {
     private Integer kidsCount = 0;
 	
 	public Integer getKidsCount() {
-		return admissions.size();
+		return getChildren().size();
 	}
 	
 	@Transient
