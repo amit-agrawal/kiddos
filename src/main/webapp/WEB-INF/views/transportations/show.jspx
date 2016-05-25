@@ -9,13 +9,19 @@
         <field:display field="allKidsCount" id="s_com_hmi_kiddos_model_Transportation_allKidsCount" object="${transportation}" z="2Urah7avAJY/cT6tOs19GnF/4To="/>
     </page:show>
 
-		<display:table id="l_com_hmi_kiddos_model_Child" name="${transportation.allChildren}" requestURI="/transportations/${transportation.id}" pagesize="100" export="true">
+		<display:table id="l_com_hmi_kiddos_model_Child" name="${transportation.allChildren}" 
+			decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"
+			requestURI="/transportations/${transportation.id}">
+			
+			<display:column property="counter" title="Sq." sortable="true"/>
 			<display:column property="firstName" title="First Name" sortable="true"/>
 			<display:column property="lastName" title="Last Name" sortable="true"/>
 			<display:column property="address" title="Address" sortable="true"/>
 			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
 			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
 			<display:column property="phoneHome" title="Phone Other" sortable="true"/>
+			<display:column property="secondLevelChildShowLink" title="Links" sortable="false"/>
+
 			<display:setProperty name="export.pdf.filename" value="${transportation.driverName}_${transportation.notes}_${transportation.van}_kids.pdf"/>
 			<display:setProperty name="export.csv.filename" value="${transportation.driverName}_${transportation.notes}_${transportation.van}_kids.csv"/>
 

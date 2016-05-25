@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"  xmlns:display="urn:jsptld:http://displaytag.sf.net" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_hmi_kiddos_model_Admission" items="${admissions}" z="user-managed">
-        <table:table data="${admissions}" id="l_com_hmi_kiddos_model_Admission" path="/admissions" z="user-managed">
-            <table:column id="c_com_hmi_kiddos_model_Child_firstName" property="child.firstName" z="user-defined"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_lastName" property="child.lastName" z="user-defined"/>
-            <table:column id="c_com_hmi_kiddos_model_Child_age" property="child.age" z="user-defined"/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_programs" property="programs" z="user-defined"/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_feesExpected" property="feesExpected" z="AhejQpAWjhQBR1dvGlq/cpNowKQ="/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_feesDue" property="feesDue" z="55hcZwg/llhX71d1HMBfnUELH98="/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_transportArrival" property="transportArrival" z="e9ujU7jHEhhdk4nhKllVhfojLHI="/>
-            <table:column id="c_com_hmi_kiddos_model_Admission_transportDeparture" property="transportDeparture" z="user-managed"/>
-        </table:table>
+    <page:list id="pl_com_hmi_kiddos_model_Admission" items="${admissions}" >
+        <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${admissions}" 
+        id="l_com_hmi_kiddos_model_Admission" requestURI="/admissions" >
+			<display:column property="counter" title="Sq." sortable="true"/>
+
+            <display:column sortable="true" title="First Name" property="child.firstName" />
+            <display:column sortable="true" title="Last Name" property="child.lastName" />
+            <display:column sortable="true" title="Age" property="child.age" />
+            <display:column sortable="true" title="Programs" property="programs" />
+            <display:column sortable="true" title="Expected Fee" property="feesExpected" />
+            <display:column sortable="true" title="Due Fee" property="feesDue" />
+            <display:column sortable="true" title="Transport Arrival" property="transportArrival" />
+            <display:column sortable="true" title="Transport Departure" property="transportDeparture" />
+			<display:column property="showLink" title="Links" sortable="false"/>
+
+			<display:setProperty name="export.pdf.filename" value="admissions.pdf"/>
+			<display:setProperty name="export.csv.filename" value="admissions.csv"/>
+
+			<display:setProperty name="export.pdf" value="true" />
+            <display:setProperty name="export.xml" value="false" />
+            <display:setProperty name="export.excel" value="false" />
+        </display:table>
     </page:list>
 </div>

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"  xmlns:display="urn:jsptld:http://displaytag.sf.net" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_hmi_kiddos_model_Program" items="${programs}" z="93RXlLkkiwajgS+P9kyi9N1csaE=">
-        <table:table data="${programs}" id="l_com_hmi_kiddos_model_Program" path="/programs" z="JtAC/LWbXN92xFp+uOc+hD+Jw/E=">
-            <table:column id="c_com_hmi_kiddos_model_Program_center" property="center" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_term" property="term" z="IgL6tWI6X5OJ4+fa5N49FbMFcNE="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_batch" property="batch" z="6CmU+ZvLYKQcyP528awm5k+emsg="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_type" property="type" z="rg9l6H90IW/8s5RHW9k9EiFPKyc="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_teacher" property="teacher" z="user-managed"/>
-            <table:column id="c_com_hmi_kiddos_model_Program_kidsCount" property="kidsCount" z="LFPPThoGY+wEaEv/Fgx+g4712Wg="/>
-        </table:table>
+    <page:list id="pl_com_hmi_kiddos_model_Program" items="${programs}" >
+        <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${programs}" id="l_com_hmi_kiddos_model_Program" requestURI="/programs" >
+			<display:column property="counter" title="Sq." sortable="true"/>
+
+            <display:column sortable="true" title="center" property="center" />
+            <display:column sortable="true" title="term" property="term" />
+            <display:column sortable="true" title="batch" property="batch" />
+            <display:column sortable="true" title="type" property="type" />
+            <display:column sortable="true" title="teacher" property="teacher" />
+            <display:column sortable="true" title="kidsCount" property="kidsCount" />
+			<display:column property="showLink" title="Links" sortable="false"/>
+			<display:setProperty name="export.pdf.filename" value="programs.pdf"/>
+			<display:setProperty name="export.csv.filename" value="programs.csv"/>
+
+			<display:setProperty name="export.pdf" value="true" />
+            <display:setProperty name="export.xml" value="false" />
+            <display:setProperty name="export.excel" value="false" />
+        </display:table>
     </page:list>
 </div>
