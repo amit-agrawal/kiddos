@@ -6,12 +6,12 @@
         <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${staffs}" id="l_com_hmi_kiddos_model_Staff" requestURI="/staffs" >
 			<display:column property="counter" title="Sq." sortable="true"/>
 
-            <display:column sortable="true" title="firstName" property="firstName" />
-            <display:column sortable="true" title="middleName" property="middleName" />
-            <display:column sortable="true" title="lastName" property="lastName" />
-            <display:column sortable="true" title="emailOne" property="emailOne" />
-            <display:column sortable="true" title="phone" property="phone" />
-            <display:column sortable="true" title="phoneHome" property="phoneHome" />
+            <display:column sortable="true" title="First Name" property="firstName" />
+            <display:column sortable="true" title="Middle Name" property="middleName" />
+            <display:column sortable="true" title="Last Name" property="lastName" />
+            <display:column sortable="true" title="Email" property="emailOne" />
+            <display:column sortable="true" title="Phone" property="phone" />
+            <display:column sortable="true" title="Phone Other" property="phoneHome" />
 			<display:column property="showLink" title="Links" sortable="false"/>
 			<display:setProperty name="export.pdf.filename" value="staffs.pdf"/>
 			<display:setProperty name="export.csv.filename" value="staffs.csv"/>

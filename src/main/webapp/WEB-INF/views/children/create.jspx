@@ -9,21 +9,21 @@
         <field:datetime dateTimePattern="${child_dob_date_format}" field="dob" id="c_com_hmi_kiddos_model_Child_dob" z="1xkWvEb9yPOUgGpfEhEH1f862sU="/>
         <field:input field="bloodGroup" id="c_com_hmi_kiddos_model_Child_bloodGroup" max="20" z="LxoVDiI70zP7vJDiYWHRmjPAYIo="/>
         <field:select field="gender" id="c_com_hmi_kiddos_model_Child_gender" items="${genders}" path="genders" z="PQZSDARFbL2FXSpVZuSXITgmaJo="/>
-        <field:textarea field="motherName" id="c_com_hmi_kiddos_model_Child_motherName" z="QtKGy/Sb4XzKyfvxwYqoP7Nrsaw="/>
+        <field:input field="motherName" id="c_com_hmi_kiddos_model_Child_motherName" z="QtKGy/Sb4XzKyfvxwYqoP7Nrsaw="/>
         <field:input field="phoneMother" id="c_com_hmi_kiddos_model_Child_phoneMother" max="30" z="gA/TAIyegSQsJG5bVV4oPp0SJg4="/>
-        <field:textarea field="emailOne" id="c_com_hmi_kiddos_model_Child_emailOne" validationMessageCode="field_invalid_email" z="m+LlPcEqa2FL63wW2URPgNr0mBk="/>
-        <field:textarea field="fatherName" id="c_com_hmi_kiddos_model_Child_fatherName" z="TOqYpQz3XGyLXp2knCFRMhKzyCY="/>
+        <field:input field="emailOne" id="c_com_hmi_kiddos_model_Child_emailOne" validationMessageCode="field_invalid_email" z="m+LlPcEqa2FL63wW2URPgNr0mBk="/>
+        <field:input field="fatherName" id="c_com_hmi_kiddos_model_Child_fatherName" z="TOqYpQz3XGyLXp2knCFRMhKzyCY="/>
         <field:input field="phoneFather" id="c_com_hmi_kiddos_model_Child_phoneFather" max="30" z="11ZZqIlRYOwApXYDFSs1YBTeIWk="/>
-        <field:textarea field="emailTwo" id="c_com_hmi_kiddos_model_Child_emailTwo" validationMessageCode="field_invalid_email" z="v9096PH8dWrMhUtnjGvxQN9tqGg="/>
-        <field:textarea field="emailThree" id="c_com_hmi_kiddos_model_Child_emailThree" validationMessageCode="field_invalid_email" z="oq7m0+Byo/dFci3N+jvbW47dYDQ="/>
+        <field:input field="emailTwo" id="c_com_hmi_kiddos_model_Child_emailTwo" validationMessageCode="field_invalid_email" z="v9096PH8dWrMhUtnjGvxQN9tqGg="/>
+        <field:input field="emailThree" id="c_com_hmi_kiddos_model_Child_emailThree" validationMessageCode="field_invalid_email" z="oq7m0+Byo/dFci3N+jvbW47dYDQ="/>
         <field:input field="phoneHome" id="c_com_hmi_kiddos_model_Child_phoneHome" max="30" z="rk9YKT/VIii/1tC3eGM5dfjBuYE="/>
         <field:textarea field="address" id="c_com_hmi_kiddos_model_Child_address" z="WdRLWl+vI7XihoT8UDL4mzvnK5g="/>
         <field:input field="pincode" id="c_com_hmi_kiddos_model_Child_pincode" max="6" z="LgLwAQws7s5/+n0TigKiIJ2hGb4="/>
         <field:textarea field="allergy" id="c_com_hmi_kiddos_model_Child_allergy" z="7SMbN/gxgARYMrLg0J3xepNqzNo="/>
-        <field:textarea field="nationality" id="c_com_hmi_kiddos_model_Child_nationality" z="QSoLcRtbL2rlNgOBO4kDfXoxWFs="/>
+        <field:input field="nationality" id="c_com_hmi_kiddos_model_Child_nationality" z="QSoLcRtbL2rlNgOBO4kDfXoxWFs="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Child_notes" z="FiwJNs2G/P6e8QHTrM7zV7DN16s="/>
-        <field:textarea field="fatherOrganization" id="c_com_hmi_kiddos_model_Child_fatherOrganization" z="jyqL241p5lH1T6uYppxtIfqT360="/>
-        <field:textarea field="motherOrganization" id="c_com_hmi_kiddos_model_Child_motherOrganization" z="EcxmJneWZrZvpvJe3vX+U2++jP4="/>
+        <field:input field="fatherOrganization" id="c_com_hmi_kiddos_model_Child_fatherOrganization" z="jyqL241p5lH1T6uYppxtIfqT360="/>
+        <field:input field="motherOrganization" id="c_com_hmi_kiddos_model_Child_motherOrganization" z="EcxmJneWZrZvpvJe3vX+U2++jP4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Child" render="${not empty dependencies}" z="rL1ZaT6lxDdTbQM9+Rcw2lUJkmc="/>
 </div>

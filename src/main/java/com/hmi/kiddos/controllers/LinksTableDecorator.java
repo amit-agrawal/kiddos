@@ -47,35 +47,56 @@ public class LinksTableDecorator extends TableDecorator {
 			link = " <a href=\"children/" + child.getId() + "\">"
 					+ "<img title=\"Show Child\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show Child\"/>"
 					+ "</a>";
+			link = link + " <a href=\"children/" + child.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
+					+ "</a>";
 		} else if (currentObj instanceof Admission) {
 			Admission admission = (Admission) getCurrentRowObject();
 			link = " <a href=\"admissions/" + admission.getId() + "\">"
 					+ "<img title=\"Show Admission\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show Admission\"/>"
+					+ "</a>";
+			link = link + " <a href=\"admissions/" + admission.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
 					+ "</a>";
 		} else if (currentObj instanceof Program) {
 			Program program = (Program) getCurrentRowObject();
 			link = " <a href=\"programs/" + program.getId() + "\">"
 					+ "<img title=\"Show Program\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show Program\"/>"
 					+ "</a>";
+			link = link + " <a href=\"programs/" + program.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
+					+ "</a>";
 		} else if (currentObj instanceof Payment) {
 			Payment payment = (Payment) getCurrentRowObject();
 			link = " <a href=\"payments/" + payment.getId() + "\">"
 					+ "<img title=\"Show Payment\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show Payment\"/>"
+					+ "</a>";
+			link = link + " <a href=\"payments/" + payment.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
 					+ "</a>";
 		} else if (currentObj instanceof Transportation) {
 			Transportation transport = (Transportation) getCurrentRowObject();
 			link = " <a href=\"transportations/" + transport.getId() + "\">"
 					+ "<img title=\"Show Transportation\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show Transportation\"/>"
 					+ "</a>";
+			link = link + " <a href=\"transportations/" + transport.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
+					+ "</a>";
 		} else if (currentObj instanceof Staff) {
 			Staff staff = (Staff) getCurrentRowObject();
 			link = " <a href=\"staffs/" + staff.getId() + "\">"
 					+ "<img title=\"Show Staff\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show Staff\"/>"
 					+ "</a>";
+			link = link + " <a href=\"staffs/" + staff.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
+					+ "</a>";
 		} else if (currentObj instanceof UserRole) {
-			UserRole userroles = (UserRole) getCurrentRowObject();
-			link = " <a href=\"userroles/" + userroles.getId() + "\">"
+			UserRole userrole = (UserRole) getCurrentRowObject();
+			link = " <a href=\"userroles/" + userrole.getId() + "\">"
 					+ "<img title=\"Show UserRole\" src=\"resources/images/show.png\" class=\"image\" alt=\"Show UserRole\"/>"
+					+ "</a>";
+			link = link + " <a href=\"userroles/" + userrole.getId() + "?form\">"
+					+ "<img title=\"Edit\" src=\"resources/images/update.png\" class=\"image\" alt=\"Edit\"/>"
 					+ "</a>";
 		}
 		return link;

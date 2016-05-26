@@ -30,17 +30,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
-import org.springframework.roo.addon.javabean.annotations.RooToString;
-import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
 import org.springframework.transaction.annotation.Transactional;
 	
 @Configurable
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"firstName", "middleName", "lastName", "dob"})})
-@RooJavaBean
-@RooToString
-@RooJpaActiveRecord
 @Audited
 public class Child implements Comparable {
 
