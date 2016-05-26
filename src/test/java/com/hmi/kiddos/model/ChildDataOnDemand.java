@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.dod.annotations.RooDataOnDemand;
 import org.springframework.stereotype.Component;
 
+import com.hmi.kiddos.dao.ChildDao;
+
 @Configurable
 @Component
 @RooDataOnDemand(entity = Child.class)
@@ -235,14 +237,14 @@ public class ChildDataOnDemand {
         }
         Child obj = data.get(index);
         Long id = obj.getId();
-        return Child.findChild(id);
+        return ChildDao.findChild(id);
     }
 
 	public Child getRandomChild() {
         init();
         Child obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Child.findChild(id);
+        return ChildDao.findChild(id);
     }
 
 	public boolean modifyChild(Child obj) {
@@ -252,7 +254,7 @@ public class ChildDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = Child.findChildEntries(from, to, null);
+        data = ChildDao.findChildEntries(from, to, null);
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Child' illegally returned null");
         }

@@ -1,4 +1,5 @@
 package com.hmi.kiddos.controllers;
+import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
@@ -42,7 +43,7 @@ public class AdmissionController {
     public String createForm(Model uiModel) {
         populateEditForm(uiModel, new Admission());
         List<String[]> dependencies = new ArrayList<String[]>();
-        if (Child.countChildren() == 0) {
+        if (ChildDao.countChildren() == 0) {
             dependencies.add(new String[] { "transportArrival", "children" });
         }
         uiModel.addAttribute("dependencies", dependencies);
@@ -107,7 +108,7 @@ public class AdmissionController {
 	void populateEditForm(Model uiModel, Admission admission) {
         uiModel.addAttribute("admission", admission);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("children", Child.findAllChildren());
+        uiModel.addAttribute("children", ChildDao.findAllChildren());
         uiModel.addAttribute("payments", Payment.findAllPayments());
         uiModel.addAttribute("programs", Program.findAllPrograms());
         uiModel.addAttribute("activePrograms", Program.findAllActivePrograms());

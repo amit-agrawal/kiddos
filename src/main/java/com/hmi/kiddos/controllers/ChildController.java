@@ -1,4 +1,5 @@
 package com.hmi.kiddos.controllers;
+import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Gender;
@@ -24,6 +25,8 @@ import org.springframework.web.util.WebUtils;
 @RooWebScaffold(path = "children", formBackingObject = Child.class)
 public class ChildController {
 
+	private ChildDao childDao = new ChildDao();
+	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Child child, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -44,7 +47,7 @@ public class ChildController {
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("child", Child.findChild(id));
+        uiModel.addAttribute("child", childDao.findChild(id));
         uiModel.addAttribute("itemId", id);
         return "children/show";
     }
@@ -55,14 +58,18 @@ public class ChildController {
     		@RequestParam(value = "sortFieldName", required = false) String sortFieldName, 
     		@RequestParam(value = "sortOrder", required = false) String sortOrder, 
     		@RequestParam(value = "type", required = false) String types, Model uiModel) {
-        if (page != null || size != null) {
+        if (types != null) {
+            uiModel.addAttribute("children", childDao.findAllChildren(types));
+
+        }
+        else if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();	
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("children", Child.findChildEntries(firstResult, sizeNo, sortFieldName, sortOrder, types));
-            float nrOfPages = (float) Child.countChildren() / sizeNo;
+            uiModel.addAttribute("children", childDao.findChildEntries(firstResult, sizeNo, sortFieldName, sortOrder, types));
+            float nrOfPages = (float) childDao.countChildren() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("children", Child.findAllChildren(sortFieldName, sortOrder, types));
+            uiModel.addAttribute("children", childDao.findAllChildren(sortFieldName, sortOrder, types));
         }
         addDateTimeFormatPatterns(uiModel);
         return "children/list";
@@ -81,14 +88,14 @@ public class ChildController {
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Child.findChild(id));
+        populateEditForm(uiModel, childDao.findChild(id));
         return "children/update";
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Child child = Child.findChild(id);
-        child.remove();
+        Child child = childDao.findChild(id);
+        child.remove(childDao);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

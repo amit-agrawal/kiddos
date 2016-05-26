@@ -1,6 +1,8 @@
 package com.hmi.kiddos.controllers;
 
 import org.springframework.format.FormatterRegistry;
+
+import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.*;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.annotations.converter.RooConversionService;
@@ -103,7 +105,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Long, Child> getIdToChildConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.hmi.kiddos.model.Child>() {
             public com.hmi.kiddos.model.Child convert(java.lang.Long id) {
-                return Child.findChild(id);
+                return ChildDao.findChild(id);
             }
         };
     }

@@ -31,12 +31,15 @@ import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.hmi.kiddos.dao.ChildDao;
 	
 @Configurable
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"firstName", "middleName", "lastName", "dob"})})
 @Audited
 public class Child implements Comparable {
+	
 
 	@Transient
 	private String age;
@@ -209,90 +212,36 @@ public class Child implements Comparable {
 		return this.toString().compareToIgnoreCase(other.toString());
 	}
 
-
-	@PersistenceContext
-    transient EntityManager entityManager;
-
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("age", "firstName", "middleName", "lastName", "gender", "fatherName", "motherName", "fatherOrganization", "motherOrganization", "emailOne", "emailTwo", "emailThree", "phoneFather", "phoneMother", "phoneHome", "address", "pincode", "bloodGroup", "allergy", "nationality", "dob", "notes");
-
-	public static final EntityManager entityManager() {
-        EntityManager em = new Child().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
-    }
-
-	public static long countChildren() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Child o order by o.id desc ", Long.class).getSingleResult();
-    }
-
-	public static List<Child> findAllChildren() {
-        return entityManager().createQuery("SELECT o FROM Child o order by o.id desc ", Child.class).getResultList();
-    }
-
-	public static List<Child> findAllChildren(String sortFieldName, String sortOrder, String type) {
-        String jpaQuery = "SELECT o FROM Child o";
-        if (sortFieldName != null) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }
-        else {
-        	jpaQuery = jpaQuery + " order by o.id desc ";
-        }
-        return entityManager().createQuery(jpaQuery, Child.class).getResultList();
-    }
-
-	public static Child findChild(Long id) {
-        if (id == null) return null;
-        return entityManager().find(Child.class, id);
-    }
-
-	public static List<Child> findChildEntries(int firstResult, int maxResults, String type) {
-        List<Child> children = entityManager().createQuery("SELECT o FROM Child o  order by o.id desc ", Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-        return getFilteredListBasedUponProgram(type, children);
-	}
-
-	private static List<Child> getFilteredListBasedUponProgram(String type, List<Child> children) {
-		List<Child> newList = new ArrayList<Child>();
-        if (type != null) {
-        	for (Child child : children)
-        	{
-        	    if (child.hasProgram(type))
-        	    {
-        	        newList.add(child);
-        	    }
-        	}
-        }
-		return newList;
-	}
-
-	private boolean hasProgram(String type) {
+	public boolean hasProgram(String type) {
 		Set<Program> programs = getPrograms();
 		boolean hasProgram = false;
-		for(Program program : programs) {
-			if (program.getType().equals(type)) {
-				hasProgram = true;
-				break;
+		if (type != null & (type.startsWith("PS"))) {
+			for(Program program : programs) {
+				if (program.getType().startsWith("Jr") || program.getType().startsWith("Pl") || program.getType().startsWith("Nu")) {
+					hasProgram = true;
+					break;
+				}
+			}
+		}
+		else {
+			for(Program program : programs) {
+				if (program.getType().startsWith(type)) {
+					hasProgram = true;
+					break;
+				}
 			}
 		}
 		
 		return hasProgram;
 	}
 
-	public static List<Child> findChildEntries(int firstResult, 
-			int maxResults, String sortFieldName, String sortOrder, String type) {
-        String jpaQuery = "SELECT o FROM Child o";
-        if (sortFieldName != null) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }
-        else {
-        	jpaQuery = jpaQuery +  " order by o.id desc";
-        }
-        return entityManager().createQuery(jpaQuery, Child.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+	@PersistenceContext
+    public transient EntityManager entityManager;
+
+	public static final EntityManager entityManager() {
+        EntityManager em = new Child().entityManager;
+        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+        return em;
     }
 
 	@Transactional
@@ -302,12 +251,12 @@ public class Child implements Comparable {
     }
 
 	@Transactional
-    public void remove() {
+    public void remove(ChildDao childDao) {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            Child attached = Child.findChild(this.id);
+            Child attached = childDao.findChild(this.id);
             this.entityManager.remove(attached);
         }
     }
