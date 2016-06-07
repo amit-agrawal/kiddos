@@ -9,7 +9,11 @@
         </menu:category>
         <menu:category id="c_program" z="YGxVV4/fAoI1UpA5Qj+HrGbzkYw=">
             <menu:item id="i_program_new" messageCode="global_menu_new" url="/programs?form" z="zDcnKu0MxAKfjglkepWRPV+CgbM="/>
-            <menu:item id="i_program_list" messageCode="global_menu_list" url="/programs?page=1&amp;sortFieldName=term&amp;size=100" z="user-managed"/>
+         	<menu:item id="i_program_old_list" messageCode="global_menu_list" url="/programs?type=old" />
+            <menu:item id="i_program_current_list" messageCode="global_menu_list" url="/programs?type=current" z="user-managed"/>
+            <!--
+            <menu:item id="i_program_future_list" messageCode="global_menu_list" url="/programs?type=future" z="user-managed"/>
+            -->
         </menu:category>
         <menu:category id="c_staff" z="WEqNUFcSQYoW/mQULTlPjM/nWNU=">
             <menu:item id="i_staff_new" messageCode="global_menu_new" url="/staffs?form" z="H2VWxcFT9MZjwJqkdaMj688QtI4="/>

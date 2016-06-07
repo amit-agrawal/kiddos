@@ -2,7 +2,10 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"  xmlns:display="urn:jsptld:http://displaytag.sf.net" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    
     <page:list id="pl_com_hmi_kiddos_model_Child" items="${children}" >
+    	<!--input type="text" id="search" placeholder="Type to search"/-->
+    
         <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${children}" id="l_com_hmi_kiddos_model_Child" requestURI="/children" >
 			<display:column property="counter" title="Sq." sortable="true"/>
 

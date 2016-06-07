@@ -1,4 +1,5 @@
 package com.hmi.kiddos.model;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -324,5 +325,28 @@ public class Program implements Comparable {
 			     
 	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
 	private Calendar creationTS;
+
+	public static List<Program> findAllPrograms(String status) {
+		List<Program> allPrograms = findAllPrograms();
+		List<Program> programList = new ArrayList<Program>();
+		for(Program program: allPrograms) {
+			if (status.equals("old")) {
+				if ((program.getDueDate() != null) && program.getDueDate().before(Calendar.getInstance()))
+					programList.add(program);
+			}
+			else if (status.equals("current")) {
+				if ((program.getDueDate() == null) || program.getDueDate().after(Calendar.getInstance()))
+					programList.add(program);
+				
+			}
+			else if (status.equals("future")) {
+				if ((program.getDueDate() != null) && program.getDueDate().after(Calendar.getInstance()))
+					programList.add(program);
+				
+			}
+			
+		}
+		return programList;		
+	}
 
 }

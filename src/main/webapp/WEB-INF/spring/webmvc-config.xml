@@ -74,4 +74,8 @@
     </property>
   </bean>
 <bean class="com.hmi.kiddos.controllers.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/"  
+	cache-period="31556926"/>
+	
 </beans>

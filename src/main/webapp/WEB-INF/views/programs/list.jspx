@@ -6,7 +6,6 @@
         <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${programs}" id="l_com_hmi_kiddos_model_Program" requestURI="/programs" >
 			<display:column property="counter" title="Sq." sortable="true"/>
 
-            <display:column sortable="true" title="Center" property="center" />
             <display:column sortable="true" title="Term" property="term" />
             <display:column sortable="true" title="Batch" property="batch" />
             <display:column sortable="true" title="Type" property="type" />
