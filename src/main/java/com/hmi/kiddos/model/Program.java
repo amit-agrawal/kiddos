@@ -81,9 +81,24 @@ public class Program implements Comparable {
      */
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
+    @Column(name = "DUE_DATE")
     private Calendar dueDate;
     
     /**
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Calendar startDate;
+
+    public Calendar getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Calendar startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
      */
     @Min(1L)
     @Max(999999L)
@@ -145,6 +160,14 @@ public class Program implements Comparable {
 
 	public static List<Program> findAllActivePrograms() {
         return entityManager().createQuery("SELECT o FROM Program o where due_date > current_date order by type, term, batch", Program.class).getResultList();
+    }
+
+	public static List<Program> findOnlyActivePrograms() {
+        return entityManager().createQuery("SELECT o FROM Program o where due_date > current_date and start_date <= current_date order by type, term, batch", Program.class).getResultList();
+    }
+
+	public static List<Program> findFuturePrograms() {
+        return entityManager().createQuery("SELECT o FROM Program o where start_date > current_date order by type, term, batch", Program.class).getResultList();
     }
 
 	public static List<Program> findAllPrograms(String sortFieldName, String sortOrder) {
@@ -335,18 +358,16 @@ public class Program implements Comparable {
 					programList.add(program);
 			}
 			else if (status.equals("current")) {
-				if ((program.getDueDate() == null) || program.getDueDate().after(Calendar.getInstance()))
+				if (((program.getDueDate() == null) || program.getDueDate().after(Calendar.getInstance())) &&
+						((program.getStartDate() == null) || program.getStartDate().before(Calendar.getInstance())))
 					programList.add(program);
 				
 			}
 			else if (status.equals("future")) {
-				if ((program.getDueDate() != null) && program.getDueDate().after(Calendar.getInstance()))
-					programList.add(program);
-				
-			}
-			
+				if ((program.getStartDate() != null) && program.getStartDate().after(Calendar.getInstance()))
+					programList.add(program);				
+			}			
 		}
 		return programList;		
 	}
-
 }

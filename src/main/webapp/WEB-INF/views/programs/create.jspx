@@ -6,6 +6,7 @@
         <field:select field="center" id="c_com_hmi_kiddos_model_Program_center" items="${centerses}" path="centerses" z="ec84dPEq80gcWM5NePqzdCkUCVg="/>
         <field:input field="fees" id="c_com_hmi_kiddos_model_Program_fees" max="999999" min="1" required="true" validationMessageCode="field_invalid_integer" z="7zrjSvrEEoitttUWZLcaaU2t9fM="/>
         <field:input field="notes" id="c_com_hmi_kiddos_model_Program_notes" z="bilUl+hAzf6r38RKFDxK6/2i97A="/>
+        <field:datetime dateTimePattern="${program_duedate_date_format}" field="startDate" id="c_com_hmi_kiddos_model_Program_startDate" z="4xhPrhID4pSX+5JdJVbEL1MSggw="/>
         <field:datetime dateTimePattern="${program_duedate_date_format}" field="dueDate" id="c_com_hmi_kiddos_model_Program_dueDate" z="4xhPrhID4pSX+5JdJVbEL1MSggw="/>
         <field:input field="term" id="c_com_hmi_kiddos_model_Program_term" required="true" z="5Td9qhnz5CcdWGJMhcjB2hr9LP8="/>
         <field:input field="batch" id="c_com_hmi_kiddos_model_Program_batch" z="k91dNdv52W63gQl0I073wxapcRQ="/>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 import com.hmi.kiddos.model.Admission;
+import com.hmi.kiddos.model.Program;
 import com.hmi.kiddos.model.Transportation;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +46,14 @@ public class TransportationController {
     }
 
 	@RequestMapping(produces = "text/html")
-    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
-        if (page != null || size != null) {
+    public String list(@RequestParam(value = "page", required = false) Integer page, 
+    		@RequestParam(value = "size", required = false) Integer size, 
+    		@RequestParam(value = "sortFieldName", required = false) String sortFieldName, 
+    		@RequestParam(value = "sortOrder", required = false) String sortOrder, 
+			@RequestParam(value = "type", required = false) String types, Model uiModel) {
+		if (types != null) {
+			uiModel.addAttribute("transportations", Transportation.findAllTransports(types));
+		} else if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
             uiModel.addAttribute("transportations", Transportation.findTransportationEntries(firstResult, sizeNo, sortFieldName, sortOrder));

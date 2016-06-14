@@ -1,11 +1,13 @@
 package com.hmi.kiddos.model;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
 import org.springframework.roo.addon.javabean.annotations.RooToString;
 import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.TreeSet;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +22,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
@@ -43,6 +47,35 @@ public class Transportation implements Comparable {
     		return "[" + driverName + ", " + notes + ", " + van + "]";
 	}
 
+    /**
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    @Column(name = "DUE_DATE")
+    private Calendar dueDate;
+    
+    public Calendar getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Calendar dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	/**
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Calendar startDate;
+
+    public Calendar getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Calendar startDate) {
+		this.startDate = startDate;
+	}
+	
 	/**
      */
     @NotNull
@@ -310,6 +343,28 @@ public class Transportation implements Comparable {
 	public static List<Transportation> findAllPickupTransportations() {
         String jpaQuery = "SELECT o FROM Transportation o where van in ('N.A.', 'Pickup') ";
         return entityManager().createQuery(jpaQuery, Transportation.class).getResultList();
+	}
+	
+	public static List<Transportation> findAllTransports(String status) {
+		List<Transportation> allTransportations = findAllTransportations();
+		List<Transportation> transportationList = new ArrayList<Transportation>();
+		for(Transportation transportation: allTransportations) {
+			if (status.equals("old")) {
+				if ((transportation.getDueDate() != null) && transportation.getDueDate().before(Calendar.getInstance()))
+					transportationList.add(transportation);
+			}
+			else if (status.equals("current")) {
+				if (((transportation.getDueDate() == null) || transportation.getDueDate().after(Calendar.getInstance())) &&
+						((transportation.getStartDate() == null) || transportation.getStartDate().before(Calendar.getInstance())))
+					transportationList.add(transportation);
+				
+			}
+			else if (status.equals("future")) {
+				if ((transportation.getStartDate() != null) && transportation.getStartDate().after(Calendar.getInstance()))
+					transportationList.add(transportation);				
+			}			
+		}
+		return transportationList;		
 	}
 
 }

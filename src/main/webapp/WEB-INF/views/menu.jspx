@@ -11,9 +11,7 @@
             <menu:item id="i_program_new" messageCode="global_menu_new" url="/programs?form" z="zDcnKu0MxAKfjglkepWRPV+CgbM="/>
          	<menu:item id="i_program_old_list" messageCode="global_menu_list" url="/programs?type=old" />
             <menu:item id="i_program_current_list" messageCode="global_menu_list" url="/programs?type=current" z="user-managed"/>
-            <!--
             <menu:item id="i_program_future_list" messageCode="global_menu_list" url="/programs?type=future" z="user-managed"/>
-            -->
         </menu:category>
         <menu:category id="c_staff" z="WEqNUFcSQYoW/mQULTlPjM/nWNU=">
             <menu:item id="i_staff_new" messageCode="global_menu_new" url="/staffs?form" z="H2VWxcFT9MZjwJqkdaMj688QtI4="/>
@@ -21,7 +19,9 @@
         </menu:category>
         <menu:category id="c_transportation" z="RX3FSxLlZERcuTeXoKByDoI0UUg=">
             <menu:item id="i_transportation_new" messageCode="global_menu_new" url="/transportations?form" z="user-managed"/>
-            <menu:item id="i_transportation_list" messageCode="global_menu_list" url="/transportations?page=1&amp;size=100" z="user-managed"/>
+         	<menu:item id="i_transportation_old_list" messageCode="global_menu_list" url="/transportations?type=old" />
+            <menu:item id="i_transportation_current_list" messageCode="global_menu_list" url="/transportations?type=current" z="user-managed"/>
+            <menu:item id="i_transportation_future_list" messageCode="global_menu_list" url="/transportations?type=future" z="user-managed"/>
         </menu:category>
         <menu:category id="c_child" z="Umebzxknrpx6gCK6XVpuR+8kMBw=">
             <menu:item id="i_child_new" messageCode="global_menu_new" url="/children?form" z="Z0oDvepNCuVm3tF2neiHstdqD9k="/>
