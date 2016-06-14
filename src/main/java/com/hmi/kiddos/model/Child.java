@@ -189,7 +189,7 @@ public class Child implements Comparable {
 			LocalDate birthday = getDobAsLocalDate();
 
 			Period period = Period.between(birthday, today);
-			output = period.getYears() + " yrs " + period.getMonths() + " mths";
+			output = period.getYears() + " yrs " + ((period.getMonths() < 10)?"0":"") + period.getMonths() + " mths";
 		}
 		return output;
 	}
