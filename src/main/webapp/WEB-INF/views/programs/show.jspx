@@ -18,13 +18,12 @@
 
 			<display:column property="firstName" title="First Name" sortable="true"/>
 			<display:column property="lastName" title="Last Name" sortable="true"/>
-			<display:column property="age" title="Current Age" sortable="true"/>
+			<display:column property="age" title="Age" sortable="true"/>
 			<display:column property="motherName" title="Mother Name" sortable="true"/>
 			<display:column property="fatherName" title="Father Name" sortable="true"/>
 			<display:column property="address" title="Address" sortable="true"/>
 			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
 			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
-
             <display:column property="transportations" title="Transport" sortable="true"/>
 
 			<display:setProperty name="export.pdf.filename" value="${program.type}_${program.term}_${program.batch}_kids.pdf"/>

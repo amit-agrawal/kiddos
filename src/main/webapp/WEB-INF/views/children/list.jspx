@@ -11,9 +11,11 @@
 
             <display:column sortable="true" title="First Name" property="firstName" />
             <display:column sortable="true" title="Last Name" property="lastName" />
-            <display:column sortable="true" title="Age" property="age" />
+            <display:column sortable="true" title="Current Age" property="age" />
             <display:column sortable="true" title="Address" property="address" />
             <display:column sortable="true" title="Programs" property="programs" />
+			<display:column sortable="true" title="Transports" property="transportations" />
+
 			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="children.pdf"/>
 			<display:setProperty name="export.csv.filename" value="children.csv"/>

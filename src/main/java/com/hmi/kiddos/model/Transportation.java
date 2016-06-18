@@ -344,6 +344,14 @@ public class Transportation implements Comparable {
         String jpaQuery = "SELECT o FROM Transportation o where van in ('N.A.', 'Pickup') ";
         return entityManager().createQuery(jpaQuery, Transportation.class).getResultList();
 	}
+
+	public boolean isCurrent() {
+		if (((getDueDate() == null) || getDueDate().after(Calendar.getInstance())) &&
+				((getStartDate() == null) || getStartDate().before(Calendar.getInstance())))
+			return true;
+		else 
+			return false;		
+	}
 	
 	public static List<Transportation> findAllTransports(String status) {
 		List<Transportation> allTransportations = findAllTransportations();
@@ -354,8 +362,7 @@ public class Transportation implements Comparable {
 					transportationList.add(transportation);
 			}
 			else if (status.equals("current")) {
-				if (((transportation.getDueDate() == null) || transportation.getDueDate().after(Calendar.getInstance())) &&
-						((transportation.getStartDate() == null) || transportation.getStartDate().before(Calendar.getInstance())))
+				if (transportation.isCurrent())
 					transportationList.add(transportation);
 				
 			}

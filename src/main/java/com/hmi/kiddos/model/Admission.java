@@ -7,6 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.apache.log4j.Logger;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -105,6 +108,8 @@ public class Admission implements Comparable {
      */
     @NotNull
     @ManyToMany
+	@Fetch(FetchMode.SUBSELECT)
+	@BatchSize(size=100)
     private Set<Program> programs = new TreeSet<Program>();
 
     /**

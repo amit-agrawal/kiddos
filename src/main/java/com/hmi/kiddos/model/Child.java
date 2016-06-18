@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
+import org.hibernate.annotations.*;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
@@ -156,6 +157,17 @@ public class Child implements Comparable {
 	public Set<Transportation> getTransportations() {
 		Set<Transportation> transportationSet = new TreeSet<Transportation>();
 		for (Admission admission : admissions) {
+			if (admission.getTransportArrival().isCurrent())
+				transportationSet.add(admission.getTransportArrival());
+			if (admission.getTransportDeparture().isCurrent())
+				transportationSet.add(admission.getTransportDeparture());
+		}
+		return transportationSet;
+	}
+
+	public Set<Transportation> getAllTransportations() {
+		Set<Transportation> transportationSet = new TreeSet<Transportation>();
+		for (Admission admission : admissions) {
 			transportationSet.add(admission.getTransportArrival());
 			transportationSet.add(admission.getTransportDeparture());
 		}
@@ -175,6 +187,8 @@ public class Child implements Comparable {
 	/**
 	 */
 	@OneToMany(mappedBy = "child")
+	@Fetch(FetchMode.SUBSELECT)
+	@BatchSize(size=100)
 	private Set<Admission> admissions = new TreeSet<Admission>();
 
 	private LocalDate getDobAsLocalDate() {
