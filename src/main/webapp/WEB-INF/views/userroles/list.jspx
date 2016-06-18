@@ -9,7 +9,7 @@
             <display:column sortable="true" title="roleName" property="roleName" />
             <display:column sortable="true" title="notes" property="notes" />
             <display:column sortable="true" title="users" property="users" />
-			<display:column property="showLink" title="Links" sortable="false"/>
+			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="userroles.pdf"/>
 			<display:setProperty name="export.csv.filename" value="userroles.csv"/>
 

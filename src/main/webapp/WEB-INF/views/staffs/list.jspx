@@ -12,7 +12,7 @@
             <display:column sortable="true" title="Email" property="emailOne" />
             <display:column sortable="true" title="Phone" property="phone" />
             <display:column sortable="true" title="Phone Other" property="phoneHome" />
-			<display:column property="showLink" title="Links" sortable="false"/>
+			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="staffs.pdf"/>
 			<display:setProperty name="export.csv.filename" value="staffs.csv"/>
 

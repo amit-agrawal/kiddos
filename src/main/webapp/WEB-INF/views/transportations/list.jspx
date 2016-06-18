@@ -10,7 +10,7 @@
             <display:column sortable="true" title="Pickup/Drop" property="van" />
             <display:column sortable="true" title="Time" property="notes" />
             <display:column sortable="true" title="Kids Count" property="allKidsCount" />
-			<display:column property="showLink" title="Links" sortable="false"/>
+			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="transports.pdf"/>
 			<display:setProperty name="export.csv.filename" value="transports.csv"/>
 

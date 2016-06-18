@@ -20,7 +20,7 @@
 			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
 			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
 			<display:column property="phoneHome" title="Phone Other" sortable="true"/>
-			<display:column property="secondLevelChildShowLink" title="Links" sortable="false"/>
+			<display:column property="secondLevelChildShowLink" title="Links" sortable="false" media="html"/>
 
 			<display:setProperty name="export.pdf.filename" value="${transportation.driverName}_${transportation.notes}_${transportation.van}_kids.pdf"/>
 			<display:setProperty name="export.csv.filename" value="${transportation.driverName}_${transportation.notes}_${transportation.van}_kids.csv"/>

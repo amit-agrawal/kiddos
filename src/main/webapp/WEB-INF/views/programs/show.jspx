@@ -18,14 +18,19 @@
 
 			<display:column property="firstName" title="First Name" sortable="true"/>
 			<display:column property="lastName" title="Last Name" sortable="true"/>
-			<display:column property="age" title="Age" sortable="true"/>
+			<display:column property="age" title="Current Age" sortable="true"/>
 			<display:column property="motherName" title="Mother Name" sortable="true"/>
 			<display:column property="fatherName" title="Father Name" sortable="true"/>
 			<display:column property="address" title="Address" sortable="true"/>
+			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
+			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
+
+            <display:column property="transportations" title="Transport" sortable="true"/>
+
 			<display:setProperty name="export.pdf.filename" value="${program.type}_${program.term}_${program.batch}_kids.pdf"/>
 			<display:setProperty name="export.csv.filename" value="${program.type}_${program.term}_${program.batch}_kids.csv"/>
 
-			<display:column property="secondLevelChildShowLink" title="Links" sortable="false"/>
+			<display:column property="secondLevelChildShowLink" title="Links" sortable="false" media="html"/>
 
 			<display:setProperty name="export.pdf" value="true" />
             <display:setProperty name="export.xml" value="false" />
