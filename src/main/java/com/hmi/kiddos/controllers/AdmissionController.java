@@ -112,8 +112,8 @@ public class AdmissionController {
         uiModel.addAttribute("payments", Payment.findAllPayments());
         uiModel.addAttribute("programs", Program.findAllPrograms());
         uiModel.addAttribute("activePrograms", Program.findAllActivePrograms());
-        uiModel.addAttribute("pickupTransportations", Transportation.findAllPickupTransportations());
-        uiModel.addAttribute("dropTransportations", Transportation.findAllDropTransportations());
+        uiModel.addAttribute("pickupTransportations", Transportation.findAllActivePickupTransportations());
+        uiModel.addAttribute("dropTransportations", Transportation.findAllActiveDropTransportations());
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

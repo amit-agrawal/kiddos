@@ -345,6 +345,24 @@ public class Transportation implements Comparable {
         return entityManager().createQuery(jpaQuery, Transportation.class).getResultList();
 	}
 
+	public static List<Transportation> findAllActiveDropTransportations() {
+        List<Transportation> activeDropTransports = new ArrayList<Transportation>();
+        for (Transportation transport : findAllDropTransportations()) {
+        	if (transport.isCurrent())
+        		activeDropTransports.add(transport);
+        }
+        return activeDropTransports;
+	}
+
+	public static List<Transportation> findAllActivePickupTransportations() {
+        List<Transportation> activePickupTransports = new ArrayList<Transportation>();
+        for (Transportation transport : findAllPickupTransportations()) {
+        	if (transport.isCurrent())
+        		activePickupTransports.add(transport);
+        }
+        return activePickupTransports;
+	}
+
 	public boolean isCurrent() {
 		if (((getDueDate() == null) || getDueDate().after(Calendar.getInstance())) &&
 				((getStartDate() == null) || getStartDate().before(Calendar.getInstance())))

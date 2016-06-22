@@ -1,5 +1,6 @@
 package com.hmi.kiddos.model;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.Set;
@@ -336,6 +337,15 @@ public class Admission implements Comparable {
 
 	public Set<Program> getPrograms() {
         return this.programs;
+    }
+
+	public Set<Program> getCurrentPrograms() {
+		Set<Program> currentPrograms = new HashSet<Program>();
+		for (Program program : programs) {
+			if (program.isCurrent())
+				currentPrograms.add(program);
+		}
+		return currentPrograms;
     }
 
 	public void setPrograms(Set<Program> programs) {

@@ -184,6 +184,13 @@ public class Child implements Comparable {
 		return programSet;
 	}
 
+	public Set<Program> getCurrentPrograms() {
+		Set<Program> programSet = new TreeSet<Program>();
+		for (Admission admission : admissions)
+			programSet.addAll(admission.getCurrentPrograms());
+		return programSet;
+	}
+
 	/**
 	 */
 	@OneToMany(mappedBy = "child")

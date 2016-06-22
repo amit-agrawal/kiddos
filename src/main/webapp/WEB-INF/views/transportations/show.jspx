@@ -20,6 +20,7 @@
 			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
 			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
 			<display:column property="phoneHome" title="Phone Other" sortable="true"/>
+            <display:column sortable="true" title="Current Programs" property="currentPrograms" />
 			<display:column property="secondLevelChildShowLink" title="Links" sortable="false" media="html"/>
 
 			<display:setProperty name="export.pdf.filename" value="${transportation.driverName}_${transportation.notes}_${transportation.van}_kids.pdf"/>
