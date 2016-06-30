@@ -26,12 +26,11 @@
         <field:display field="notes" id="s_com_hmi_kiddos_model_Child_notes" object="${child}" z="/tz3+gS2Qsh8voCGAUbWBtA1LiE="/>
         <field:display field="age" id="s_com_hmi_kiddos_model_Child_age" object="${child}" z="Ygz2X/tnePvsMJYQTFT0HnJvq/4="/>
         <field:display field="transportations" id="s_com_hmi_kiddos_model_Child_transportations" object="${child}" z="jjlZ1+j09Shlrjq/YuUz5MG7Zn8="/>
-        <table:table data="${child.programs}" id="l_com_hmi_kiddos_model_Program" path="/programs" z="user-managed">
-            <table:column id="c_com_hmi_kiddos_model_Program_center" property="center" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_term" property="term" z="IgL6tWI6X5OJ4+fa5N49FbMFcNE="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_batch" property="batch" z="6CmU+ZvLYKQcyP528awm5k+emsg="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_type" property="type" z="rg9l6H90IW/8s5RHW9k9EiFPKyc="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_teacher" property="teacher" z="user-managed"/>
+        <table:table data="${child.admissions}" id="l_com_hmi_kiddos_model_Admission" path="/admissions" z="user-managed">
+            <table:column id="c_com_hmi_kiddos_model_Admission_programs" property="programs" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Admission_payments" property="payments" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Admission_notes" property="notes" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Admission_feesDue" property="feesDue" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
        </table:table>
     </page:show>
 </div>

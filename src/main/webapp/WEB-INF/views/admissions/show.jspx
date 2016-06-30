@@ -16,5 +16,7 @@
         <field:display field="admissionFee" id="s_com_hmi_kiddos_model_Admission_admissionFee" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
         <field:display field="transportArrival" id="s_com_hmi_kiddos_model_Admission_transportArrival" object="${admission}" z="tRalg8fdZFXgFGeu8Mh8pN3XT+U="/>
         <field:display field="transportDeparture" id="s_com_hmi_kiddos_model_Admission_transportDeparture" object="${admission}" z="UKWQwMAnWBsagfPWgIo0DbULgEo="/>
+		<field:display field="admissions" id="s_com_hmi_kiddos_model_Child_admissions" object="${admission.child}" z="u9fBL/Viv0JelSriH0nTHJhHfKE="/>
+
     </page:show>
 </div>
