@@ -12,6 +12,7 @@
         <field:input field="batch" id="c_com_hmi_kiddos_model_Program_batch" z="k91dNdv52W63gQl0I073wxapcRQ="/>
         <field:input field="type" id="c_com_hmi_kiddos_model_Program_type" required="true" z="xq1kndd0gXDqfM1FoXsBMStODBY="/>
         <field:select field="teacher" id="c_com_hmi_kiddos_model_Program_teacher" itemValue="id" items="${staffs}" path="/staffs" z="NVXq4GQIeShtm7zDM50euPOw93E="/>
+        <field:select field="teacherTwo" id="c_com_hmi_kiddos_model_Program_teacher" itemValue="id" items="${staffs}" path="/staffs" z="NVXq4GQIeShtm7zDM50euPOw93E="/>
         <field:input render="false" disabled="true" field="kidsCount" id="c_com_hmi_kiddos_model_Program_kidsCount" validationMessageCode="field_invalid_integer" z="YIjNyN7BhdTQrW0ueNuP6Neby/o="/>
         <field:input disabled="true" render="false" field="children" id="c_com_hmi_kiddos_model_Program_children" z="4UmpJ3J2ruU8t9ctxrjmSg1RdLQ="/>
     </form:update>

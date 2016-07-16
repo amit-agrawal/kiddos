@@ -12,6 +12,7 @@
             <display:column sortable="true" title="Notes" property="notes" />
             <display:column sortable="true" title="Fees" property="fees" />
             <display:column sortable="true" title="Teacher" property="teacher" />
+            <display:column sortable="true" title="Second Teacher" property="teacherTwo" />
             <display:column sortable="true" title="Kids Count" property="kidsCount" />
 			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="programs.pdf"/>

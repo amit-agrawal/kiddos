@@ -1,5 +1,6 @@
 package com.hmi.kiddos.model;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -162,9 +163,6 @@ public class Admission implements Comparable {
 		return this.toString().compareToIgnoreCase(other.toString());
 	}
 
-
-
-
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -297,6 +295,10 @@ public class Admission implements Comparable {
 
 	public Calendar getAdmissionDate() {
         return this.admissionDate;
+    }
+
+	public Date getAdmissionDateAsDate() {
+        return (this.admissionDate == null)? null : this.admissionDate.getTime();
     }
 
 	public void setAdmissionDate(Calendar admissionDate) {

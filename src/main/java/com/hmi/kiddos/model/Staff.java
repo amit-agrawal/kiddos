@@ -30,7 +30,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Configurable
 @Entity
@@ -40,6 +40,28 @@ import javax.persistence.Table;
 @RooJpaActiveRecord
 @Audited
 public class Staff implements Comparable {
+
+	@OneToMany(mappedBy="teacher")
+	private Set<Program> primaryPrograms;
+
+	public Set<Program> getPrimaryPrograms() {
+		return primaryPrograms;
+	}
+
+	public void setPrimaryPrograms(Set<Program> primaryPrograms) {
+		this.primaryPrograms = primaryPrograms;
+	}
+
+	@OneToMany(mappedBy="teacherTwo")
+	private Set<Program> secondaryPrograms;
+
+	public Set<Program> getSecondaryPrograms() {
+		return secondaryPrograms;
+	}
+
+	public void setSecondaryPrograms(Set<Program> secondaryPrograms) {
+		this.secondaryPrograms = secondaryPrograms;
+	}
 
     /**
      */

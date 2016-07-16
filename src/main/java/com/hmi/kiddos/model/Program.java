@@ -123,6 +123,19 @@ public class Program implements Comparable {
 	@ManyToOne
 	private Staff teacher;
 
+	/**
+	 */
+	@ManyToOne
+	private Staff teacherTwo;
+
+	public Staff getTeacherTwo() {
+		return teacherTwo;
+	}
+
+	public void setTeacherTwo(Staff teacherTwo) {
+		this.teacherTwo = teacherTwo;
+	}
+
 	public boolean isPreSchool() {
 		return (type.equals(ProgramTypes.JR_KG.toString()) || type.equals(ProgramTypes.NURSERY.toString())
 				|| type.equals(ProgramTypes.PLAY_GROUP.toString()) || type.equals(ProgramTypes.ANNUAL_FEE.toString())
