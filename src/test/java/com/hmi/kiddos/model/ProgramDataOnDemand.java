@@ -1,5 +1,5 @@
 package com.hmi.kiddos.model;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -7,17 +7,17 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.dod.annotations.RooDataOnDemand;
 import org.springframework.stereotype.Component;
 
 @Component
 @Configurable
-@RooDataOnDemand(entity = Program.class)
 public class ProgramDataOnDemand {
 	@Test
 	public void toStringTestPS() {

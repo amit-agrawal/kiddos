@@ -5,15 +5,15 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.dod.annotations.RooDataOnDemand;
 import org.springframework.stereotype.Component;
 
 @Component
 @Configurable
-@RooDataOnDemand(entity = Staff.class)
 public class StaffDataOnDemand {
 
 	private Random rnd = new SecureRandom();

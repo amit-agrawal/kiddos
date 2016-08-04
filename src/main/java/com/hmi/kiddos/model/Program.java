@@ -29,17 +29,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
-import org.springframework.roo.addon.javabean.annotations.RooToString;
-import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
 @Entity
-@RooJavaBean
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "term", "batch", "center" }) })
-@RooToString
-@RooJpaActiveRecord
 @Audited
 public class Program implements Comparable {
 	@Transient
@@ -178,7 +172,7 @@ public class Program implements Comparable {
 	}
 
 	public static List<Program> findAllPrograms() {
-		return entityManager().createQuery("SELECT o FROM Program o", Program.class).getResultList();
+		return entityManager().createQuery("SELECT o FROM Program o order by term, type", Program.class).getResultList();
 	}
 
 	public static List<Program> findAllActivePrograms() {

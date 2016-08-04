@@ -1,18 +1,10 @@
 package com.hmi.kiddos.model;
-import org.hibernate.envers.Audited;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
-import org.springframework.roo.addon.javabean.annotations.RooToString;
-import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
-import org.springframework.transaction.annotation.Transactional;
-import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -30,12 +22,14 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
+
 @Configurable
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"driverName", "van", "notes"})})
-@RooJavaBean
-@RooToString
-@RooJpaActiveRecord
 @Audited
 public class Transportation implements Comparable {
 

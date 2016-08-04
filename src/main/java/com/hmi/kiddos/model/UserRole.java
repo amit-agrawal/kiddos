@@ -1,19 +1,9 @@
 package com.hmi.kiddos.model;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.envers.Audited;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
-import org.springframework.roo.addon.javabean.annotations.RooToString;
-import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
-import org.springframework.transaction.annotation.Transactional;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.TreeSet;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
+import java.util.TreeSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -23,12 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.envers.Audited;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
 @Entity
-@RooJavaBean
-@RooToString
-@RooJpaActiveRecord
 @Audited
 public class UserRole {
 

@@ -8,18 +8,18 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.dod.annotations.RooDataOnDemand;
 import org.springframework.stereotype.Component;
 
 import com.hmi.kiddos.dao.ChildDao;
 
 @Configurable
 @Component
-@RooDataOnDemand(entity = Child.class)
 public class ChildDataOnDemand {
 	@Test
 	public void toStringTest() {

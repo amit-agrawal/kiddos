@@ -2,13 +2,10 @@ date picker should pick date string
 add added date and default as current date
 child unique fields
 admission date as default to today
-pickup and drop should respectively come in arrival and departure
 same child should not get added to two programs in two different admissions
 admission should have payment page
 populate payment
 staff default female
 teacher number of kids
 data backup
-program can have multiple teachers
-teacher addition to program throwing error
 pretty print Sets

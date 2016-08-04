@@ -1,19 +1,23 @@
 package com.hmi.kiddos.controllers;
 
-import org.springframework.format.FormatterRegistry;
-
-import com.hmi.kiddos.dao.ChildDao;
-import com.hmi.kiddos.model.*;
-import org.springframework.format.support.FormattingConversionServiceFactoryBean;
-import org.springframework.roo.addon.web.mvc.controller.annotations.converter.RooConversionService;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.format.support.FormattingConversionServiceFactoryBean;
+
+import com.hmi.kiddos.dao.ChildDao;
+import com.hmi.kiddos.model.Admission;
+import com.hmi.kiddos.model.Child;
+import com.hmi.kiddos.model.Payment;
+import com.hmi.kiddos.model.Program;
+import com.hmi.kiddos.model.Staff;
+import com.hmi.kiddos.model.Transportation;
+import com.hmi.kiddos.model.UserRole;
 
 @Configurable
 /**
  * A central place to register application converters and formatters. 
  */
-@RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
     public Converter<Admission, String> getAdmissionToStringConverter() {

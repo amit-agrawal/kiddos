@@ -1,11 +1,9 @@
 package com.hmi.kiddos.model;
-import org.springframework.roo.addon.javabean.annotations.RooJavaBean;
-import org.springframework.roo.addon.javabean.annotations.RooToString;
-import org.springframework.roo.addon.jpa.annotations.activerecord.RooJpaActiveRecord;
-import org.springframework.transaction.annotation.Transactional;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.persistence.CascadeType;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -14,27 +12,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.TreeSet;
-import java.util.Set;
-
+import javax.persistence.PersistenceContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.validation.constraints.Size;
-import javax.persistence.ManyToOne;
-import javax.persistence.PersistenceContext;
+import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Configurable
-@RooJavaBean
-@RooToString
-@RooJpaActiveRecord
 @Audited
 public class Payment {
 

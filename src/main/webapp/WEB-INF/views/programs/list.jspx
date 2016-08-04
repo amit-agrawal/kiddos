@@ -6,14 +6,14 @@
         <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${programs}" id="l_com_hmi_kiddos_model_Program" requestURI="/programs" >
 			<display:column property="counter" title="Sq." sortable="true"/>
 
-            <display:column sortable="true" title="Term/Month" property="term" />
+            <display:column sortable="true" title="Term/Month" property="term" group="1"/>
+            <display:column sortable="true" title="Program" property="type" group="2"/>
             <display:column sortable="true" title="Batch/Plan" property="batch" />
-            <display:column sortable="true" title="Program" property="type" />
             <display:column sortable="true" title="Notes" property="notes" />
             <display:column sortable="true" title="Fees" property="fees" />
             <display:column sortable="true" title="Teacher" property="teacher" />
             <display:column sortable="true" title="Second Teacher" property="teacherTwo" />
-            <display:column sortable="true" title="Kids Count" property="kidsCount" />
+            <display:column sortable="true" title="Kids Count" property="kidsCount" total="true" format="{0,number,0}" />
 			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="programs.pdf"/>
 			<display:setProperty name="export.csv.filename" value="programs.csv"/>

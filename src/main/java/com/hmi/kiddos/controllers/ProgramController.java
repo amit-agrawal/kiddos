@@ -1,16 +1,13 @@
 package com.hmi.kiddos.controllers;
 
-import com.hmi.kiddos.model.Admission;
-import com.hmi.kiddos.model.Centers;
-import com.hmi.kiddos.model.Program;
-import com.hmi.kiddos.model.Staff;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.roo.addon.web.mvc.controller.annotations.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.hmi.kiddos.model.Admission;
+import com.hmi.kiddos.model.Centers;
+import com.hmi.kiddos.model.Program;
+import com.hmi.kiddos.model.Staff;
+
 @RequestMapping("/programs")
 @Controller
-@RooWebScaffold(path = "programs", formBackingObject = Program.class)
 public class ProgramController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")

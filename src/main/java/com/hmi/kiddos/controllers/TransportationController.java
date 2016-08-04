@@ -1,4 +1,9 @@
 package com.hmi.kiddos.controllers;
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,17 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
 import com.hmi.kiddos.model.Admission;
-import com.hmi.kiddos.model.Program;
 import com.hmi.kiddos.model.Transportation;
-import java.io.UnsupportedEncodingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import org.springframework.roo.addon.web.mvc.controller.annotations.scaffold.RooWebScaffold;
 
 @RequestMapping("/transportations")
 @Controller
-@RooWebScaffold(path = "transportations", formBackingObject = Transportation.class)
 public class TransportationController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")

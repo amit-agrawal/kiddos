@@ -3,10 +3,9 @@
  */
 package com.hmi.kiddos.controllers;
 
-import java.util.Calendar;
 import java.util.Date;
 
-import org.displaytag.decorator.TableDecorator;
+import org.displaytag.decorator.MultilevelTotalTableDecorator;
 
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
@@ -20,8 +19,12 @@ import com.hmi.kiddos.model.UserRole;
  * @author Dell
  *
  */
-public class LinksTableDecorator extends TableDecorator {
-
+public class LinksTableDecorator extends MultilevelTotalTableDecorator {
+	{
+		setGrandTotalDescription("&nbsp;Total Kids");    // optional, defaults to Grand Total
+        setSubtotalLabel("&nbsp;", null);
+	}
+	
 	public int getCounter() {
 		return getListIndex() + 1;
 	}
