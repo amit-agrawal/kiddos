@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Centers;
 import com.hmi.kiddos.model.Program;
@@ -26,6 +28,8 @@ import com.hmi.kiddos.model.Staff;
 @RequestMapping("/programs")
 @Controller
 public class ProgramController {
+	@Autowired
+	private AdmissionDao admissionDao;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Program program, BindingResult bindingResult, Model uiModel,
@@ -112,7 +116,7 @@ public class ProgramController {
 	void populateEditForm(Model uiModel, Program program) {
 		uiModel.addAttribute("program", program);
 		addDateTimeFormatPatterns(uiModel);
-		uiModel.addAttribute("admissions", Admission.findAllAdmissions());
+		uiModel.addAttribute("admissions", admissionDao.findAllAdmissions());
 		uiModel.addAttribute("centerses", Arrays.asList(Centers.values()));
 		uiModel.addAttribute("staffs", Staff.findAllStaffs());
 	}

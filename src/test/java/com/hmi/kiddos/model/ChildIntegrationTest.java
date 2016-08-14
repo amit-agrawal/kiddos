@@ -1,11 +1,20 @@
 package com.hmi.kiddos.model;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +30,8 @@ import com.hmi.kiddos.dao.ChildDao;
 @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml")
 @Transactional
 public class ChildIntegrationTest {
+	@Autowired
+	private ChildDao childDao;
 
     @Test
     public void testMarkerMethod() {
@@ -30,9 +41,55 @@ public class ChildIntegrationTest {
     ChildDataOnDemand dod;
 
 	@Test
+	@Ignore
+    public void sendMail() {
+        Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
+        sendGmail();
+        
+        long count = childDao.countChildren();
+        Assert.assertTrue("Counter for 'Child' incorrectly reported there were no entries", count > 0);
+    }
+
+	private void sendGmail() {
+		final String username = "amit01@gmail.com";
+		final String password = "no12blame";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		  });
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("amit01@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse("amit01@gmail.com"));
+			message.setSubject("Testing Subject");
+			message.setText("Dear Mail Crawler,"
+				+ "\n\n No spam to my email, please!");
+
+			Transport.send(message);
+
+			System.out.println("Done");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}		
+	}
+
+	@Test
     public void testCountChildren() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-        long count = ChildDao.countChildren();
+        long count = childDao.countChildren();
         Assert.assertTrue("Counter for 'Child' incorrectly reported there were no entries", count > 0);
     }
 
@@ -42,7 +99,7 @@ public class ChildIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Child' failed to provide an identifier", id);
-        obj = ChildDao.findChild(id);
+        obj = childDao.findChild(id);
         Assert.assertNotNull("Find method for 'Child' illegally returned null for id '" + id + "'", obj);
         Assert.assertEquals("Find method for 'Child' returned the incorrect identifier", id, obj.getId());
     }
@@ -50,9 +107,9 @@ public class ChildIntegrationTest {
 	@Test
     public void testFindAllChildren() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-        long count = ChildDao.countChildren();
+        long count = childDao.countChildren();
         Assert.assertTrue("Too expensive to perform a find all test for 'Child', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Child> result = ChildDao.findAllChildren();
+        List<Child> result = childDao.findAllChildren();
         Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
     }
@@ -60,9 +117,9 @@ public class ChildIntegrationTest {
 	@Test
     public void testFindAllSCChildren() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-        long count = ChildDao.countChildren();
+        long count = childDao.countChildren();
         Assert.assertTrue("Too expensive to perform a find all test for 'Child', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Child> result = ChildDao.findAllChildren("SC");
+        List<Child> result = childDao.findAllChildren("SC");
         Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
     }
@@ -70,9 +127,9 @@ public class ChildIntegrationTest {
 	@Test
     public void testFindAllDCChildren() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-        long count = ChildDao.countChildren();
+        long count = childDao.countChildren();
         Assert.assertTrue("Too expensive to perform a find all test for 'Child', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Child> result = ChildDao.findAllChildren("DC");
+        List<Child> result = childDao.findAllChildren("DC");
         Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
     }
@@ -80,9 +137,9 @@ public class ChildIntegrationTest {
 	@Test
     public void testFindAllPSChildren() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-        long count = ChildDao.countChildren();
+        long count = childDao.countChildren();
         Assert.assertTrue("Too expensive to perform a find all test for 'Child', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Child> result = ChildDao.findAllChildren("PS");
+        List<Child> result = childDao.findAllChildren("PS");
         Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
     }
@@ -90,11 +147,11 @@ public class ChildIntegrationTest {
 	@Test
     public void testFindChildEntries() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-        long count = ChildDao.countChildren();
+        long count = childDao.countChildren();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<Child> result = ChildDao.findChildEntries(firstResult, maxResults, "SC");
+        List<Child> result = childDao.findChildEntries(firstResult, maxResults, "SC");
         Assert.assertNotNull("Find entries method for 'Child' illegally returned null", result);
         //Assert.assertEquals("Find entries method for 'Child' returned an incorrect number of entries", count, result.size());
     }
@@ -105,7 +162,7 @@ public class ChildIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Child' failed to provide an identifier", id);
-        obj = ChildDao.findChild(id);
+        obj = childDao.findChild(id);
         Assert.assertNotNull("Find method for 'Child' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyChild(obj);
         Integer currentVersion = obj.getVersion();
@@ -119,7 +176,7 @@ public class ChildIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Child' failed to provide an identifier", id);
-        obj = ChildDao.findChild(id);
+        obj = childDao.findChild(id);
         boolean modified =  dod.modifyChild(obj);
         Integer currentVersion = obj.getVersion();
         Child merged = obj.merge();
@@ -154,9 +211,9 @@ public class ChildIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Child' failed to provide an identifier", id);
-        obj = ChildDao.findChild(id);
+        obj = childDao.findChild(id);
         obj.remove(new ChildDao());
         obj.flush();
-        Assert.assertNull("Failed to remove 'Child' with identifier '" + id + "'", ChildDao.findChild(id));
+        Assert.assertNull("Failed to remove 'Child' with identifier '" + id + "'", childDao.findChild(id));
     }
 }

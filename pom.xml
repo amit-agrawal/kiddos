@@ -391,6 +391,7 @@
 			<!-- Ensures that the config.properties file is always loaded from the 
 				configuration directory of the active Maven profile. -->
 			<filter>src/main/resources/profiles/${build.profile.id}/database.properties</filter>
+			<filter>src/main/resources/profiles/${build.profile.id}/email.properties</filter>
 		</filters>
 
 		<plugins>

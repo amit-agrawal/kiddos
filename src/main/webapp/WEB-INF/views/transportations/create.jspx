@@ -6,6 +6,7 @@
         <field:textarea field="driverName" id="c_com_hmi_kiddos_model_Transportation_driverName" required="true" z="dMLEOCGQMSbIBnu9Pn+lkRXeHdc="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Transportation_notes" z="6ejINbLnjLAuD3TxRLDyWtzle+g="/>
         <field:textarea field="van" id="c_com_hmi_kiddos_model_Transportation_van" z="zVWH1gCS2XIp7E7hnRS63iW7ZIY="/>
+        <field:select field="children" id="c_com_hmi_kiddos_model_program_children" itemValue="id" items="${children}" multiple="true" path="/children" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Transportation" render="${not empty dependencies}" z="7JJysCGUylcPO/hRUf2uI29MkmQ="/>
 </div>

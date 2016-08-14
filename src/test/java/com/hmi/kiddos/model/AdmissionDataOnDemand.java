@@ -18,9 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
+import com.hmi.kiddos.dao.AdmissionDao;
+
 @Component
 @Configurable
 public class AdmissionDataOnDemand {
+	@Autowired
+	private AdmissionDao admissionDao;
 
 
 	@Test
@@ -51,7 +55,7 @@ public class AdmissionDataOnDemand {
 		Admission admission = new Admission();
 		admission.setChild(child);
 		admission.setPrograms(programs);
-		assertEquals(5800, (int) admission.getFeesExpected());
+		assertEquals(5700, (int) admission.getFeesExpected());
 	}
 
 	
@@ -117,14 +121,14 @@ public class AdmissionDataOnDemand {
         }
         Admission obj = data.get(index);
         Long id = obj.getId();
-        return Admission.findAdmission(id);
+        return admissionDao.findAdmission(id);
     }
 
 	public Admission getRandomAdmission() {
         init();
         Admission obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Admission.findAdmission(id);
+        return admissionDao.findAdmission(id);
     }
 
 	public boolean modifyAdmission(Admission obj) {
@@ -134,7 +138,7 @@ public class AdmissionDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = Admission.findAdmissionEntries(from, to);
+        data = admissionDao.findAdmissionEntries(from, to);
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Admission' illegally returned null");
         }

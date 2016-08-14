@@ -15,6 +15,7 @@
             <display:column sortable="true" title="Address" property="address" />
             <display:column sortable="true" title="Programs" property="programs" />
 			<display:column sortable="true" title="Transports" property="transportations" />
+			<display:column sortable="true" title="Fees Due" property="feesDue" />
 
 			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="children.pdf"/>

@@ -4,18 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_hmi_kiddos_model_Admission" modelAttribute="admission" path="/admissions" render="${empty dependencies}" z="dvJ+kaurPr1YGAkZtFmBYvqFvrM=">
         <field:input field="feesExpected" id="c_com_hmi_kiddos_model_Admission_feesExpected" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
-        <field:input field="feesPaid" id="c_com_hmi_kiddos_model_Admission_feesPaid" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
-        <field:input field="feesDue" id="c_com_hmi_kiddos_model_Admission_feesDue" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
         <field:datetime dateTimePattern="${admission_admissiondate_date_format}" field="admissionDate" id="c_com_hmi_kiddos_model_Admission_admissionDate" z="VKCkkXLLBJ8R5KtXPyQzV77sasw="/>
         <field:datetime dateTimePattern="${admission_joiningdate_date_format}" field="joiningDate" id="c_com_hmi_kiddos_model_Admission_joiningDate" z="rDztC1QekGHKRmQe7dFafS0iDjY="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Admission_notes" z="DfRNmFKyHJkBE1Xxl5iUB6fdvVQ="/>
         <field:select field="child" id="c_com_hmi_kiddos_model_Admission_child" itemValue="id" items="${children}" path="/children" required="true" z="MG7PccQXZTIlgqFGxNpM/heuE58="/>
-        <field:select field="programs" id="c_com_hmi_kiddos_model_Admission_programs" itemValue="id" items="${activePrograms}" multiple="true" path="/programs" required="true" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
-        <field:select field="payments" id="c_com_hmi_kiddos_model_Admission_payments" itemValue="id" items="${payments}" multiple="true" path="/payments" render="false" z="user-managed"/>
+        <field:select field="programs" id="c_com_hmi_kiddos_model_Admission_programs" itemValue="id" items="${activePrograms}" multiple="false" path="/programs" required="true" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:input field="discount" id="c_com_hmi_kiddos_model_Admission_discount" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
         <field:input field="admissionFee" id="c_com_hmi_kiddos_model_Admission_admissionFee" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
-        <field:select field="transportArrival" id="c_com_hmi_kiddos_model_Admission_transportArrival" itemValue="id" items="${pickupTransportations}" path="/transportations" z="US1pMnSAvtYsdA2AzcpO+2Hpx9c="/>
-        <field:select field="transportDeparture" id="c_com_hmi_kiddos_model_Admission_transportDeparture" itemValue="id" items="${dropTransportations}" path="/transportations" z="glweeUAlmR8LMM1j8mngyb97R8s="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Admission" render="${not empty dependencies}" z="edxULQKoLOCsjkXKcV+FS4y1tdw="/>
 </div>

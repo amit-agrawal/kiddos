@@ -1,10 +1,12 @@
 package com.hmi.kiddos.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 
+import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
@@ -19,6 +21,11 @@ import com.hmi.kiddos.model.UserRole;
  * A central place to register application converters and formatters. 
  */
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
+	@Autowired
+	private ChildDao childDao;
+
+	@Autowired
+	private AdmissionDao admissionDao;
 
     public Converter<Admission, String> getAdmissionToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.hmi.kiddos.model.Admission, java.lang.String>() {
@@ -93,7 +100,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Long, Admission> getIdToAdmissionConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.hmi.kiddos.model.Admission>() {
             public com.hmi.kiddos.model.Admission convert(java.lang.Long id) {
-                return Admission.findAdmission(id);
+                return admissionDao.findAdmission(id);
             }
         };
     }
@@ -109,7 +116,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Long, Child> getIdToChildConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.hmi.kiddos.model.Child>() {
             public com.hmi.kiddos.model.Child convert(java.lang.Long id) {
-                return ChildDao.findChild(id);
+                return childDao.findChild(id);
             }
         };
     }

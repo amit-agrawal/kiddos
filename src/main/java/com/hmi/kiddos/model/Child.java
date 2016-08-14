@@ -15,6 +15,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
@@ -26,6 +28,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -41,6 +44,8 @@ import com.hmi.kiddos.dao.ChildDao;
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "firstName", "middleName", "lastName", "dob" }) })
 @Audited
 public class Child implements Comparable {
+
+	private static Logger log = Logger.getLogger(Child.class);
 
 	@Transient
 	private String age;
@@ -154,30 +159,85 @@ public class Child implements Comparable {
 	private String notes;
 
 	@Transient
-	private Set<Transportation> transportations = new TreeSet<Transportation>();
+	private Integer feesExpected = 0;
 
-	public Set<Transportation> getTransportations() {
-		Set<Transportation> transportationSet = new TreeSet<Transportation>();
+	@Transient
+	private Integer feesDue = 0;
+
+	@Transient
+	private Integer feesPaid = 0;
+
+	public Integer getFeesExpected() {
+		feesExpected = 0;
 		for (Admission admission : admissions) {
-			if (admission.getTransportArrival().isCurrent())
-				transportationSet.add(admission.getTransportArrival());
-			if (admission.getTransportDeparture().isCurrent())
-				transportationSet.add(admission.getTransportDeparture());
+			feesExpected += admission.getFeesExpected();
 		}
-		return transportationSet;
+		// if (!programs.isEmpty()) {
+		// boolean sc = false;
+		// for (Program program : programs) {
+		// if (program.getType().equals("SC"))
+		// sc = true;
+		// }
+		// if (sc) {
+		// // TODO logic based upon combination of programs
+		// log.info("adjusting fees for SC");
+		// if (feesExpected == 1700)
+		// feesExpected = 3400;
+		// else if (feesExpected == 5100)
+		// feesExpected = 5800;
+		// else if (feesExpected == 6800)
+		// feesExpected = 5800;
+		// }
+		// }
+		log.info("Fees calculated: " + feesExpected);
+		return feesExpected;
+
 	}
 
-	public Set<Transportation> getAllTransportations() {
-		Set<Transportation> transportationSet = new TreeSet<Transportation>();
-		for (Admission admission : admissions) {
-			transportationSet.add(admission.getTransportArrival());
-			transportationSet.add(admission.getTransportDeparture());
+	public Set<Payment> getPayments() {
+		return this.payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+	}
+
+	public Integer getFeesPaid() {
+		feesPaid = 0;
+		log.debug("Payments are: " + payments);
+		if (!payments.isEmpty()) {
+			for (Payment payment : payments) {
+				feesPaid += payment.getAmount();
+			}
 		}
-		return transportationSet;
+		return feesPaid;
+	}
+
+	public void setFeesDue(Integer feesDue) {
+		this.feesDue = feesDue;
+	}
+
+	public void setFeesPaid(Integer feesPaid) {
+		this.feesPaid = feesPaid;
+	}
+
+	public Integer getFeesDue() {
+		return getFeesExpected() - getFeesPaid();
+	}
+
+	@ManyToMany(mappedBy = "children")
+	private Set<Transportation> transportations;
+
+	public void setTransportations(Set<Transportation> transportations) {
+		this.transportations = transportations;
+	}
+
+	public Set<Transportation> getTransportations() {
+		return transportations;
 	}
 
 	@Transient
-	private Set<Program> programs = new TreeSet<Program>();
+	private Set<Program> programs;
 
 	public Set<Program> getPrograms() {
 		Set<Program> programSet = new TreeSet<Program>();
@@ -197,8 +257,13 @@ public class Child implements Comparable {
 	 */
 	@OneToMany(mappedBy = "child")
 	@Fetch(FetchMode.SUBSELECT)
-	@BatchSize(size=100)
+	@BatchSize(size = 100)
 	private Set<Admission> admissions = new TreeSet<Admission>();
+
+	@OneToMany(mappedBy = "child")
+	@Fetch(FetchMode.SUBSELECT)
+	@BatchSize(size = 100)
+	private Set<Payment> payments = new TreeSet<Payment>();
 
 	private LocalDate getDobAsLocalDate() {
 		ZonedDateTime zdt = ZonedDateTime.ofInstant(dob.toInstant(), ZoneId.systemDefault());
@@ -212,7 +277,8 @@ public class Child implements Comparable {
 			LocalDate birthday = getDobAsLocalDate();
 
 			Period period = Period.between(birthday, today);
-			output = period.getYears() + " yrs " + ((period.getMonths() < 10)?"0":"") + period.getMonths() + " mths";
+			output = period.getYears() + " yrs " + ((period.getMonths() < 10) ? "0" : "") + period.getMonths()
+					+ " mths";
 		}
 		return output;
 	}
@@ -511,10 +577,6 @@ public class Child implements Comparable {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	public void setTransportations(Set<Transportation> transportations) {
-		this.transportations = transportations;
 	}
 
 	public void setPrograms(Set<Program> programs) {

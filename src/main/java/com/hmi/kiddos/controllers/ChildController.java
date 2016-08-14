@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +19,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Gender;
+import com.hmi.kiddos.model.Transportation;
 
 @RequestMapping("/children")
 @Controller
 public class ChildController {
 
-	private ChildDao childDao = new ChildDao();
+	@Autowired
+	private ChildDao childDao;
+	
+	@Autowired
+	private AdmissionDao admissionDao;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Child child, BindingResult bindingResult, Model uiModel,
@@ -115,8 +122,10 @@ public class ChildController {
 	void populateEditForm(Model uiModel, Child child) {
 		uiModel.addAttribute("child", child);
 		addDateTimeFormatPatterns(uiModel);
-		uiModel.addAttribute("admissions", Admission.findAllAdmissions());
+		uiModel.addAttribute("admissions", admissionDao.findAllAdmissions());
 		uiModel.addAttribute("genders", Arrays.asList(Gender.values()));
+        uiModel.addAttribute("pickupTransportations", Transportation.findAllActivePickupTransportations());
+        uiModel.addAttribute("dropTransportations", Transportation.findAllActiveDropTransportations());
 	}
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

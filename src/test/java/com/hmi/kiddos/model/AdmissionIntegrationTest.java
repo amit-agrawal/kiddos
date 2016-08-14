@@ -14,11 +14,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hmi.kiddos.dao.AdmissionDao;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml")
 @Transactional
 @Configurable
 public class AdmissionIntegrationTest {
+	@Autowired
+	private AdmissionDao admissionDao;
 
     @Test
     public void testMarkerMethod() {
@@ -30,7 +34,7 @@ public class AdmissionIntegrationTest {
 	@Test
     public void testCountAdmissions() {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", dod.getRandomAdmission());
-        long count = Admission.countAdmissions();
+        long count = admissionDao.countAdmissions();
         Assert.assertTrue("Counter for 'Admission' incorrectly reported there were no entries", count > 0);
     }
 
@@ -40,7 +44,7 @@ public class AdmissionIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Admission' failed to provide an identifier", id);
-        obj = Admission.findAdmission(id);
+        obj = admissionDao.findAdmission(id);
         Assert.assertNotNull("Find method for 'Admission' illegally returned null for id '" + id + "'", obj);
         Assert.assertEquals("Find method for 'Admission' returned the incorrect identifier", id, obj.getId());
     }
@@ -48,9 +52,9 @@ public class AdmissionIntegrationTest {
 	@Test
     public void testFindAllAdmissions() {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", dod.getRandomAdmission());
-        long count = Admission.countAdmissions();
-        Assert.assertTrue("Too expensive to perform a find all test for 'Admission', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Admission> result = Admission.findAllAdmissions();
+        long count = admissionDao.countAdmissions();
+        Assert.assertTrue("Too expensive to perform a find all test for 'Admission', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 2000);
+        List<Admission> result = admissionDao.findAllAdmissions();
         Assert.assertNotNull("Find all method for 'Admission' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Admission' failed to return any data", result.size() > 0);
     }
@@ -58,11 +62,11 @@ public class AdmissionIntegrationTest {
 	@Test
     public void testFindAdmissionEntries() {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", dod.getRandomAdmission());
-        long count = Admission.countAdmissions();
+        long count = admissionDao.countAdmissions();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<Admission> result = Admission.findAdmissionEntries(firstResult, maxResults);
+        List<Admission> result = admissionDao.findAdmissionEntries(firstResult, maxResults);
         Assert.assertNotNull("Find entries method for 'Admission' illegally returned null", result);
         Assert.assertEquals("Find entries method for 'Admission' returned an incorrect number of entries", count, result.size());
     }
@@ -73,7 +77,7 @@ public class AdmissionIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Admission' failed to provide an identifier", id);
-        obj = Admission.findAdmission(id);
+        obj = admissionDao.findAdmission(id);
         Assert.assertNotNull("Find method for 'Admission' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyAdmission(obj);
         Integer currentVersion = obj.getVersion();
@@ -87,7 +91,7 @@ public class AdmissionIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Admission' failed to provide an identifier", id);
-        obj = Admission.findAdmission(id);
+        obj = admissionDao.findAdmission(id);
         boolean modified =  dod.modifyAdmission(obj);
         Integer currentVersion = obj.getVersion();
         Admission merged = obj.merge();
@@ -122,9 +126,9 @@ public class AdmissionIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Admission' failed to provide an identifier", id);
-        obj = Admission.findAdmission(id);
+        obj = admissionDao.findAdmission(id);
         obj.remove();
         obj.flush();
-        Assert.assertNull("Failed to remove 'Admission' with identifier '" + id + "'", Admission.findAdmission(id));
+        Assert.assertNull("Failed to remove 'Admission' with identifier '" + id + "'", admissionDao.findAdmission(id));
     }
 }

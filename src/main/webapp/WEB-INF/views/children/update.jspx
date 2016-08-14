@@ -25,8 +25,6 @@
         <field:input field="nationality" id="c_com_hmi_kiddos_model_Child_nationality" max="100" z="QSoLcRtbL2rlNgOBO4kDfXoxWFs="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Child_notes" z="FiwJNs2G/P6e8QHTrM7zV7DN16s="/>
         <field:simple field="admissions" id="c_com_hmi_kiddos_model_Child_admissions" messageCode="entity_reference_not_managed" messageCodeAttribute="Admission" z="user-managed"/>
-        <field:input disabled="true" field="age" id="c_com_hmi_kiddos_model_Child_age" z="user-managed"/>
         <field:input disabled="true" field="programs" id="c_com_hmi_kiddos_model_Child_programs" z="user-managed"/>
-        <field:input disabled="true" field="transportations" id="c_com_hmi_kiddos_model_Child_transportations" z="user-managed"/>
     </form:update>
 </div>

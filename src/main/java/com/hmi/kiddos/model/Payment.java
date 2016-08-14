@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,6 +39,11 @@ public class Payment {
 
     /**
      */
+    @ManyToOne
+    private Child child;
+
+    /**
+     */
     @Enumerated
     @NotNull
     private PaymentMedium paymentMedium;
@@ -60,9 +66,24 @@ public class Payment {
 
     /**
      */
-    @NotNull
     @ManyToMany
-    private Set<Admission> admissions = new TreeSet<Admission>();
+    private Set<Program> programs = new TreeSet<Program>();
+
+	public Child getChild() {
+		return child;
+	}
+
+	public void setChild(Child child) {
+		this.child = child;
+	}
+
+	public Set<Program> getPrograms() {
+		return programs;
+	}
+
+	public void setPrograms(Set<Program> programs) {
+		this.programs = programs;
+	}
 
 	@Override
 	public String toString() {
@@ -133,14 +154,6 @@ public class Payment {
 
 	public void setReceiptNumber(String receiptNumber) {
         this.receiptNumber = receiptNumber;
-    }
-
-	public Set<Admission> getAdmissions() {
-        return this.admissions;
-    }
-
-	public void setAdmissions(Set<Admission> admissions) {
-        this.admissions = admissions;
     }
 
 	@PersistenceContext

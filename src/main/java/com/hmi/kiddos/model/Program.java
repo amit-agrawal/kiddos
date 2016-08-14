@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "term", "batch", "center" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "term", "batch", "center", "notes" }) })
 @Audited
 public class Program implements Comparable {
 	@Transient
@@ -141,6 +141,19 @@ public class Program implements Comparable {
 	@ManyToMany(mappedBy = "programs")
 	private Set<Admission> admissions = new TreeSet<Admission>();
 
+	/**
+	 */
+	@ManyToMany(mappedBy = "programs")
+	private Set<Payment> payments = new TreeSet<Payment>();
+
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+	}
+
 	public String toString() {
 		String output = type + " : " + term;
 		if (batch != null)
@@ -172,12 +185,12 @@ public class Program implements Comparable {
 	}
 
 	public static List<Program> findAllPrograms() {
-		return entityManager().createQuery("SELECT o FROM Program o order by term, type", Program.class).getResultList();
+		return entityManager().createQuery("SELECT o FROM Program o order by term, type, batch, notes", Program.class).getResultList();
 	}
 
 	public static List<Program> findAllActivePrograms() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date order by type, term, batch",
+				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, type, batch",
 						Program.class)
 				.getResultList();
 	}

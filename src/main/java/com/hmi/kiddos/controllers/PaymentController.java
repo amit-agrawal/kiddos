@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Payment;
 import com.hmi.kiddos.model.PaymentMedium;
+import com.hmi.kiddos.model.Program;
 
 @RequestMapping("/payments")
 @Controller
 public class PaymentController {
+	@Autowired
+	private ChildDao childDao;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Payment payment, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -99,7 +104,9 @@ public class PaymentController {
 	void populateEditForm(Model uiModel, Payment payment) {
         uiModel.addAttribute("payment", payment);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("admissions", Admission.findAllAdmissions());
+        uiModel.addAttribute("children", childDao.findAllChildren());
+        uiModel.addAttribute("programs", Program.findAllPrograms());
+        uiModel.addAttribute("activeFuturePrograms", Program.findAllActivePrograms());
         uiModel.addAttribute("paymentmediums", Arrays.asList(PaymentMedium.values()));
     }
 

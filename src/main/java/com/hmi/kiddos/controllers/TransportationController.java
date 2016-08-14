@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Transportation;
 
 @RequestMapping("/transportations")
 @Controller
 public class TransportationController {
+
+	@Autowired
+	private ChildDao childDao;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Transportation transportation, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -94,7 +99,7 @@ public class TransportationController {
 
 	void populateEditForm(Model uiModel, Transportation transportation) {
         uiModel.addAttribute("transportation", transportation);
-        uiModel.addAttribute("admissions", Admission.findAllAdmissions());
+        uiModel.addAttribute("children", childDao.findAllChildren());
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

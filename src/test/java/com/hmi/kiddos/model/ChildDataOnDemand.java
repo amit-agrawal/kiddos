@@ -13,6 +13,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,9 @@ import com.hmi.kiddos.dao.ChildDao;
 @Configurable
 @Component
 public class ChildDataOnDemand {
+	@Autowired
+	private ChildDao childDao;
+
 	@Test
 	public void toStringTest() {
 		Child child = new Child();
@@ -237,14 +241,14 @@ public class ChildDataOnDemand {
         }
         Child obj = data.get(index);
         Long id = obj.getId();
-        return ChildDao.findChild(id);
+        return childDao.findChild(id);
     }
 
 	public Child getRandomChild() {
         init();
         Child obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return ChildDao.findChild(id);
+        return childDao.findChild(id);
     }
 
 	public boolean modifyChild(Child obj) {
@@ -254,7 +258,7 @@ public class ChildDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = ChildDao.findChildEntries(from, to, null);
+        data = childDao.findChildEntries(from, to, null);
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Child' illegally returned null");
         }

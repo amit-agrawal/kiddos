@@ -9,7 +9,7 @@
         <field:display field="allKidsCount" id="s_com_hmi_kiddos_model_Transportation_allKidsCount" object="${transportation}" z="2Urah7avAJY/cT6tOs19GnF/4To="/>
     </page:show>
 
-		<display:table id="l_com_hmi_kiddos_model_Child" name="${transportation.allChildren}" 
+		<display:table id="l_com_hmi_kiddos_model_Child" name="${transportation.children}" 
 			decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"
 			requestURI="/transportations/${transportation.id}">
 			
