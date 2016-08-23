@@ -54,8 +54,8 @@ public class AdmissionDataOnDemand {
 
 		Admission admission = new Admission();
 		admission.setChild(child);
-		admission.setPrograms(programs);
-		assertEquals(5700, (int) admission.getFeesExpected());
+		admission.setProgram(program);
+		assertEquals(1900, (int) admission.getFeesExpected());
 	}
 
 	
@@ -71,12 +71,16 @@ public class AdmissionDataOnDemand {
     ChildDataOnDemand childDataOnDemand;
 
 	@Autowired
+    ProgramDataOnDemand programDataOnDemand;
+
+	@Autowired
     TransportationDataOnDemand transportationDataOnDemand;
 
 	public Admission getNewTransientAdmission(int index) {
         Admission obj = new Admission();
         setAdmissionDate(obj, index);
         setChild(obj, index);
+        setProgram(obj, index);
         setDiscount(obj, index);
         setJoiningDate(obj, index);
         setNotes(obj, index);
@@ -91,6 +95,11 @@ public class AdmissionDataOnDemand {
 	public void setChild(Admission obj, int index) {
         Child child = childDataOnDemand.getRandomChild();
         obj.setChild(child);
+    }
+
+	public void setProgram(Admission obj, int index) {
+        Program program = programDataOnDemand.getRandomProgram();
+        obj.setProgram(program);
     }
 
 	public void setDiscount(Admission obj, int index) {

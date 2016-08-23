@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -138,7 +139,7 @@ public class Program implements Comparable {
 
 	/**
 	 */
-	@ManyToMany(mappedBy = "programs")
+	@OneToMany(mappedBy = "program")
 	private Set<Admission> admissions = new TreeSet<Admission>();
 
 	/**

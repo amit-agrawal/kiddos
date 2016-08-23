@@ -10,7 +10,7 @@
             <display:column sortable="true" title="First Name" property="child.firstName" />
             <display:column sortable="true" title="Last Name" property="child.lastName" />
             <display:column sortable="true" title="Age" property="child.age" />
-            <display:column sortable="true" title="Programs" property="programs" />
+            <display:column sortable="true" title="Program" property="program" />
             <display:column sortable="true" title="Expected Fee" property="feesExpected" />
             <display:column sortable="true" title="Admission Date" property="admissionDateAsDate"  format="{0,date,dd-MM-yyyy}" />
 			<display:column property="showLink" title="Links" sortable="false" media="html"/>

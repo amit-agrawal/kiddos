@@ -8,7 +8,7 @@
         <field:datetime dateTimePattern="${admission_joiningdate_date_format}" field="joiningDate" id="c_com_hmi_kiddos_model_Admission_joiningDate" z="rDztC1QekGHKRmQe7dFafS0iDjY="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Admission_notes" z="DfRNmFKyHJkBE1Xxl5iUB6fdvVQ="/>
         <field:select field="child" id="c_com_hmi_kiddos_model_Admission_child" itemValue="id" items="${children}" path="/children" required="true" z="MG7PccQXZTIlgqFGxNpM/heuE58="/>
-        <field:select field="programs" id="c_com_hmi_kiddos_model_Admission_programs" itemValue="id" items="${activePrograms}" multiple="false" path="/programs" required="true" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:select field="program" id="c_com_hmi_kiddos_model_Admission_programs" itemValue="id" items="${activePrograms}" multiple="false" path="/programs" required="true" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:input field="discount" id="c_com_hmi_kiddos_model_Admission_discount" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
         <field:input field="admissionFee" id="c_com_hmi_kiddos_model_Admission_admissionFee" z="anLb6JTGpT1L7jAmTyBl+huPAK4="/>
     </form:create>

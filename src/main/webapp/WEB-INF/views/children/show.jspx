@@ -27,9 +27,14 @@
         <field:display field="age" id="s_com_hmi_kiddos_model_Child_age" object="${child}" z="Ygz2X/tnePvsMJYQTFT0HnJvq/4="/>
         <field:display field="feesDue" id="s_com_hmi_kiddos_model_Admission_feesDue" object="${child}" z="Ygz2X/tnePvsMJYQTFT0HnJvq/4="/>
         <field:display field="transportations" id="s_com_hmi_kiddos_model_Child_transportations" object="${child}" z="jjlZ1+j09Shlrjq/YuUz5MG7Zn8="/>
-        <field:display field="payments" id="s_com_hmi_kiddos_model_Payment" object="${child}" z="jjlZ1+j09Shlrjq/YuUz5MG7Zn8="/>
+        <table:table data="${child.payments}" id="l_com_hmi_kiddos_model_Payment" path="/payments" z="user-managed">
+            <table:column id="c_com_hmi_kiddos_model_Payment_amount" property="amount" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_paymentMedium" property="paymentMedium" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_transactionNumber" property="transactionNumber" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Payment_receiptNumber" property="receiptNumber" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+        </table:table>
         <table:table data="${child.admissions}" id="l_com_hmi_kiddos_model_Admission" path="/admissions" z="user-managed">
-            <table:column id="c_com_hmi_kiddos_model_Admission_programs" property="programs" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Admission_programs" property="program" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
             <table:column id="c_com_hmi_kiddos_model_Admission_notes" property="notes" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
        </table:table>
     </page:show>

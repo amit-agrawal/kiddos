@@ -242,14 +242,16 @@ public class Child implements Comparable {
 	public Set<Program> getPrograms() {
 		Set<Program> programSet = new TreeSet<Program>();
 		for (Admission admission : admissions)
-			programSet.addAll(admission.getPrograms());
+			programSet.add(admission.getProgram());
 		return programSet;
 	}
 
 	public Set<Program> getCurrentPrograms() {
 		Set<Program> programSet = new TreeSet<Program>();
-		for (Admission admission : admissions)
-			programSet.addAll(admission.getCurrentPrograms());
+		for (Admission admission : admissions) {
+			if (admission.getCurrentPrograms() != null)
+				programSet.add(admission.getCurrentPrograms());
+		}
 		return programSet;
 	}
 

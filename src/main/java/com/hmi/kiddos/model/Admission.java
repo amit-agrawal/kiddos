@@ -79,25 +79,18 @@ public class Admission implements Comparable {
 	/**
 	 */
 	@NotNull
-	@ManyToMany
-	@Fetch(FetchMode.SUBSELECT)
-	@BatchSize(size = 100)
-	private Set<Program> programs = new TreeSet<Program>();
+	@ManyToOne
+	private Program program;
 
 	public String toString() {
-		return child.toString() + ", " + programs.toString();
+		return child.toString() + ", " + program.toString();
 	}
 
-	@Transient
-	private Set<Program> activePrograms = new TreeSet<Program>();
-
-	public Set<Program> getActivePrograms() {
-		Set<Program> programSet = new TreeSet<Program>();
-		for (Program program : programs) {
-			if (program.getDueDate().after(Calendar.getInstance()))
-				programSet.add(program);
-		}
-		return programSet;
+	public Program getActivePrograms() {
+		if (program.getDueDate().after(Calendar.getInstance()))
+			return program;
+		else
+			return null;
 	}
 
 	@Override
@@ -131,10 +124,8 @@ public class Admission implements Comparable {
 		this.version = version;
 	}
 
-
 	@PersistenceContext
 	transient EntityManager entityManager;
-
 
 	@Transactional
 	public void persist() {
@@ -162,7 +153,6 @@ public class Admission implements Comparable {
 		this.entityManager.flush();
 	}
 
-	
 	@Transactional
 	public void clear() {
 		if (this.entityManager == null)
@@ -200,23 +190,8 @@ public class Admission implements Comparable {
 
 	public Integer getFeesExpected() {
 		feesExpected = 0;
-		if (!programs.isEmpty()) {
-			boolean sc = false;
-			for (Program program : programs) {
-				feesExpected += program.getFees();
-				if (program.getType().equals("SC"))
-					sc = true;
-			}
-			if (sc) {
-				log.info("adjusting fees for SC");
-				if (feesExpected == 1700)
-					feesExpected = 3400;
-				else if (feesExpected == 5100)
-					feesExpected = 5800;
-				else if (feesExpected == 6800)
-					feesExpected = 5800;
-			}
-		}
+		if (program != null)
+			feesExpected += program.getFees();
 		log.info("Fees calculated: " + feesExpected + " , discount: " + discount + " admission fee: " + admissionFee);
 		feesExpected = feesExpected - discount + admissionFee;
 		return feesExpected;
@@ -246,7 +221,6 @@ public class Admission implements Comparable {
 		this.joiningDate = joiningDate;
 	}
 
-
 	public String getNotes() {
 		return this.notes;
 	}
@@ -263,21 +237,19 @@ public class Admission implements Comparable {
 		this.child = child;
 	}
 
-	public Set<Program> getPrograms() {
-		return this.programs;
+	public Program getProgram() {
+		return this.program;
 	}
 
-	public Set<Program> getCurrentPrograms() {
-		Set<Program> currentPrograms = new HashSet<Program>();
-		for (Program program : programs) {
-			if (program.isCurrent())
-				currentPrograms.add(program);
-		}
-		return currentPrograms;
+	public Program getCurrentPrograms() {
+		if (program.isCurrent())
+			return program;
+		else
+			return null;
 	}
 
-	public void setPrograms(Set<Program> programs) {
-		this.programs = programs;
+	public void setProgram(Program program) {
+		this.program = program;
 	}
 
 	public int getDiscount() {

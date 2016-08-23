@@ -8,7 +8,7 @@
         <field:display calendar="true" dateTimePattern="${admission_joiningdate_date_format}" field="joiningDate" id="s_com_hmi_kiddos_model_Admission_joiningDate" object="${admission}" z="XYz1GH8mbg8bSl5dj4Y/ocCPH90="/>
         <field:display field="notes" id="s_com_hmi_kiddos_model_Admission_notes" object="${admission}" z="ZaS2Ktw+NJclWcENMGKY8FmD0go="/>
         <field:display field="child" id="s_com_hmi_kiddos_model_Admission_child" object="${admission}" z="u9fBL/Viv0JelSriH0nTHJhHfKE="/>
-        <field:display field="programs" id="s_com_hmi_kiddos_model_Admission_programs" object="${admission}" z="uPvcqapjjnIAs3MxKLXcIaReF/o="/>
+        <field:display field="program" id="s_com_hmi_kiddos_model_Admission_programs" object="${admission}" z="uPvcqapjjnIAs3MxKLXcIaReF/o="/>
         <field:display field="discount" id="s_com_hmi_kiddos_model_Admission_discount" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
         <field:display field="admissionFee" id="s_com_hmi_kiddos_model_Admission_admissionFee" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
 
