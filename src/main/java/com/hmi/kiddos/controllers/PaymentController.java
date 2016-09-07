@@ -1,6 +1,9 @@
 package com.hmi.kiddos.controllers;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -15,11 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.hmi.kiddos.dao.ChildDao;
-import com.hmi.kiddos.model.Admission;
+import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
 import com.hmi.kiddos.model.PaymentMedium;
 import com.hmi.kiddos.model.Program;
@@ -29,6 +33,18 @@ import com.hmi.kiddos.model.Program;
 public class PaymentController {
 	@Autowired
 	private ChildDao childDao;
+
+	@RequestMapping(value = "/getPrograms/{id}", method = RequestMethod.GET)
+	public @ResponseBody HashMap<String, String>  getPrograms(@PathVariable("id") Long id, Model uiModel) {  
+	    HashMap<String,String>  stateMap = new HashMap<String,String>();
+	    //put your logic to add state on basis of country
+         Child child  = childDao.findChild(id);
+         Set<Program> programs = new TreeSet<Program>();
+         if (child != null) 
+        	 programs = child.getCurrentOrFuturePrograms();
+        uiModel.addAttribute("childPrograms", programs);
+	    return stateMap;
+    }  
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Payment payment, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

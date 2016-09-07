@@ -69,17 +69,9 @@
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
-        <property name="host" value="${email.host}"/>
-        <property name="protocol" value="${email.protocol}"/>
-        <property name="port" value="${email.port}"/>
+    <bean class="com.hmi.kiddos.util.MailUtil" id="mailUtil">
         <property name="username" value="${email.username}"/>
         <property name="password" value="${email.password}"/>
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-            </props>
-        </property>
+        <property name="notify" value="${email.notify}"/>
     </bean>
 </beans>

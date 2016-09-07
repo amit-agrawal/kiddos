@@ -41,7 +41,7 @@ public class Transportation implements Comparable {
 
 	@Override
 	public String toString() {
-		if (driverName.equals("N.A."))
+		if (driverName != null && driverName.equals("N.A."))
 			return "N.A.";
 		else
 			return "[" + driverName + ", " + notes + ", " + van + "]";

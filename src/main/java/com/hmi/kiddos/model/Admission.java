@@ -2,10 +2,6 @@ package com.hmi.kiddos.model;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,20 +9,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -37,6 +31,7 @@ import com.hmi.kiddos.dao.AdmissionDao;
 
 @Entity
 @Configurable
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"child", "program"}) })
 @Audited
 public class Admission implements Comparable {
 	@Autowired
@@ -83,7 +78,7 @@ public class Admission implements Comparable {
 	private Program program;
 
 	public String toString() {
-		return child.toString() + ", " + program.toString();
+		return ((child == null) ? "" : child.toString()) + ", " + ((program == null) ? "" : program.toString());
 	}
 
 	public Program getActivePrograms() {
@@ -243,6 +238,13 @@ public class Admission implements Comparable {
 
 	public Program getCurrentPrograms() {
 		if (program.isCurrent())
+			return program;
+		else
+			return null;
+	}
+
+	public Program getCurrentOrFuturePrograms() {
+		if (program.isCurrentOrFuture())
 			return program;
 		else
 			return null;

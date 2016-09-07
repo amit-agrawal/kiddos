@@ -249,8 +249,17 @@ public class Child implements Comparable {
 	public Set<Program> getCurrentPrograms() {
 		Set<Program> programSet = new TreeSet<Program>();
 		for (Admission admission : admissions) {
-			if (admission.getCurrentPrograms() != null)
-				programSet.add(admission.getCurrentPrograms());
+			if (admission.getProgram().isCurrent())
+				programSet.add(admission.getProgram());
+		}
+		return programSet;
+	}
+
+	public Set<Program> getCurrentOrFuturePrograms() {
+		Set<Program> programSet = new TreeSet<Program>();
+		for (Admission admission : admissions) {
+			if (admission.getProgram().isCurrentOrFuture())
+				programSet.add(admission.getProgram());
 		}
 		return programSet;
 	}
@@ -287,7 +296,7 @@ public class Child implements Comparable {
 
 	public String toString() {
 		String output = firstName + " ";
-		if (!middleName.isEmpty())
+		if (middleName != null && !middleName.isEmpty())
 			output = output + middleName + " ";
 		output = output + lastName;
 		if (dob != null) {

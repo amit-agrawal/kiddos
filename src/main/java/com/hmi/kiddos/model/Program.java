@@ -60,9 +60,17 @@ public class Program implements Comparable {
 			return true;
 		else
 			return false;
-
 	}
 
+
+	public boolean isCurrentOrFuture() {
+		if ((getDueDate() == null) || getDueDate().after(Calendar.getInstance()))
+			return true;
+		else
+			return false;
+	}
+
+	
 	/**
 	 */
 	@NotNull
@@ -415,4 +423,6 @@ public class Program implements Comparable {
 		}
 		return programList;
 	}
+
+
 }

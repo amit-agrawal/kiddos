@@ -1,6 +1,5 @@
 package com.hmi.kiddos.util;
 
-
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,15 +10,24 @@ import org.aspectj.lang.reflect.MethodSignature;
 public class LoggingAspect {
 	@Around("execution(* com.hmi..*(..))")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
+		Object result = null;
 		long start = System.currentTimeMillis();
-		Object result = point.proceed();
+		result = point.proceed();
 		long timeTaken = System.currentTimeMillis() - start;
-		
-		if (timeTaken > 1)
-			Logger.getLogger(LoggingAspect.class).info(String.format("Called %s.%s(%s) in %d ms", point.getSignature().getDeclaringType().getSimpleName(), 
-				MethodSignature.class.cast(point.getSignature()).getMethod().getName(),
-				point.getArgs(), timeTaken));
+		try {
+
+			if (timeTaken > 2) {
+				//String args = Arrays.asList(point.getArgs()).toString();
+				//String args = point.getArgs().toString();
+				Logger.getLogger(LoggingAspect.class).info(String.format("Called %s.%s in %d ms",
+						point.getSignature().getDeclaringType().getSimpleName(),
+						MethodSignature.class.cast(point.getSignature()).getMethod().getName(), timeTaken));
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
+			Logger.getLogger(LoggingAspect.class).error("Exception while logging", t);
+		}
 		return result;
 	}
-	
+
 }

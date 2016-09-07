@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_hmi_kiddos_model_Admission" items="${admissions}" >
-        <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${admissions}" 
+        <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="1000" export="true"  name="${admissions}" 
         id="l_com_hmi_kiddos_model_Admission" requestURI="/admissions" >
 			<display:column property="counter" title="Sq." sortable="true"/>
 

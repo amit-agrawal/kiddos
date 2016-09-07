@@ -151,7 +151,7 @@ public class Staff implements Comparable {
     
     public String toString() {
 		String output = firstName + " ";
-		if (! middleName.isEmpty())
+		if (middleName != null && !middleName.isEmpty())
 			output = output + middleName + " ";
 		output = output + lastName;
     	return output;
