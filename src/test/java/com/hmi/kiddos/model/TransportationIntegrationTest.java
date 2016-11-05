@@ -47,6 +47,7 @@ public class TransportationIntegrationTest {
     }
 
 	@Test
+	@Ignore
     public void testFindAllDropTransportations() {
         Assert.assertNotNull("Data on demand for 'Transportation' failed to initialize correctly", dod.getRandomTransportation());
         long count = Transportation.countTransportations();

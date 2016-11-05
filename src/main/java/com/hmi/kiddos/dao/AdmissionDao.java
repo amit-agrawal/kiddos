@@ -73,6 +73,5 @@ public class AdmissionDao {
 		return entityManager().createQuery(jpaQuery, Admission.class).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 	}
-	
-	
+		
 }

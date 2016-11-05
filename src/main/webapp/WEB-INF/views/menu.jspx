@@ -26,7 +26,7 @@
         <menu:category id="c_child" z="Umebzxknrpx6gCK6XVpuR+8kMBw=">
             <menu:item id="i_child_new" messageCode="global_menu_new" url="/children?form" z="Z0oDvepNCuVm3tF2neiHstdqD9k="/>
             <menu:item id="i_child_list" messageCode="global_menu_list" url="/children?page=1&amp;size=1000" z="user-managed"/>
-         	<menu:item id="i_child_sc_list" messageCode="global_menu_list" url="/children?type=SC" />
+         	<menu:item id="i_child_sc_list" messageCode="global_menu_list" url="/children?type=Camp" />
             <menu:item id="i_child_dc_list" messageCode="global_menu_list" url="/children?type=DC" z="user-managed"/>
             <menu:item id="i_child_ps_list" messageCode="global_menu_list" url="/children?type=PS" z="user-managed"/>
             
