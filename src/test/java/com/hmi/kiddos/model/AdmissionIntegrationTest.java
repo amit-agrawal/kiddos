@@ -60,6 +60,16 @@ public class AdmissionIntegrationTest {
     }
 
 	@Test
+    public void testFindAllAdmissionsOfType() {
+        Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", dod.getRandomAdmission());
+        long count = admissionDao.countAdmissions();
+        Assert.assertTrue("Too expensive to perform a find all test for 'Admission', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 2000);
+        List<Admission> result = admissionDao.findAllAdmissions("DC");
+        Assert.assertNotNull("Find all method for 'Admission' illegally returned null", result);
+        Assert.assertTrue("Find all method for 'Admission' failed to return any data", result.size() > 0);
+    }
+
+	@Test
     public void testFindAdmissionEntries() {
         Assert.assertNotNull("Data on demand for 'Admission' failed to initialize correctly", dod.getRandomAdmission());
         long count = admissionDao.countAdmissions();

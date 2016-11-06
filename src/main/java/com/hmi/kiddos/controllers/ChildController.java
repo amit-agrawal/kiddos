@@ -67,7 +67,8 @@ public class ChildController {
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
 			@RequestParam(value = "sortOrder", required = false) String sortOrder,
-			@RequestParam(value = "type", required = false) String types, Model uiModel) {
+			@RequestParam(value = "type", required = false) String types, 
+			Model uiModel) {
 		if (types != null) {
 			uiModel.addAttribute("children", childDao.findAllChildren(types));
 		} else if (page != null || size != null) {

@@ -2,6 +2,7 @@ package com.hmi.kiddos.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ import com.hmi.kiddos.dao.AdmissionDao;
 
 @Entity
 @Configurable
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"child", "program"}) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "child", "program" }) })
 @Audited
 public class Admission implements Comparable {
 	@Autowired
@@ -267,5 +268,27 @@ public class Admission implements Comparable {
 
 	@Column(name = "CREATION_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar creationTS;
+
+	public boolean hasCurrentProgram(String type) {
+		boolean hasProgram = false;
+		if (program.isCurrentOrFuture()) {
+			if (type != null & (type.startsWith("PS"))) {
+				if (program.getType().startsWith("Jr") || program.getType().startsWith("Pl")
+						|| program.getType().startsWith("Nu")) {
+					hasProgram = true;
+				}
+			} else if (type != null & (type.startsWith("DC"))) {
+				if (program.getType().startsWith("DC") || program.getType().startsWith("IC")) {
+					hasProgram = true;
+				}
+			} else {
+				if (program.getType().startsWith(type)) {
+					hasProgram = true;
+				}
+			}
+		}
+
+		return hasProgram;
+	}
 
 }

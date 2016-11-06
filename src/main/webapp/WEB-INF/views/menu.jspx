@@ -34,6 +34,9 @@
         <menu:category id="c_admission" z="Poe6vXYlIQ6amv1SRE7ApYKCEu4=">
             <menu:item id="i_admission_new" messageCode="global_menu_new" url="/admissions?form" z="LPZUuok7ERI+pQOgnqsVragag3A="/>
             <menu:item id="i_admission_list" messageCode="global_menu_list" url="/admissions?page=1&amp;size=1000" z="user-managed"/>
+         	<menu:item id="i_admission_sc_list" messageCode="global_menu_list" url="/admissions?type=Camp" />
+            <menu:item id="i_admission_dc_list" messageCode="global_menu_list" url="/admissions?type=DC" z="user-managed"/>
+            <menu:item id="i_admission_ps_list" messageCode="global_menu_list" url="/admissions?type=PS" z="user-managed"/>
         </menu:category>
     </menu:menu>
 </div>

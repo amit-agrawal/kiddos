@@ -1,5 +1,6 @@
 package com.hmi.kiddos.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -48,6 +49,16 @@ public class AdmissionDao {
 		return entityManager().createQuery(jpaQuery, Admission.class).getResultList();
 	}
 
+	public static List<Admission> findAllAdmissions(String types) {
+		List<Admission> allAdmissions = findAllAdmissions();
+		List<Admission> filteredAdmissions = new ArrayList<Admission>();
+		for (Admission admission : allAdmissions) {
+			if (admission.hasCurrentProgram(types))
+				filteredAdmissions.add(admission);
+		}
+		return filteredAdmissions;
+	}
+
 	public static Admission findAdmission(Long id) {
 		if (id == null)
 			return null;
@@ -73,5 +84,5 @@ public class AdmissionDao {
 		return entityManager().createQuery(jpaQuery, Admission.class).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 	}
-		
+
 }

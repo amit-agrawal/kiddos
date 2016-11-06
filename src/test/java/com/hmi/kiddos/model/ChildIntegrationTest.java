@@ -115,11 +115,11 @@ public class ChildIntegrationTest {
     }
 
 	@Test
-    public void testFindAllSCChildren() {
+    public void testFindAllCampChildren() {
         Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
         long count = childDao.countChildren();
         Assert.assertTrue("Too expensive to perform a find all test for 'Child', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Child> result = childDao.findAllChildren("SC");
+        List<Child> result = childDao.findAllChildren("Camp");
         Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
     }
@@ -151,7 +151,7 @@ public class ChildIntegrationTest {
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<Child> result = childDao.findChildEntries(firstResult, maxResults, "SC");
+        List<Child> result = childDao.findChildEntries(firstResult, maxResults, "Camp");
         Assert.assertNotNull("Find entries method for 'Child' illegally returned null", result);
         //Assert.assertEquals("Find entries method for 'Child' returned an incorrect number of entries", count, result.size());
     }
