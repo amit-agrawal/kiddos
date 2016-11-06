@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
+import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Centers;
 import com.hmi.kiddos.model.Child;
@@ -19,11 +20,14 @@ public class AdmissionsCarryForward {
 	private ChildDao childDao;
 
 	@Autowired
+	private ProgramDao programDao;
+
+	@Autowired
 	private AdmissionDao admissionDao;
 
 	public void carryForward(String fromTerm, String toTerm) {
 		List<Admission> admissions = admissionDao.findAllAdmissions();
-		List<Program> programs = Program.findAllPrograms();
+		List<Program> programs = programDao.findAllPrograms();
 
 		for (Admission fromAdmission : admissions) {
 			Program fromProgram = fromAdmission.getProgram();
@@ -47,7 +51,7 @@ public class AdmissionsCarryForward {
 
 
 	public void createNextProgramSet(String fromTerm, String toTerm, Calendar startDate, Calendar endDate) {
-		List<Program> programs = Program.findAllPrograms();
+		List<Program> programs = programDao.findAllPrograms();
 
 		for (Program fromProgram : programs) {
 			if (fromProgram.getTerm().equals(fromTerm)) {

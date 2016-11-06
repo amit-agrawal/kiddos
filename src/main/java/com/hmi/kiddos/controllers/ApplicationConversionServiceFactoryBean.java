@@ -8,6 +8,7 @@ import org.springframework.format.support.FormattingConversionServiceFactoryBean
 
 import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
+import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
@@ -26,6 +27,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 
 	@Autowired
 	private AdmissionDao admissionDao;
+	
+	@Autowired
+	private ProgramDao programDao;
 
     public Converter<Admission, String> getAdmissionToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.hmi.kiddos.model.Admission, java.lang.String>() {
@@ -148,7 +152,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Long, Program> getIdToProgramConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.hmi.kiddos.model.Program>() {
             public com.hmi.kiddos.model.Program convert(java.lang.Long id) {
-                return Program.findProgram(id);
+                return programDao.findProgram(id);
             }
         };
     }

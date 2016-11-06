@@ -271,7 +271,7 @@ public class Admission implements Comparable {
 
 	public boolean hasCurrentProgram(String type) {
 		boolean hasProgram = false;
-		if (program.isCurrentOrFuture()) {
+		if (program.isCurrent()) {
 			if (type != null & (type.startsWith("PS"))) {
 				if (program.getType().startsWith("Jr") || program.getType().startsWith("Pl")
 						|| program.getType().startsWith("Nu")) {

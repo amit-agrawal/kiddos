@@ -23,6 +23,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.hmi.kiddos.dao.ChildDao;
+import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
 import com.hmi.kiddos.model.PaymentMedium;
@@ -33,6 +34,9 @@ import com.hmi.kiddos.model.Program;
 public class PaymentController {
 	@Autowired
 	private ChildDao childDao;
+	
+	@Autowired
+	private ProgramDao programDao;
 
 	@RequestMapping(value = "/getPrograms/{id}", method = RequestMethod.GET)
 	public @ResponseBody HashMap<String, String>  getPrograms(@PathVariable("id") Long id, Model uiModel) {  
@@ -121,8 +125,8 @@ public class PaymentController {
         uiModel.addAttribute("payment", payment);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("children", childDao.findAllChildren());
-        uiModel.addAttribute("programs", Program.findAllPrograms());
-        uiModel.addAttribute("activeFuturePrograms", Program.findAllActivePrograms());
+        uiModel.addAttribute("programs", programDao.findAllPrograms());
+        uiModel.addAttribute("activeFuturePrograms", programDao.findAllActivePrograms());
         uiModel.addAttribute("paymentmediums", Arrays.asList(PaymentMedium.values()));
     }
 

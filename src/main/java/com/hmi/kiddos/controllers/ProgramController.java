@@ -20,6 +20,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.hmi.kiddos.dao.AdmissionDao;
+import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Centers;
 import com.hmi.kiddos.model.Program;
@@ -30,6 +31,9 @@ import com.hmi.kiddos.model.Staff;
 public class ProgramController {
 	@Autowired
 	private AdmissionDao admissionDao;
+	
+	@Autowired
+	private ProgramDao programDao;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Program program, BindingResult bindingResult, Model uiModel,
@@ -52,7 +56,7 @@ public class ProgramController {
 	@RequestMapping(value = "/{id}", produces = "text/html")
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		addDateTimeFormatPatterns(uiModel);
-		uiModel.addAttribute("program", Program.findProgram(id));
+		uiModel.addAttribute("program", programDao.findProgram(id));
 		uiModel.addAttribute("itemId", id);
 		return "programs/show";
 	}
@@ -64,16 +68,16 @@ public class ProgramController {
 			@RequestParam(value = "sortOrder", required = false) String sortOrder,
 			@RequestParam(value = "type", required = false) String types, Model uiModel) {
 		if (types != null) {
-			uiModel.addAttribute("programs", Program.findAllPrograms(types));
+			uiModel.addAttribute("programs", programDao.findAllPrograms(types));
 		} else if (page != null || size != null) {
 			int sizeNo = size == null ? 100 : size.intValue();
 			final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-			uiModel.addAttribute("programs", Program.findProgramEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-			float nrOfPages = (float) Program.countPrograms() / sizeNo;
+			uiModel.addAttribute("programs", programDao.findProgramEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+			float nrOfPages = (float) programDao.countPrograms() / sizeNo;
 			uiModel.addAttribute("maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
 		} else {
-			uiModel.addAttribute("programs", Program.findAllPrograms(sortFieldName, sortOrder));
+			uiModel.addAttribute("programs", programDao.findAllPrograms(sortFieldName, sortOrder));
 		}
 		addDateTimeFormatPatterns(uiModel);
 		return "programs/list";
@@ -93,15 +97,15 @@ public class ProgramController {
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
 	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-		populateEditForm(uiModel, Program.findProgram(id));
+		populateEditForm(uiModel, programDao.findProgram(id));
 		return "programs/update";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
 	public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-		Program program = Program.findProgram(id);
-		program.remove();
+		Program program = programDao.findProgram(id);
+		program.remove(programDao);
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
 		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

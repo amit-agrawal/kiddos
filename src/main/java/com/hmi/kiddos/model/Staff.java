@@ -1,5 +1,6 @@
 package com.hmi.kiddos.model;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -43,10 +44,6 @@ public class Staff implements Comparable {
 		return primaryPrograms;
 	}
 
-	public void setPrimaryPrograms(Set<Program> primaryPrograms) {
-		this.primaryPrograms = primaryPrograms;
-	}
-
 	@OneToMany(mappedBy="teacherTwo")
 	private Set<Program> secondaryPrograms;
 
@@ -58,7 +55,30 @@ public class Staff implements Comparable {
 		this.secondaryPrograms = secondaryPrograms;
 	}
 
-    /**
+	public Set<Program> getPrimaryCurrentPrograms() {
+		Set<Program> primaryCurrentPrograms = new HashSet<>();
+		for (Program program: primaryPrograms) {
+			if (program.isCurrentOrFuture())
+				primaryCurrentPrograms.add(program);
+		}
+		return primaryCurrentPrograms;
+	}
+
+	public Set<Program> getSecondaryCurrentPrograms() {
+		Set<Program> secondaryCurrentPrograms = new HashSet<>();
+		for (Program program: secondaryPrograms) {
+			if (program.isCurrentOrFuture())
+				secondaryCurrentPrograms.add(program);
+		}
+		return secondaryCurrentPrograms;
+	}
+
+	public void setPrimaryPrograms(Set<Program> primaryPrograms) {
+		this.primaryPrograms = primaryPrograms;
+	}
+
+
+	/**
      */
     @NotNull
     @Size(max = 20)

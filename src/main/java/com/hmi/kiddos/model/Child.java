@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
@@ -311,7 +310,7 @@ public class Child implements Comparable {
 	}
 
 	public boolean hasProgram(String type) {
-		Set<Program> programs = getPrograms();
+		Set<Program> programs = getCurrentPrograms(); 
 		boolean hasProgram = false;
 		if (type != null & (type.startsWith("PS"))) {
 			for (Program program : programs) {

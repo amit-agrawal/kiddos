@@ -15,11 +15,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hmi.kiddos.dao.ProgramDao;
+
 @Configurable
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml")
 @Transactional
 public class ProgramIntegrationTest {
+	@Autowired
+	private ProgramDao programDao;
 
     @Test
     public void testMarkerMethod() {
@@ -31,7 +35,7 @@ public class ProgramIntegrationTest {
 	@Test
     public void testCountPrograms() {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
-        long count = Program.countPrograms();
+        long count = programDao.countPrograms();
         Assert.assertTrue("Counter for 'Program' incorrectly reported there were no entries", count > 0);
     }
 
@@ -41,7 +45,7 @@ public class ProgramIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Program' failed to provide an identifier", id);
-        obj = Program.findProgram(id);
+        obj = programDao.findProgram(id);
         Assert.assertNotNull("Find method for 'Program' illegally returned null for id '" + id + "'", obj);
         Assert.assertEquals("Find method for 'Program' returned the incorrect identifier", id, obj.getId());
     }
@@ -49,9 +53,9 @@ public class ProgramIntegrationTest {
 	@Test
     public void testFindAllPrograms() {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
-        long count = Program.countPrograms();
+        long count = programDao.countPrograms();
         Assert.assertTrue("Too expensive to perform a find all test for 'Program', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Program> result = Program.findAllPrograms();
+        List<Program> result = programDao.findAllPrograms();
         Assert.assertNotNull("Find all method for 'Program' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Program' failed to return any data", result.size() > 0);
     }
@@ -60,9 +64,9 @@ public class ProgramIntegrationTest {
 	@Test
     public void testFindAllActivePrograms() {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
-        long count = Program.countPrograms();
+        long count = programDao.countPrograms();
         Assert.assertTrue("Too expensive to perform a find all test for 'Program', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<Program> result = Program.findAllActivePrograms();
+        List<Program> result = programDao.findAllActivePrograms();
         Assert.assertNotNull("Find all method for 'Program' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Program' failed to return any data", result.size() > 0);
     }
@@ -70,11 +74,11 @@ public class ProgramIntegrationTest {
 	@Test
     public void testFindProgramEntries() {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
-        long count = Program.countPrograms();
+        long count = programDao.countPrograms();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<Program> result = Program.findProgramEntries(firstResult, maxResults);
+        List<Program> result = programDao.findProgramEntries(firstResult, maxResults);
         Assert.assertNotNull("Find entries method for 'Program' illegally returned null", result);
         Assert.assertEquals("Find entries method for 'Program' returned an incorrect number of entries", count, result.size());
     }
@@ -85,7 +89,7 @@ public class ProgramIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Program' failed to provide an identifier", id);
-        obj = Program.findProgram(id);
+        obj = programDao.findProgram(id);
         Assert.assertNotNull("Find method for 'Program' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyProgram(obj);
         Integer currentVersion = obj.getVersion();
@@ -99,7 +103,7 @@ public class ProgramIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Program' failed to provide an identifier", id);
-        obj = Program.findProgram(id);
+        obj = programDao.findProgram(id);
         boolean modified =  dod.modifyProgram(obj);
         Integer currentVersion = obj.getVersion();
         Program merged = obj.merge();
@@ -135,9 +139,9 @@ public class ProgramIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Program' failed to provide an identifier", id);
-        obj = Program.findProgram(id);
-        obj.remove();
+        obj = programDao.findProgram(id);
+        obj.remove(programDao);
         obj.flush();
-        Assert.assertNull("Failed to remove 'Program' with identifier '" + id + "'", Program.findProgram(id));
+        Assert.assertNull("Failed to remove 'Program' with identifier '" + id + "'", programDao.findProgram(id));
     }
 }

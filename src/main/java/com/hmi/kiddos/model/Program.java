@@ -1,8 +1,6 @@
 package com.hmi.kiddos.model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,6 +29,8 @@ import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.hmi.kiddos.dao.ProgramDao;
 
 @Configurable
 @Entity
@@ -62,7 +62,6 @@ public class Program implements Comparable {
 			return false;
 	}
 
-
 	public boolean isCurrentOrFuture() {
 		if ((getDueDate() == null) || getDueDate().after(Calendar.getInstance()))
 			return true;
@@ -70,7 +69,6 @@ public class Program implements Comparable {
 			return false;
 	}
 
-	
 	/**
 	 */
 	@NotNull
@@ -178,78 +176,12 @@ public class Program implements Comparable {
 	@PersistenceContext
 	transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("kidsCount", "children",
-			"term", "type", "batch", "center", "dueDate", "fees", "notes", "teacher", "admissions");
-
 	public static final EntityManager entityManager() {
 		EntityManager em = new Program().entityManager;
 		if (em == null)
 			throw new IllegalStateException(
 					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
 		return em;
-	}
-
-	public static long countPrograms() {
-		return entityManager().createQuery("SELECT COUNT(o) FROM Program o", Long.class).getSingleResult();
-	}
-
-	public static List<Program> findAllPrograms() {
-		return entityManager().createQuery("SELECT o FROM Program o order by term, type, batch, notes", Program.class).getResultList();
-	}
-
-	public static List<Program> findAllActivePrograms() {
-		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, type, batch",
-						Program.class)
-				.getResultList();
-	}
-
-	public static List<Program> findOnlyActivePrograms() {
-		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and start_date <= current_date order by type, term, batch",
-				Program.class).getResultList();
-	}
-
-	public static List<Program> findFuturePrograms() {
-		return entityManager()
-				.createQuery("SELECT o FROM Program o where start_date > current_date order by type, term, batch",
-						Program.class)
-				.getResultList();
-	}
-
-	public static List<Program> findAllPrograms(String sortFieldName, String sortOrder) {
-		String jpaQuery = "SELECT o FROM Program o";
-		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-				jpaQuery = jpaQuery + " " + sortOrder;
-			}
-		}
-		return entityManager().createQuery(jpaQuery, Program.class).getResultList();
-	}
-
-	public static Program findProgram(Long id) {
-		if (id == null)
-			return null;
-		return entityManager().find(Program.class, id);
-	}
-
-	public static List<Program> findProgramEntries(int firstResult, int maxResults) {
-		return entityManager().createQuery("SELECT o FROM Program o", Program.class).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
-	}
-
-	public static List<Program> findProgramEntries(int firstResult, int maxResults, String sortFieldName,
-			String sortOrder) {
-		String jpaQuery = "SELECT o FROM Program o";
-		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-				jpaQuery = jpaQuery + " " + sortOrder;
-			}
-		}
-		return entityManager().createQuery(jpaQuery, Program.class).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
 	}
 
 	@Transactional
@@ -260,13 +192,13 @@ public class Program implements Comparable {
 	}
 
 	@Transactional
-	public void remove() {
+	public void remove(ProgramDao programDao) {
 		if (this.entityManager == null)
 			this.entityManager = entityManager();
 		if (this.entityManager.contains(this)) {
 			this.entityManager.remove(this);
 		} else {
-			Program attached = Program.findProgram(this.id);
+			Program attached = programDao.findProgram(this.id);
 			this.entityManager.remove(attached);
 		}
 	}
@@ -404,25 +336,5 @@ public class Program implements Comparable {
 
 	@Column(name = "CREATION_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar creationTS;
-
-	public static List<Program> findAllPrograms(String status) {
-		List<Program> allPrograms = findAllPrograms();
-		List<Program> programList = new ArrayList<Program>();
-		for (Program program : allPrograms) {
-			if (status.equals("old")) {
-				if ((program.getDueDate() != null) && program.getDueDate().before(Calendar.getInstance()))
-					programList.add(program);
-			} else if (status.equals("current")) {
-				if (program.isCurrent())
-					programList.add(program);
-
-			} else if (status.equals("future")) {
-				if ((program.getStartDate() != null) && program.getStartDate().after(Calendar.getInstance()))
-					programList.add(program);
-			}
-		}
-		return programList;
-	}
-
 
 }

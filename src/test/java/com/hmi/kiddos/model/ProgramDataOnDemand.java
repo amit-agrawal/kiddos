@@ -16,9 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
+import com.hmi.kiddos.dao.ProgramDao;
+
 @Component
 @Configurable
 public class ProgramDataOnDemand {
+	@Autowired
+	private ProgramDao programDao;
+
 	@Test
 	public void toStringTestPS() {
 		Program program = new Program();
@@ -58,6 +63,7 @@ public class ProgramDataOnDemand {
 
 	@Autowired
     StaffDataOnDemand staffDataOnDemand;
+	
 
 	public Program getNewTransientProgram(int index) {
         Program obj = new Program();
@@ -119,14 +125,14 @@ public class ProgramDataOnDemand {
         }
         Program obj = data.get(index);
         Long id = obj.getId();
-        return Program.findProgram(id);
+        return programDao.findProgram(id);
     }
 
 	public Program getRandomProgram() {
         init();
         Program obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Program.findProgram(id);
+        return programDao.findProgram(id);
     }
 
 	public boolean modifyProgram(Program obj) {
@@ -136,7 +142,7 @@ public class ProgramDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = Program.findProgramEntries(from, to);
+        data = programDao.findProgramEntries(from, to);
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Program' illegally returned null");
         }
