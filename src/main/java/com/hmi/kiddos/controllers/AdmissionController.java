@@ -126,7 +126,7 @@ public class AdmissionController {
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("children", childDao.findAllChildren());
 		uiModel.addAttribute("programs", programDao.findAllPrograms());
-		uiModel.addAttribute("activePrograms", programDao.findAllActivePrograms());
+		uiModel.addAttribute("activePrograms", programDao.findCurrentFuturePrograms());
 	}
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

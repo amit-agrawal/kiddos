@@ -34,14 +34,42 @@ public class ProgramDao {
 		return entityManager().createQuery("SELECT o FROM Program o order by term, type, batch, notes", Program.class).getResultList();
 	}
 
-	public List<Program> findAllActivePrograms() {
+	public List<Program> findCurrentFuturePrograms() {
 		return entityManager()
 				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, type, batch",
 						Program.class)
 				.getResultList();
 	}
 
-	public List<Program> findOnlyActivePrograms() {
+	public List<Program> findCurrentFuturePreschoolPrograms() {
+		return entityManager()
+				.createQuery("SELECT o FROM Program o where due_date > current_date and type in ('Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by term, type, batch",
+						Program.class)
+				.getResultList();
+	}
+
+	public List<Program> findCurrentFutureDaycarePrograms() {
+		return entityManager()
+				.createQuery("SELECT o FROM Program o where due_date > current_date and type in ('DC','IC') and is_charge = 0 order by term, type, batch",
+						Program.class)
+				.getResultList();
+	}
+
+	public List<Program> findCurrentFutureCharges() {
+		return entityManager()
+				.createQuery("SELECT o FROM Program o where due_date > current_date and is_charge = 1 order by term, type, batch",
+						Program.class)
+				.getResultList();
+	}
+
+	public List<Program> findCurrentFutureOtherPrograms() {
+		return entityManager()
+				.createQuery("SELECT o FROM Program o where due_date > current_date and type not in ('DC','IC','Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by term, type, batch",
+						Program.class)
+				.getResultList();
+	}
+
+	public List<Program> findCurrentPrograms() {
 		return entityManager().createQuery(
 				"SELECT o FROM Program o where due_date > current_date and start_date <= current_date order by type, term, batch",
 				Program.class).getResultList();

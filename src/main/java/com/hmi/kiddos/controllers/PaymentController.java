@@ -172,7 +172,10 @@ public class PaymentController {
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("children", childDao.findAllChildren());
 		uiModel.addAttribute("programs", programDao.findAllPrograms());
-		uiModel.addAttribute("activeFuturePrograms", programDao.findAllActivePrograms());
+		uiModel.addAttribute("activePreschoolPrograms", programDao.findCurrentFuturePreschoolPrograms());
+		uiModel.addAttribute("activeDaycarePrograms", programDao.findCurrentFutureDaycarePrograms());
+		uiModel.addAttribute("activeCharges", programDao.findCurrentFutureCharges());
+		uiModel.addAttribute("activeOtherPrograms", programDao.findCurrentFutureOtherPrograms());
 		uiModel.addAttribute("paymentmediums", Arrays.asList(PaymentMedium.values()));
 	}
 
