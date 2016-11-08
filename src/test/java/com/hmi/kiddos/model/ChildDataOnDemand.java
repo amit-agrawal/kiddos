@@ -270,7 +270,7 @@ public class ChildDataOnDemand {
         for (int i = 0; i < 10; i++) {
             Child obj = getNewTransientChild(i);
             try {
-                obj.persist();
+                childDao.persist(obj);
             } catch (final ConstraintViolationException e) {
                 final StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -279,7 +279,7 @@ public class ChildDataOnDemand {
                 }
                 throw new IllegalStateException(msg.toString(), e);
             }
-            obj.flush();
+            childDao.flush();
             data.add(obj);
         }
     }

@@ -7,7 +7,10 @@
         <field:select field="paymentMedium" id="c_com_hmi_kiddos_model_Payment_paymentMedium" items="${paymentmediums}" path="paymentmediums" required="true" z="joMzIsenWO75GGnFZ6BNfizAgc4="/>
         <field:datetime dateTimePattern="${payment_paymentdate_date_format}" field="paymentDate" id="c_com_hmi_kiddos_model_Payment_paymentDate" required="true" z="shSVcv/Ph2KgcSCIt8bGehwLxGo="/>
         <field:select field="child" id="c_com_hmi_kiddos_model_Admission_child" itemValue="id" required="true" items="${children}" path="/children" z="MG7PccQXZTIlgqFGxNpM/heuE58="/>
-        <field:select field="programs" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${activeFuturePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:select field="charges" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${activeFuturePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:select field="daycarePrograms" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${activeFuturePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:select field="preschoolPrograms" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${activeFuturePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:select field="otherPrograms" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${activeFuturePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:textarea field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
         <field:input field="receiptNumber" id="c_com_hmi_kiddos_model_Payment_receiptNumber" max="30" z="CVRL69oLwGRMucjA58PUdLhygEo="/>
     </form:create>

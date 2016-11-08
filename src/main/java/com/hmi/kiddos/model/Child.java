@@ -339,58 +339,7 @@ public class Child implements Comparable {
 		return hasProgram;
 	}
 
-	@PersistenceContext
-	public transient EntityManager entityManager;
 
-	public static final EntityManager entityManager() {
-		EntityManager em = new Child().entityManager;
-		if (em == null)
-			throw new IllegalStateException(
-					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-		return em;
-	}
-
-	@Transactional
-	public void persist() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		this.entityManager.persist(this);
-	}
-
-	@Transactional
-	public void remove(ChildDao childDao) {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		if (this.entityManager.contains(this)) {
-			this.entityManager.remove(this);
-		} else {
-			Child attached = childDao.findChild(this.id);
-			this.entityManager.remove(attached);
-		}
-	}
-
-	@Transactional
-	public void flush() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		this.entityManager.flush();
-	}
-
-	@Transactional
-	public void clear() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		this.entityManager.clear();
-	}
-
-	@Transactional
-	public Child merge() {
-		if (this.entityManager == null)
-			this.entityManager = entityManager();
-		Child merged = this.entityManager.merge(this);
-		this.entityManager.flush();
-		return merged;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

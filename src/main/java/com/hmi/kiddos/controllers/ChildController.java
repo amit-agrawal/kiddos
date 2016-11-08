@@ -44,7 +44,7 @@ public class ChildController {
 			return "children/create";
 		}
 		uiModel.asMap().clear();
-		child.persist();
+		childDao.persist(child);
 		return "redirect:/children/" + encodeUrlPathSegment(child.getId().toString(), httpServletRequest);
 	}
 
@@ -94,7 +94,7 @@ public class ChildController {
 			return "children/update";
 		}
 		uiModel.asMap().clear();
-		child.merge();
+		childDao.merge(child);
 		return "redirect:/children/" + encodeUrlPathSegment(child.getId().toString(), httpServletRequest);
 	}
 
@@ -108,7 +108,7 @@ public class ChildController {
 	public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		Child child = childDao.findChild(id);
-		child.remove(childDao);
+		childDao.remove(child);
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
 		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

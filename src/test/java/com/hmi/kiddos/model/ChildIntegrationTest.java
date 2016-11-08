@@ -165,7 +165,7 @@ public class ChildIntegrationTest {
         Assert.assertNotNull("Find method for 'Child' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyChild(obj);
         Integer currentVersion = obj.getVersion();
-        obj.flush();
+        childDao.flush();
         Assert.assertTrue("Version for 'Child' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
 
@@ -178,8 +178,8 @@ public class ChildIntegrationTest {
         obj = childDao.findChild(id);
         boolean modified =  dod.modifyChild(obj);
         Integer currentVersion = obj.getVersion();
-        Child merged = obj.merge();
-        obj.flush();
+        Child merged = childDao.merge(obj);
+        childDao.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         Assert.assertTrue("Version for 'Child' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
@@ -191,7 +191,7 @@ public class ChildIntegrationTest {
         Assert.assertNotNull("Data on demand for 'Child' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'Child' identifier to be null", obj.getId());
         try {
-            obj.persist();
+            childDao.persist(obj);
         } catch (final ConstraintViolationException e) {
             final StringBuilder msg = new StringBuilder();
             for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -200,7 +200,7 @@ public class ChildIntegrationTest {
             }
             throw new IllegalStateException(msg.toString(), e);
         }
-        obj.flush();
+        childDao.flush();
         Assert.assertNotNull("Expected 'Child' identifier to no longer be null", obj.getId());
     }
 
@@ -211,8 +211,8 @@ public class ChildIntegrationTest {
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Child' failed to provide an identifier", id);
         obj = childDao.findChild(id);
-        obj.remove(new ChildDao());
-        obj.flush();
+        childDao.remove(obj);
+        childDao.flush();
         Assert.assertNull("Failed to remove 'Child' with identifier '" + id + "'", childDao.findChild(id));
     }
 }

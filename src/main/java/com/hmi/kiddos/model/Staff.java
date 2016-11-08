@@ -58,7 +58,7 @@ public class Staff implements Comparable {
 	public Set<Program> getPrimaryCurrentPrograms() {
 		Set<Program> primaryCurrentPrograms = new HashSet<>();
 		for (Program program: primaryPrograms) {
-			if (program.isCurrentOrFuture())
+			if (program.isCurrent())
 				primaryCurrentPrograms.add(program);
 		}
 		return primaryCurrentPrograms;
@@ -67,7 +67,7 @@ public class Staff implements Comparable {
 	public Set<Program> getSecondaryCurrentPrograms() {
 		Set<Program> secondaryCurrentPrograms = new HashSet<>();
 		for (Program program: secondaryPrograms) {
-			if (program.isCurrentOrFuture())
+			if (program.isCurrent())
 				secondaryCurrentPrograms.add(program);
 		}
 		return secondaryCurrentPrograms;
@@ -76,7 +76,6 @@ public class Staff implements Comparable {
 	public void setPrimaryPrograms(Set<Program> primaryPrograms) {
 		this.primaryPrograms = primaryPrograms;
 	}
-
 
 	/**
      */

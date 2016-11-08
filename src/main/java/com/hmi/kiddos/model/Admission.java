@@ -38,7 +38,7 @@ public class Admission implements Comparable {
 	@Autowired
 	@Transient
 	private AdmissionDao admissionDao;
-
+	
 	public static final EntityManager entityManager() {
 		EntityManager em = new Admission().entityManager;
 		if (em == null)

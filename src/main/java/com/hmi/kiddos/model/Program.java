@@ -44,6 +44,17 @@ public class Program implements Comparable {
 		return getChildren().size();
 	}
 
+	private boolean isCharge = false;
+
+	public boolean isCharge() {
+		return isCharge;
+	}
+
+	public void setCharge(boolean isCharge) {
+		this.isCharge = isCharge;
+	}
+
+
 	@Transient
 	private Set<Child> children = new TreeSet<Child>();
 

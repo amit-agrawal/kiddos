@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -68,6 +69,50 @@ public class Payment {
      */
     @ManyToMany
     private Set<Program> programs = new TreeSet<Program>();
+
+    @Transient 
+    private Set<Program> daycarePrograms = new TreeSet<Program>();
+    
+    @Transient 
+    private Set<Program> preschoolPrograms = new TreeSet<Program>();
+    
+    @Transient 
+    private Set<Program> charges = new TreeSet<Program>();
+
+    @Transient 
+    private Set<Program> otherPrograms = new TreeSet<Program>();
+    
+	public Set<Program> getDaycarePrograms() {
+		return daycarePrograms;
+	}
+
+	public void setDaycarePrograms(Set<Program> daycarePrograms) {
+		this.daycarePrograms = daycarePrograms;
+	}
+
+	public Set<Program> getPreschoolPrograms() {
+		return preschoolPrograms;
+	}
+
+	public void setPreschoolPrograms(Set<Program> preschoolPrograms) {
+		this.preschoolPrograms = preschoolPrograms;
+	}
+
+	public Set<Program> getCharges() {
+		return charges;
+	}
+
+	public void setCharges(Set<Program> charges) {
+		this.charges = charges;
+	}
+
+	public Set<Program> getOtherPrograms() {
+		return otherPrograms;
+	}
+
+	public void setOtherPrograms(Set<Program> otherPrograms) {
+		this.otherPrograms = otherPrograms;
+	}
 
 	public Child getChild() {
 		return child;

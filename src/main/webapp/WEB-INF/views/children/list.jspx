@@ -13,7 +13,7 @@
             <display:column sortable="true" title="Last Name" property="lastName" />
             <display:column sortable="true" title="Current Age" property="age" />
             <display:column sortable="true" title="Address" property="address" />
-            <display:column sortable="true" title="Programs" property="programs" />
+            <display:column sortable="true" title="Programs" property="currentPrograms" />
 			<display:column sortable="true" title="Transports" property="transportations" />
 			<display:column sortable="true" title="Fees Due" property="feesDue" />
 

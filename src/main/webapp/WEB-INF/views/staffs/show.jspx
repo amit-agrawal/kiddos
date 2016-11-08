@@ -6,7 +6,6 @@
         <field:display field="firstName" id="s_com_hmi_kiddos_model_Staff_firstName" object="${staff}" z="0d7hygQozuSbjOqFayMuM3Vgln8="/>
         <field:display field="middleName" id="s_com_hmi_kiddos_model_Staff_middleName" object="${staff}" z="kQHLE2N8kpGQdXNF1TTYHZRio4g="/>
         <field:display field="lastName" id="s_com_hmi_kiddos_model_Staff_lastName" object="${staff}" z="bvF3xYVvzDSqOauqlxvu4Wj4Q7Y="/>
-        <field:display field="password" id="s_com_hmi_kiddos_model_Staff_password" object="${staff}" z="SjsQuvddjqdJvCWeFcXbODdi22s="/>
         <field:display field="gender" id="s_com_hmi_kiddos_model_Staff_gender" object="${staff}" z="1P8IRVv/aK2If5dZ03n7D2Ug7uU="/>
         <field:display field="emailOne" id="s_com_hmi_kiddos_model_Staff_emailOne" object="${staff}" z="7EcmklhQwEydcb/i3fGBSpWtlQw="/>
         <field:display field="phone" id="s_com_hmi_kiddos_model_Staff_phone" object="${staff}" z="gQSgCamKKAxJ04bV89m0MO1beeY="/>
@@ -17,7 +16,8 @@
         <field:display field="department" id="s_com_hmi_kiddos_model_Staff_department" object="${staff}" z="m2bTaAnlHmuqCWf1qoSiibQVVo4="/>
         <field:display calendar="true" dateTimePattern="${staff_dob_date_format}" field="dob" id="s_com_hmi_kiddos_model_Staff_dob" object="${staff}" z="RhkafmdChbC3ZqNcKHZ5sGmxvFI="/>
         <field:display field="notes" id="s_com_hmi_kiddos_model_Staff_notes" object="${staff}" z="hEmTL6WULrqKScuWNpegrkaxI30="/>
-        <field:display field="enabled" id="s_com_hmi_kiddos_model_Staff_enabled" object="${staff}" z="B91lY1R/5PBei67rxkyMuwnGSzo="/>
         <field:display field="roles" id="s_com_hmi_kiddos_model_Staff_roles" object="${staff}" z="wF5EjnLytNfFGtfpUneHPefWuLQ="/>
+        <field:display id="s_com_hmi_kiddos_model_Staff_primaryPrograms" field="primaryPrograms"  object="${staff}" />
+        <field:display id="s_com_hmi_kiddos_model_Staff_secondaryPrograms" field="secondaryPrograms"  object="${staff}" />
     </page:show>
 </div>
