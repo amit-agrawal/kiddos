@@ -11,8 +11,8 @@
         <field:select field="preschoolPrograms" id="c_com_hmi_kiddos_model_Payment_preschoolPrograms" itemValue="id" items="${activePreschoolPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:select field="otherPrograms" id="c_com_hmi_kiddos_model_Payment_otherPrograms" itemValue="id" items="${activeOtherPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:select field="charges" id="c_com_hmi_kiddos_model_Payment_chargesPrograms" itemValue="id" items="${activeCharges}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
-        <field:textarea field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
-        <field:input field="receiptNumber" id="c_com_hmi_kiddos_model_Payment_receiptNumber" max="30" z="CVRL69oLwGRMucjA58PUdLhygEo="/>
-    </form:create>
+        <field:input field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" max="100" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+        <field:input field="notes" id="c_com_hmi_kiddos_model_Payment_notes" max="100" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+   </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Payment" render="${not empty dependencies}" z="+wKOE+qaHofz0A/k+mRJhXuV668="/>
 </div>

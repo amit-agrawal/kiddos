@@ -146,6 +146,34 @@ public class Staff implements Comparable {
 
     /**
      */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Calendar joiningDate;
+
+    public Calendar getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(Calendar joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+
+	public Calendar getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(Calendar lastDate) {
+		this.lastDate = lastDate;
+	}
+
+	/**
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Calendar lastDate;
+
+    /**
+     */
     @Size(max = 400)
     private String notes;
 
@@ -354,8 +382,23 @@ public class Staff implements Comparable {
         return entityManager().createQuery("SELECT o FROM Staff o", Staff.class).getResultList();
     }
 
+	public static List<Staff> findAllActiveStaffs() {
+        return entityManager().createQuery("SELECT o FROM Staff o where enabled = 1", Staff.class).getResultList();
+    }
+
 	public static List<Staff> findAllStaffs(String sortFieldName, String sortOrder) {
         String jpaQuery = "SELECT o FROM Staff o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Staff.class).getResultList();
+    }
+
+	public static List<Staff> findAllActiveStaffs(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Staff o where is_active = 1";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
@@ -374,8 +417,23 @@ public class Staff implements Comparable {
         return entityManager().createQuery("SELECT o FROM Staff o", Staff.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
+	public static List<Staff> findActiveStaffEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM Staff o where is_active = 1", Staff.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+
 	public static List<Staff> findStaffEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
         String jpaQuery = "SELECT o FROM Staff o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Staff.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+
+	public static List<Staff> findActiveStaffEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Staff o where is_active = 1";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {

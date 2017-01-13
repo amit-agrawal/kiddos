@@ -16,7 +16,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.hmi.kiddos.dao.ChildDao;
-import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Transportation;
 
 @RequestMapping("/transportations")

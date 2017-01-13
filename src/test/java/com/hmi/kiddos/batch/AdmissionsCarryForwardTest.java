@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml")
-@Transactional
 @Configurable
 public class AdmissionsCarryForwardTest {
 	@Autowired
@@ -32,10 +31,31 @@ public class AdmissionsCarryForwardTest {
 	@Test
 	@Ignore
 	public void createNewProgramSetTest() {
-		String fromTerm = "October";
-		String toTerm = "January 17";
-		Calendar startDate = new GregorianCalendar(2017,1,1);
-		Calendar endDate = new GregorianCalendar(2017,1,31);
+		try {
+		String fromTerm = "Term 4";
+		String toTerm = "Term 4, 17-18";
+		Calendar startDate = new GregorianCalendar(2018,0,25);
+		Calendar endDate = new GregorianCalendar(2018,3,31);
 		carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
+		}
+		catch (Exception ex) {
+			System.out.println(ex);
+		}
 	}
+
+	@Test
+	@Ignore
+	public void createNewProgramSetMonthlyTest() {
+		try {
+		String fromTerm = "February 17";
+		String toTerm = "March 17";
+		Calendar startDate = new GregorianCalendar(2017,2,1);
+		Calendar endDate = new GregorianCalendar(2017,2,31);
+		carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
+		}
+		catch (Exception ex) {
+			System.out.println(ex);
+		}
+	}
+
 }

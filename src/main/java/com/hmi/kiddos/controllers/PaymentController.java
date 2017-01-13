@@ -32,7 +32,6 @@ import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
 import com.hmi.kiddos.model.PaymentMedium;
 import com.hmi.kiddos.model.Program;
-import com.hmi.kiddos.util.MailingAspect;
 
 @RequestMapping("/payments")
 @Controller
@@ -72,15 +71,22 @@ public class PaymentController {
 
 	private void createPaymentRelatedAdmissions(Payment payment) {
 		Set<Program> programs = new TreeSet<Program>();
-		programs.addAll(payment.getDaycarePrograms());
-		programs.addAll(payment.getOtherPrograms());
-		programs.addAll(payment.getPreschoolPrograms());
-		programs.addAll(payment.getCharges());
-		
+		if ((payment.getDaycarePrograms() != null) && !payment.getDaycarePrograms().isEmpty())
+			programs.addAll(payment.getDaycarePrograms());
+
+		if ((payment.getOtherPrograms() != null) && !payment.getOtherPrograms().isEmpty())
+			programs.addAll(payment.getOtherPrograms());
+
+		if ((payment.getPreschoolPrograms() != null) && !payment.getPreschoolPrograms().isEmpty())
+			programs.addAll(payment.getPreschoolPrograms());
+
+		if ((payment.getCharges() != null) && !payment.getCharges().isEmpty())
+			programs.addAll(payment.getCharges());
+
 		payment.setPrograms(programs);
-		
+
 		for (Program program : programs) {
-			if (!program.isCharge()) {
+			if (!program.getIsCharge()) {
 				Child child = payment.getChild();
 				Admission admission = new Admission();
 				admission.setChild(child);
@@ -117,7 +123,7 @@ public class PaymentController {
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
 			@RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
 		if (page != null || size != null) {
-			int sizeNo = size == null ? 10 : size.intValue();
+			int sizeNo = size == null ? 1000 : size.intValue();
 			final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
 			uiModel.addAttribute("payments", Payment.findPaymentEntries(firstResult, sizeNo, sortFieldName, sortOrder));
 			float nrOfPages = (float) Payment.countPayments() / sizeNo;

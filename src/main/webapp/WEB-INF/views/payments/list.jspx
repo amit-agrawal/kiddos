@@ -11,9 +11,9 @@
             <display:column sortable="true" title="Mode" property="paymentMedium" />
             <display:column sortable="true" title="Pay Date" property="paymentDateAsDate" format="{0,date,dd-MM-yyyy}"  />
             <display:column sortable="true" title="Txn No." property="transactionNumber" />
-            <display:column sortable="true" title="Receipt No." property="receiptNumber" />
+            <display:column sortable="true" title="Receipt No." property="id" />
             <display:column sortable="true" title="Programs" property="programs" />
-           <display:column sortable="true" title="Amount" property="amount" />
+            <display:column sortable="true" title="Amount" property="amount" />
  			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="payments.pdf"/>
 			<display:setProperty name="export.csv.filename" value="payments.csv"/>

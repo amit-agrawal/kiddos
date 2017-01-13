@@ -6,7 +6,6 @@
         <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="1000" export="true"  name="${admissions}" 
         id="l_com_hmi_kiddos_model_Admission" requestURI="/admissions" >
 			<display:column property="counter" title="Sq." sortable="true"/>
-
             <display:column sortable="true" title="First Name" property="child.firstName" />
             <display:column sortable="true" title="Last Name" property="child.lastName" />
             <display:column sortable="true" title="Age" property="child.age" />

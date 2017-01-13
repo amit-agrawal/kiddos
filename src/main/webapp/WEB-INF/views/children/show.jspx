@@ -3,6 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Child" object="${child}" path="/children" z="user-managed">
+        <field:display field="id" id="s_com_hmi_kiddos_model_Child_id" object="${child}" z="1Wpnvl7bV4KEICR+hEauCmyNBec="/>
         <field:display field="firstName" id="s_com_hmi_kiddos_model_Child_firstName" object="${child}" z="1Wpnvl7bV4KEICR+hEauCmyNBec="/>
         <field:display field="middleName" id="s_com_hmi_kiddos_model_Child_middleName" object="${child}" z="R/RbbUoE3Rvv+GkjVzpOkionUFA="/>
         <field:display field="lastName" id="s_com_hmi_kiddos_model_Child_lastName" object="${child}" z="YqNA7j2bniQgeM26wSjEleb7mYE="/>

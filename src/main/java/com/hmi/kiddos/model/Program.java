@@ -46,11 +46,11 @@ public class Program implements Comparable {
 
 	private boolean isCharge = false;
 
-	public boolean isCharge() {
+	public boolean getIsCharge() {
 		return isCharge;
 	}
 
-	public void setCharge(boolean isCharge) {
+	public void setIsCharge(boolean isCharge) {
 		this.isCharge = isCharge;
 	}
 

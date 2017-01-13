@@ -43,35 +43,35 @@ public class ProgramDao {
 
 	public List<Program> findCurrentFuturePreschoolPrograms() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date and type in ('Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by term, type, batch",
+				.createQuery("SELECT o FROM Program o where due_date > current_date and type in ('Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by batch, type, term",
 						Program.class)
 				.getResultList();
 	}
 
 	public List<Program> findCurrentFutureDaycarePrograms() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date and type in ('DC','IC') and is_charge = 0 order by term, type, batch",
+				.createQuery("SELECT o FROM Program o where due_date > current_date and type in ('DC','IC') and is_charge = 0 order by batch, type, term",
 						Program.class)
 				.getResultList();
 	}
 
 	public List<Program> findCurrentFutureCharges() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date and is_charge = 1 order by term, type, batch",
+				.createQuery("SELECT o FROM Program o where due_date > current_date and is_charge = 1 order by batch, type, term",
 						Program.class)
 				.getResultList();
 	}
 
 	public List<Program> findCurrentFutureOtherPrograms() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date and type not in ('DC','IC','Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by term, type, batch",
+				.createQuery("SELECT o FROM Program o where due_date > current_date and type not in ('DC','IC','Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by batch, type, term",
 						Program.class)
 				.getResultList();
 	}
 
 	public List<Program> findCurrentPrograms() {
 		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and start_date <= current_date order by type, term, batch",
+				"SELECT o FROM Program o where due_date > current_date and start_date <= current_date and is_charge = 0 order by type, term, batch",
 				Program.class).getResultList();
 	}
 
@@ -125,9 +125,8 @@ public class ProgramDao {
 				if ((program.getDueDate() != null) && program.getDueDate().before(Calendar.getInstance()))
 					programList.add(program);
 			} else if (status.equals("current")) {
-				if (program.isCurrent())
+				if (program.isCurrent() && !program.getIsCharge())
 					programList.add(program);
-
 			} else if (status.equals("future")) {
 				if ((program.getStartDate() != null) && program.getStartDate().after(Calendar.getInstance()))
 					programList.add(program);

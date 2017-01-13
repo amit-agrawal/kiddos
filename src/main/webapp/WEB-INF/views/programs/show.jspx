@@ -10,6 +10,7 @@
         <field:display field="term" id="s_com_hmi_kiddos_model_Program_term" object="${program}" z="bbHud5MCTIsf2SPBYwKOjuwqsaY="/>
         <field:display field="batch" id="s_com_hmi_kiddos_model_Program_batch" object="${program}" z="rkvjrlCguNSQ33bZWKyygYptTBQ="/>
         <field:display field="type" id="s_com_hmi_kiddos_model_Program_type" object="${program}" z="9SpHRVg8uC9NFOdtwwPDK/wrQkI="/>
+        <field:display field="isCharge" id="s_com_hmi_kiddos_model_Program_isCharge" object="${program}" z="9SpHRVg8uC9NFOdtwwPDK/wrQkI="/>
         <field:display field="teacher" id="s_com_hmi_kiddos_model_Program_teacher" object="${program}" z="SpE2tvodHAMtrbvA7DRwzdayk9o="/>
         <field:display field="teacherTwo" id="s_com_hmi_kiddos_model_Program_teacher" object="${program}" z="SpE2tvodHAMtrbvA7DRwzdayk9o="/>
         <field:display field="kidsCount" id="s_com_hmi_kiddos_model_Program_kidsCount" object="${program}" z="g5XOBUuwDC5jw5Bg8GKNSZsQWw4="/>

@@ -1,5 +1,6 @@
 package com.hmi.kiddos.util;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class MailingTest {
 	private MailUtil mailUtil;
 
 	@Test
+	@Ignore
 	public void sendGmailTest() {
 		mailUtil.sendGmail("AdmissionController", "create", "1,2");
 	}

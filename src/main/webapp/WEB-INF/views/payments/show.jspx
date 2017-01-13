@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Payment" object="${payment}" path="/payments" z="55UkjT4/I/57dqgWS6BSPdttq6c=">
         <field:display field="amount" id="s_com_hmi_kiddos_model_Payment_amount" object="${payment}" z="h0vvKi3/utkPEs+JpzqFZ6NF4WQ="/>
         <field:display field="paymentMedium" id="s_com_hmi_kiddos_model_Payment_paymentMedium" object="${payment}" z="6lFTVGLkOOOWgibEvk6iPwSFuAU="/>
-        <field:display field="programs" id="s_com_hmi_kiddos_model_Payment_admissions" object="${payment}" z="G4gP9Tbf3fl89wg8OsvFe52NH3M="/>
         <field:display field="child" id="s_com_hmi_kiddos_model_Admission_child" object="${payment}" z="u9fBL/Viv0JelSriH0nTHJhHfKE="/>
         <field:display field="transactionNumber" id="s_com_hmi_kiddos_model_Payment_transactionNumber" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
-        <field:display field="receiptNumber" id="s_com_hmi_kiddos_model_Payment_receiptNumber" object="${payment}" z="M8dtNzP/B6YJf8mKoCCXgOiExac="/>
+        <field:display field="notes" id="s_com_hmi_kiddos_model_Payment_notes" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
+        <field:display field="id" id="s_com_hmi_kiddos_model_Payment_receiptNumber" object="${payment}" z="M8dtNzP/B6YJf8mKoCCXgOiExac="/>
+        <table:table data="${payment.programs}" id="l_com_hmi_kiddos_model_Program" path="/programs" z="user-managed">
+            <table:column id="c_com_hmi_kiddos_model_Program_term" property="term" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_batch" property="batch" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_type" property="type" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_fees" property="fees" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+       </table:table>
     </page:show>
 </div>

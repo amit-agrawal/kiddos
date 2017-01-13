@@ -68,6 +68,7 @@ public class AdmissionsCarryForward {
 				toProgram.setTeacher(fromProgram.getTeacher());
 				toProgram.setTeacherTwo(fromProgram.getTeacherTwo());
 				toProgram.setFees(fromProgram.getFees());
+				toProgram.setIsCharge(fromProgram.getIsCharge());
 				System.out.println("Trying to persist: " + toProgram);
 				toProgram.persist();
 				

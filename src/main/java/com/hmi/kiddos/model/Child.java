@@ -10,14 +10,12 @@ import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +32,6 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.hmi.kiddos.dao.ChildDao;
 
 @Configurable
 @Entity
@@ -301,6 +296,7 @@ public class Child implements Comparable {
 		if (dob != null) {
 			output = output + ", " + getAge();
 		}
+		output = output + ", " + id;
 		return output;
 	}
 

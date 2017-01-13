@@ -15,7 +15,8 @@
         </menu:category>
         <menu:category id="c_staff" z="WEqNUFcSQYoW/mQULTlPjM/nWNU=">
             <menu:item id="i_staff_new" messageCode="global_menu_new" url="/staffs?form" z="H2VWxcFT9MZjwJqkdaMj688QtI4="/>
-            <menu:item id="i_staff_list" messageCode="global_menu_list" url="/staffs?page=1&amp;size=100" z="user-managed"/>
+            <menu:item id="i_staff_list" messageCode="global_menu_list" url="/staffs" z="user-managed"/>
+            <menu:item id="i_staff_all_list" messageCode="global_menu_list" url="/staffs?type=all" z="user-managed"/>
         </menu:category>
         <menu:category id="c_transportation" z="RX3FSxLlZERcuTeXoKByDoI0UUg=">
             <menu:item id="i_transportation_new" messageCode="global_menu_new" url="/transportations?form" z="user-managed"/>

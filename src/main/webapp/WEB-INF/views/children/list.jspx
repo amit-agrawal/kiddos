@@ -9,6 +9,8 @@
         <display:table decorator="com.hmi.kiddos.controllers.LinksTableDecorator" pagesize="100" export="true"  name="${children}" id="l_com_hmi_kiddos_model_Child" requestURI="/children" >
 			<display:column property="counter" title="Sq." sortable="true"/>
 
+            <display:column sortable="true" title="Enrollment Number" property="id" />
+
             <display:column sortable="true" title="First Name" property="firstName" />
             <display:column sortable="true" title="Last Name" property="lastName" />
             <display:column sortable="true" title="Current Age" property="age" />

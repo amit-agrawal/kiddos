@@ -11,6 +11,5 @@
         <field:display field="program" id="s_com_hmi_kiddos_model_Admission_programs" object="${admission}" z="uPvcqapjjnIAs3MxKLXcIaReF/o="/>
         <field:display field="discount" id="s_com_hmi_kiddos_model_Admission_discount" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
         <field:display field="admissionFee" id="s_com_hmi_kiddos_model_Admission_admissionFee" object="${admission}" z="LApjMv0HozXe5flseoqDUTiltj4="/>
-
     </page:show>
 </div>

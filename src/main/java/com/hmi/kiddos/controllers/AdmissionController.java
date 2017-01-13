@@ -24,7 +24,6 @@ import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Admission;
-import com.hmi.kiddos.model.Program;
 
 @RequestMapping("/admissions")
 @Controller

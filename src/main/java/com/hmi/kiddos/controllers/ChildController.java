@@ -21,7 +21,6 @@ import org.springframework.web.util.WebUtils;
 
 import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
-import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Gender;
 import com.hmi.kiddos.model.Transportation;
@@ -72,7 +71,7 @@ public class ChildController {
 		if (types != null) {
 			uiModel.addAttribute("children", childDao.findAllChildren(types));
 		} else if (page != null || size != null) {
-			int sizeNo = size == null ? 100 : size.intValue();
+			int sizeNo = size == null ? 1000 : size.intValue();
 			final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
 			uiModel.addAttribute("children",
 					childDao.findChildEntries(firstResult, sizeNo, sortFieldName, sortOrder, types));

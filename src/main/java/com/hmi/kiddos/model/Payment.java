@@ -1,4 +1,5 @@
 package com.hmi.kiddos.model;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -32,56 +33,68 @@ import org.springframework.transaction.annotation.Transactional;
 @Audited
 public class Payment {
 
-    /**
-     */
-    @Max(999999L)
-    @NotNull
-    private Integer amount;
+	/**
+	 */
+	@Max(999999L)
+	@NotNull
+	private Integer amount;
 
-    /**
-     */
-    @ManyToOne
-    private Child child;
+	/**
+	 */
+	@ManyToOne
+	private Child child;
 
-    /**
-     */
-    @Enumerated
-    @NotNull
-    private PaymentMedium paymentMedium;
+	/**
+	 */
+	@Enumerated
+	@NotNull
+	private PaymentMedium paymentMedium;
 
-    /**
-     */
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Calendar paymentDate;
+	/**
+	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Calendar paymentDate;
 
-    /**
-     */
-    @Size(max = 50)
-    private String transactionNumber;
+	/**
+	 */
+	@Size(max = 100)
+	private String transactionNumber;
 
-    /**
-     */
-    @Size(max = 30)
-    private String receiptNumber;
+	/**
+	 */
+	@Size(max = 30)
+	private String receiptNumber;
 
-    /**
-     */
-    @ManyToMany
-    private Set<Program> programs = new TreeSet<Program>();
+	/**
+	 */
+	private String notes;
 
-    @Transient 
-    private Set<Program> daycarePrograms = new TreeSet<Program>();
-    
-    @Transient 
-    private Set<Program> preschoolPrograms = new TreeSet<Program>();
-    
-    @Transient 
-    private Set<Program> charges = new TreeSet<Program>();
+	public String getNotes() {
+		return notes;
+	}
 
-    @Transient 
-    private Set<Program> otherPrograms = new TreeSet<Program>();
-    
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	/**
+	 */
+	@ManyToMany
+	private Set<Program> programs = new TreeSet<Program>();
+
+	@Transient
+	private Set<Program> daycarePrograms = new TreeSet<Program>();
+
+	@Transient
+	private Set<Program> preschoolPrograms = new TreeSet<Program>();
+
+	@Transient
+	private Set<Program> charges = new TreeSet<Program>();
+
+	@Transient
+	private Set<Program> otherPrograms = new TreeSet<Program>();
+
 	public Set<Program> getDaycarePrograms() {
 		return daycarePrograms;
 	}
@@ -132,166 +145,184 @@ public class Payment {
 
 	@Override
 	public String toString() {
-		return "Payment [amount=" + amount + ", paymentMedium=" + paymentMedium + ", receiptNumber=" + receiptNumber + "]";
+		String output = "Payment [amount=" + amount + ", paymentMedium=" + paymentMedium + ", receiptNumber=" + id;
+		if (programs != null && !programs.isEmpty())
+			output = output + ", Programs:" + programs;
+		if (child != null)
+			output = output + ", Child:" + child;
+		
+		output = output + "]";
+		return output;
 	}
-    
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
+	@Column(name = "version")
+	private Integer version;
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 
 	public Integer getAmount() {
-        return this.amount;
-    }
+		return this.amount;
+	}
 
 	public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+		this.amount = amount;
+	}
 
 	public PaymentMedium getPaymentMedium() {
-        return this.paymentMedium;
-    }
+		return this.paymentMedium;
+	}
 
 	public void setPaymentMedium(PaymentMedium paymentMedium) {
-        this.paymentMedium = paymentMedium;
-    }
+		this.paymentMedium = paymentMedium;
+	}
 
 	public Calendar getPaymentDate() {
-        return this.paymentDate;
-    }
+		return this.paymentDate;
+	}
 
 	public void setPaymentDate(Calendar paymentDate) {
-        this.paymentDate = paymentDate;
-    }
+		this.paymentDate = paymentDate;
+	}
 
 	public String getTransactionNumber() {
-        return this.transactionNumber;
-    }
+		return this.transactionNumber;
+	}
 
 	public void setTransactionNumber(String transactionNumber) {
-        this.transactionNumber = transactionNumber;
-    }
+		this.transactionNumber = transactionNumber;
+	}
 
 	public String getReceiptNumber() {
-        return this.receiptNumber;
-    }
+		return this.receiptNumber;
+	}
 
 	public void setReceiptNumber(String receiptNumber) {
-        this.receiptNumber = receiptNumber;
-    }
+		this.receiptNumber = receiptNumber;
+	}
 
 	@PersistenceContext
-    transient EntityManager entityManager;
+	transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("amount", "paymentMedium", "paymentDate", "transactionNumber", "receiptNumber", "admissions");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("amount", "paymentMedium",
+			"paymentDate", "transactionNumber", "receiptNumber", "admissions");
 
 	public static final EntityManager entityManager() {
-        EntityManager em = new Payment().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
-    }
+		EntityManager em = new Payment().entityManager;
+		if (em == null)
+			throw new IllegalStateException(
+					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+		return em;
+	}
 
 	public static long countPayments() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Payment o", Long.class).getSingleResult();
-    }
+		return entityManager().createQuery("SELECT COUNT(o) FROM Payment o", Long.class).getSingleResult();
+	}
 
 	public static List<Payment> findAllPayments() {
-        return entityManager().createQuery("SELECT o FROM Payment o", Payment.class).getResultList();
-    }
+		return entityManager().createQuery("SELECT o FROM Payment o", Payment.class).getResultList();
+	}
 
 	public static List<Payment> findAllPayments(String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Payment o";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }
-        return entityManager().createQuery(jpaQuery, Payment.class).getResultList();
-    }
+		String jpaQuery = "SELECT o FROM Payment o";
+		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+				jpaQuery = jpaQuery + " " + sortOrder;
+			}
+		}
+		return entityManager().createQuery(jpaQuery, Payment.class).getResultList();
+	}
 
 	public static Payment findPayment(Long id) {
-        if (id == null) return null;
-        return entityManager().find(Payment.class, id);
-    }
+		if (id == null)
+			return null;
+		return entityManager().find(Payment.class, id);
+	}
 
 	public static List<Payment> findPaymentEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Payment o", Payment.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-    }
+		return entityManager().createQuery("SELECT o FROM Payment o", Payment.class).setFirstResult(firstResult)
+				.setMaxResults(maxResults).getResultList();
+	}
 
-	public static List<Payment> findPaymentEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Payment o";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }
-        return entityManager().createQuery(jpaQuery, Payment.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-    }
-
-	@Transactional
-    public void persist() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.persist(this);
-    }
+	public static List<Payment> findPaymentEntries(int firstResult, int maxResults, String sortFieldName,
+			String sortOrder) {
+		String jpaQuery = "SELECT o FROM Payment o";
+		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+				jpaQuery = jpaQuery + " " + sortOrder;
+			}
+		}
+		return entityManager().createQuery(jpaQuery, Payment.class).setFirstResult(firstResult)
+				.setMaxResults(maxResults).getResultList();
+	}
 
 	@Transactional
-    public void remove() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        if (this.entityManager.contains(this)) {
-            this.entityManager.remove(this);
-        } else {
-            Payment attached = Payment.findPayment(this.id);
-            this.entityManager.remove(attached);
-        }
-    }
+	public void persist() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.persist(this);
+	}
 
 	@Transactional
-    public void flush() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.flush();
-    }
+	public void remove() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		if (this.entityManager.contains(this)) {
+			this.entityManager.remove(this);
+		} else {
+			Payment attached = Payment.findPayment(this.id);
+			this.entityManager.remove(attached);
+		}
+	}
 
 	@Transactional
-    public void clear() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.clear();
-    }
+	public void flush() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.flush();
+	}
 
 	@Transactional
-    public Payment merge() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        Payment merged = this.entityManager.merge(this);
-        this.entityManager.flush();
-        return merged;
-    }
-	
-	@Column(name="UPDATE_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", insertable=false, updatable=false)
+	public void clear() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.clear();
+	}
+
+	@Transactional
+	public Payment merge() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		Payment merged = this.entityManager.merge(this);
+		this.entityManager.flush();
+		return merged;
+	}
+
+	@Column(name = "UPDATE_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar updateTS;
-			     
-	@Column(name="CREATION_TS", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
+
+	@Column(name = "CREATION_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar creationTS;
 
 }
