@@ -81,7 +81,9 @@ public class PaymentDataOnDemand {
         init();
         Payment obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Payment.findPayment(id);
+        obj = Payment.findPayment(id);
+        obj.getPrograms();
+        return obj;
     }
 
 	public boolean modifyPayment(Payment obj) {

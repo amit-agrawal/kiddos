@@ -261,13 +261,9 @@ public class Child implements Comparable {
 	/**
 	 */
 	@OneToMany(mappedBy = "child")
-	@Fetch(FetchMode.SUBSELECT)
-	@BatchSize(size = 100)
 	private Set<Admission> admissions = new TreeSet<Admission>();
 
 	@OneToMany(mappedBy = "child")
-	@Fetch(FetchMode.SUBSELECT)
-	@BatchSize(size = 100)
 	private Set<Payment> payments = new TreeSet<Payment>();
 
 	private LocalDate getDobAsLocalDate() {

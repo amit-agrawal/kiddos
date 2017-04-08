@@ -17,28 +17,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Configurable
 public class AdmissionsCarryForwardTest {
 	@Autowired
-    private AdmissionsCarryForward carryForward;
-	
+	private AdmissionsCarryForward carryForward;
+
 	@Test
 	@Ignore
 	public void carryForwardTest() {
 		String fromTerm = "October";
 		String toTerm = "November";
-		carryForward.carryForward(fromTerm, toTerm);		
+		carryForward.carryForward(fromTerm, toTerm);
 	}
-	
 
 	@Test
 	@Ignore
 	public void createNewProgramSetTest() {
 		try {
-		String fromTerm = "Term 4";
-		String toTerm = "Term 4, 17-18";
-		Calendar startDate = new GregorianCalendar(2018,0,25);
-		Calendar endDate = new GregorianCalendar(2018,3,31);
-		carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
-		}
-		catch (Exception ex) {
+			String fromTerm = "Term 4";
+			String toTerm = "Term 4, 17-18";
+			Calendar startDate = new GregorianCalendar(2018, 0, 25);
+			Calendar endDate = new GregorianCalendar(2018, 3, 31);
+			carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
+		} catch (Exception ex) {
 			System.out.println(ex);
 		}
 	}
@@ -47,15 +45,13 @@ public class AdmissionsCarryForwardTest {
 	@Ignore
 	public void createNewProgramSetMonthlyTest() {
 		try {
-		String fromTerm = "February 17";
-		String toTerm = "March 17";
-		Calendar startDate = new GregorianCalendar(2017,2,1);
-		Calendar endDate = new GregorianCalendar(2017,2,31);
-		carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
-		}
-		catch (Exception ex) {
+			String fromTerm = "Week 4, Summer 16";
+			String toTerm = "Week 4, Summer 17";
+			Calendar startDate = new GregorianCalendar(2017, 4, 1);
+			Calendar endDate = new GregorianCalendar(2017, 4, 28);
+			carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
+		} catch (Exception ex) {
 			System.out.println(ex);
 		}
 	}
-
 }

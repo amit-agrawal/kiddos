@@ -94,6 +94,7 @@ public class PaymentController {
 				admission.setAdmissionDate(Calendar.getInstance());
 
 				try {
+					Logger.getLogger(PaymentController.class).info("Creating admission: " + admission + " for payment: " + payment);
 					admission.persist();
 				} catch (Exception ex) {
 					Logger.getLogger(PaymentController.class).error("Exception while creating admission: " + admission,
@@ -164,7 +165,7 @@ public class PaymentController {
 		payment.remove();
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+		uiModel.addAttribute("size", (size == null) ? "100" : size.toString());
 		return "redirect:/payments";
 	}
 

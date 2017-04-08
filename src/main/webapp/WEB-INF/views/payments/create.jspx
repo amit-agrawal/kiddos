@@ -12,7 +12,9 @@
         <field:select field="otherPrograms" id="c_com_hmi_kiddos_model_Payment_otherPrograms" itemValue="id" items="${activeOtherPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:select field="charges" id="c_com_hmi_kiddos_model_Payment_chargesPrograms" itemValue="id" items="${activeCharges}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:input field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" max="100" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
-        <field:input field="notes" id="c_com_hmi_kiddos_model_Payment_notes" max="100" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+        <field:input field="notes" id="c_com_hmi_kiddos_model_Payment_notes" max="500" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+        <field:datetime dateTimePattern="${payment_paymentdate_date_format}" field="nextFeeDueDate" id="c_com_hmi_kiddos_model_Payment_nextFeeDueDate" required="false" z="shSVcv/Ph2KgcSCIt8bGehwLxGo="/>
+        <field:input field="nextFeeDueAmount" id="c_com_hmi_kiddos_model_Payment_nextFeeDueAmount" max="999999" required="false" validationMessageCode="field_invalid_integer" z="+DWU/lcObhErf38ALhJIYSTaj3M="/>
    </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_hmi_kiddos_model_Payment" render="${not empty dependencies}" z="+wKOE+qaHofz0A/k+mRJhXuV668="/>
 </div>

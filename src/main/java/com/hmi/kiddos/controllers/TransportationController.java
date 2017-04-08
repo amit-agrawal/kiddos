@@ -92,7 +92,7 @@ public class TransportationController {
         transportation.remove();
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        uiModel.addAttribute("size", (size == null) ? "100" : size.toString());
         return "redirect:/transportations";
     }
 

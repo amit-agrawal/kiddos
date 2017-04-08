@@ -54,9 +54,16 @@ public class Program implements Comparable {
 		this.isCharge = isCharge;
 	}
 
-
 	@Transient
 	private Set<Child> children = new TreeSet<Child>();
+
+	public String getName() {
+		String output = type + ", " + term;
+		if (batch != null)
+			output = output + ", " + batch;
+		return output;
+
+	}
 
 	public Set<Child> getChildren() {
 		Set<Child> childrenSet = new TreeSet<Child>();

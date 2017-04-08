@@ -110,7 +110,7 @@ public class ChildController {
 		childDao.remove(child);
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+		uiModel.addAttribute("size", (size == null) ? "100" : size.toString());
 		return "redirect:/children";
 	}
 

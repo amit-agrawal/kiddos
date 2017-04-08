@@ -49,7 +49,7 @@ public class PaymentIntegrationTest {
     public void testFindAllPayments() {
         Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", dod.getRandomPayment());
         long count = Payment.countPayments();
-        Assert.assertTrue("Too expensive to perform a find all test for 'Payment', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
+        Assert.assertTrue("Too expensive to perform a find all test for 'Payment', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 5000);
         List<Payment> result = Payment.findAllPayments();
         Assert.assertNotNull("Find all method for 'Payment' illegally returned null", result);
         Assert.assertTrue("Find all method for 'Payment' failed to return any data", result.size() > 0);

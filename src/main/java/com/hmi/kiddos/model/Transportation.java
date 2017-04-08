@@ -94,8 +94,6 @@ public class Transportation implements Comparable {
 	}
 
 	@ManyToMany
-	@Fetch(FetchMode.SUBSELECT)
-	@BatchSize(size = 100)
 	private Set<Child> children;
 
 	public Set<Child> getChildren() {

@@ -24,12 +24,15 @@ public class MailingAspect {
 				Logger.getLogger(MailingAspect.class).debug("Sending mail for method: " + methodName);
 				Object[] args = point.getArgs();
 				String className = point.getSignature().getDeclaringType().getSimpleName();
-				
+
 				String objectString = args[0].toString();
-				
-				if (methodName.equals("delete")) {					
-				}
-				
+
+				/*
+				 * if (methodName.equals("delete")) { Long deletedId = (Long)
+				 * args[0];
+				 * 
+				 * }
+				 */
 				mailUtil.sendGmail(className, methodName, objectString);
 			}
 		} catch (Throwable t) {

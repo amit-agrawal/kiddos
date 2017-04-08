@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,6 +62,14 @@ public class Payment {
 	@Size(max = 100)
 	private String transactionNumber;
 
+	public Calendar getNextFeeDueDate() {
+		return nextFeeDueDate;
+	}
+
+	public void setNextFeeDueDate(Calendar nextFeeDueDate) {
+		this.nextFeeDueDate = nextFeeDueDate;
+	}
+
 	/**
 	 */
 	@Size(max = 30)
@@ -68,6 +77,18 @@ public class Payment {
 
 	/**
 	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Calendar nextFeeDueDate;
+
+	/**
+	 */
+	@Max(999999L)
+	private Integer nextFeeDueAmount;
+
+	/**
+	 */
+	@Size(max = 500)
 	private String notes;
 
 	public String getNotes() {
@@ -80,7 +101,7 @@ public class Payment {
 
 	/**
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	private Set<Program> programs = new TreeSet<Program>();
 
 	@Transient
@@ -94,6 +115,14 @@ public class Payment {
 
 	@Transient
 	private Set<Program> otherPrograms = new TreeSet<Program>();
+
+	public Integer getNextFeeDueAmount() {
+		return nextFeeDueAmount;
+	}
+
+	public void setNextFeeDueAmount(Integer nextFeeDueAmount) {
+		this.nextFeeDueAmount = nextFeeDueAmount;
+	}
 
 	public Set<Program> getDaycarePrograms() {
 		return daycarePrograms;
@@ -150,7 +179,7 @@ public class Payment {
 			output = output + ", Programs:" + programs;
 		if (child != null)
 			output = output + ", Child:" + child;
-		
+
 		output = output + "]";
 		return output;
 	}
@@ -239,17 +268,12 @@ public class Payment {
 	}
 
 	public static List<Payment> findAllPayments() {
-		return entityManager().createQuery("SELECT o FROM Payment o", Payment.class).getResultList();
+		return entityManager().createQuery("SELECT o FROM Payment o ORDER BY id DESC", Payment.class)
+				.getResultList();
 	}
 
 	public static List<Payment> findAllPayments(String sortFieldName, String sortOrder) {
-		String jpaQuery = "SELECT o FROM Payment o";
-		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-				jpaQuery = jpaQuery + " " + sortOrder;
-			}
-		}
+		String jpaQuery = "SELECT o FROM Payment o ORDER BY id DESC";
 		return entityManager().createQuery(jpaQuery, Payment.class).getResultList();
 	}
 
@@ -260,19 +284,13 @@ public class Payment {
 	}
 
 	public static List<Payment> findPaymentEntries(int firstResult, int maxResults) {
-		return entityManager().createQuery("SELECT o FROM Payment o", Payment.class).setFirstResult(firstResult)
+		return entityManager().createQuery("SELECT o FROM Payment o  ORDER BY id DESC ", Payment.class).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 	}
 
 	public static List<Payment> findPaymentEntries(int firstResult, int maxResults, String sortFieldName,
 			String sortOrder) {
-		String jpaQuery = "SELECT o FROM Payment o";
-		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-				jpaQuery = jpaQuery + " " + sortOrder;
-			}
-		}
+		String jpaQuery = "SELECT o FROM Payment o ORDER BY id DESC";
 		return entityManager().createQuery(jpaQuery, Payment.class).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 	}
@@ -324,5 +342,4 @@ public class Payment {
 
 	@Column(name = "CREATION_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar creationTS;
-
 }

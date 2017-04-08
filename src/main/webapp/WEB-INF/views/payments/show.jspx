@@ -3,12 +3,16 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Payment" object="${payment}" path="/payments" z="55UkjT4/I/57dqgWS6BSPdttq6c=">
+        <field:display calendar="true" dateTimePattern="${child_dob_date_format}" field="paymentDate" id="s_com_hmi_kiddos_model_Payment_paymentDate" object="${child}" z="erCEkdsXWMRVyA/G9S1UX81GtvI="/>
         <field:display field="amount" id="s_com_hmi_kiddos_model_Payment_amount" object="${payment}" z="h0vvKi3/utkPEs+JpzqFZ6NF4WQ="/>
         <field:display field="paymentMedium" id="s_com_hmi_kiddos_model_Payment_paymentMedium" object="${payment}" z="6lFTVGLkOOOWgibEvk6iPwSFuAU="/>
         <field:display field="child" id="s_com_hmi_kiddos_model_Admission_child" object="${payment}" z="u9fBL/Viv0JelSriH0nTHJhHfKE="/>
         <field:display field="transactionNumber" id="s_com_hmi_kiddos_model_Payment_transactionNumber" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
         <field:display field="notes" id="s_com_hmi_kiddos_model_Payment_notes" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
+        <field:display field="nextFeeDueDate" id="s_com_hmi_kiddos_model_Payment_nextFeeDueDate" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
+        <field:display calendar="true" dateTimePattern="${child_dob_date_format}" field="nextFeeDueDate" id="s_com_hmi_kiddos_model_Payment_nextFeeDueDate" object="${child}" z="erCEkdsXWMRVyA/G9S1UX81GtvI="/>
         <field:display field="id" id="s_com_hmi_kiddos_model_Payment_receiptNumber" object="${payment}" z="M8dtNzP/B6YJf8mKoCCXgOiExac="/>
+        <field:display field="nextFeeDueAmount" id="s_com_hmi_kiddos_model_Payment_nextFeeDueAmount" object="${payment}" z="h0vvKi3/utkPEs+JpzqFZ6NF4WQ="/>
         <table:table data="${payment.programs}" id="l_com_hmi_kiddos_model_Program" path="/programs" z="user-managed">
             <table:column id="c_com_hmi_kiddos_model_Program_term" property="term" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
             <table:column id="c_com_hmi_kiddos_model_Program_batch" property="batch" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>

@@ -14,6 +14,7 @@
             <display:column sortable="true" title="Receipt No." property="id" />
             <display:column sortable="true" title="Programs" property="programs" />
             <display:column sortable="true" title="Amount" property="amount" />
+            <display:column sortable="true" title="Notes" property="notes" />
  			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="payments.pdf"/>
 			<display:setProperty name="export.csv.filename" value="payments.csv"/>
