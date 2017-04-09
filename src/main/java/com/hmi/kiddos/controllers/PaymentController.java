@@ -86,7 +86,6 @@ public class PaymentController {
 		payment.setPrograms(programs);
 
 		for (Program program : programs) {
-			if (!program.getIsCharge()) {
 				Child child = payment.getChild();
 				Admission admission = new Admission();
 				admission.setChild(child);
@@ -101,7 +100,6 @@ public class PaymentController {
 							ex);
 				}
 			}
-		}
 	}
 
 	@RequestMapping(params = "form", produces = "text/html")
@@ -145,9 +143,8 @@ public class PaymentController {
 			return "payments/update";
 		}
 		uiModel.asMap().clear();
-		payment.merge();
-
 		createPaymentRelatedAdmissions(payment);
+		payment.merge();
 
 		return "redirect:/payments/" + encodeUrlPathSegment(payment.getId().toString(), httpServletRequest);
 	}

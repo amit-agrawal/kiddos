@@ -39,32 +39,32 @@ public class ProgramDao {
 
 	public List<Program> findCurrentFuturePrograms() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, type, batch",
+				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, type, batch, start_date",
 						Program.class)
 				.getResultList();
 	}
 
 	public List<Program> findCurrentFuturePreschoolPrograms() {
 		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and type in ('Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by batch, type, term",
+				"SELECT o FROM Program o where due_date > current_date and type in ('Jr. K.G.', 'Sr. K.G.', 'Nursery','Play Group') and is_charge = 0 order by batch, type, start_date",
 				Program.class).getResultList();
 	}
 
 	public List<Program> findCurrentFutureDaycarePrograms() {
 		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and type in ('DC','IC') and is_charge = 0 order by batch, type, term",
+				"SELECT o FROM Program o where due_date > current_date and type in ('DC','IC') and is_charge = 0 order by batch, type, start_date",
 				Program.class).getResultList();
 	}
 
 	public List<Program> findCurrentFutureCharges() {
 		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and is_charge = 1 order by batch, type, term",
+				"SELECT o FROM Program o where due_date > current_date and is_charge = 1 order by batch, type, start_date",
 				Program.class).getResultList();
 	}
 
 	public List<Program> findCurrentFutureOtherPrograms() {
 		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and type not in ('DC','IC','Jr. K.G.','Nursery','Play Group') and is_charge = 0 order by batch, type, term",
+				"SELECT o FROM Program o where due_date > current_date and type not in ('DC','IC','Jr. K.G.','Sr. K.G.', 'Nursery','Play Group') and is_charge = 0 order by batch, type, start_date",
 				Program.class).getResultList();
 	}
 

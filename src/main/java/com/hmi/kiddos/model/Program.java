@@ -94,6 +94,10 @@ public class Program implements Comparable {
 
 	/**
 	 */
+	private ProgramTypes programType;
+
+	/**
+	 */
 	@NotNull
 	private String type;
 
@@ -156,11 +160,9 @@ public class Program implements Comparable {
 	}
 
 	public boolean isPreSchool() {
-		return (type.equals(ProgramTypes.JR_KG.toString()) || type.equals(ProgramTypes.NURSERY.toString())
-				|| type.equals(ProgramTypes.PLAY_GROUP.toString()) || type.equals(ProgramTypes.ANNUAL_FEE.toString())
-				|| type.equals(ProgramTypes.ADMISSION_FEE.toString()));
+		return programType == ProgramTypes.PRESCHOOL;
 	}
-
+				
 	/**
 	 */
 	@OneToMany(mappedBy = "program")
@@ -322,6 +324,18 @@ public class Program implements Comparable {
 
 	public void setAdmissions(Set<Admission> admissions) {
 		this.admissions = admissions;
+	}
+
+	public ProgramTypes getProgramType() {
+		return programType;
+	}
+
+	public void setProgramType(ProgramTypes programType) {
+		this.programType = programType;
+	}
+
+	public void setCharge(boolean isCharge) {
+		this.isCharge = isCharge;
 	}
 
 	@Id

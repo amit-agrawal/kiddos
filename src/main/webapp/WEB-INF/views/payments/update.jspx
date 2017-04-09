@@ -4,7 +4,10 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_hmi_kiddos_model_Payment" modelAttribute="payment" path="/payments" versionField="Version" z="Ix0xiSbkzhLFNjaqj+q0LOYA7o0=">
         <field:select field="child" required="true" id="c_com_hmi_kiddos_model_Admission_child" itemValue="id" items="${children}" path="/children" z="MG7PccQXZTIlgqFGxNpM/heuE58="/>
-        <field:select field="programs" id="c_com_hmi_kiddos_model_Payment_admissions" itemValue="id" items="${programs}" multiple="true" path="/programs" required="true" z="xXlab7XdswxtUNOH1ptwa+bXmM4="/>
+        <field:selectcheckbox size="10" field="daycarePrograms" id="c_com_hmi_kiddos_model_Payment_daycarePrograms" itemValue="id" items="${activeDaycarePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:selectcheckbox size="10" field="preschoolPrograms" id="c_com_hmi_kiddos_model_Payment_preschoolPrograms" itemValue="id" items="${activePreschoolPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:selectcheckbox size="10" field="otherPrograms" id="c_com_hmi_kiddos_model_Payment_otherPrograms" itemValue="id" items="${activeOtherPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
+        <field:selectcheckbox  size="10" field="charges" id="c_com_hmi_kiddos_model_Payment_chargesPrograms" itemValue="id" items="${activeCharges}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:select field="paymentMedium" id="c_com_hmi_kiddos_model_Payment_paymentMedium" items="${paymentmediums}" path="paymentmediums" required="true" z="joMzIsenWO75GGnFZ6BNfizAgc4="/>
         <field:datetime dateTimePattern="${payment_paymentdate_date_format}" required="true" field="paymentDate" id="c_com_hmi_kiddos_model_Payment_paymentDate" z="shSVcv/Ph2KgcSCIt8bGehwLxGo="/>
         <field:textarea field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
