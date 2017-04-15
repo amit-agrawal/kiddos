@@ -9,6 +9,7 @@
         <field:display field="child" id="s_com_hmi_kiddos_model_Admission_child" object="${payment}" z="u9fBL/Viv0JelSriH0nTHJhHfKE="/>
         <field:display field="transactionNumber" id="s_com_hmi_kiddos_model_Payment_transactionNumber" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
         <field:display field="notes" id="s_com_hmi_kiddos_model_Payment_notes" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
+        <field:display field="payer" id="s_com_hmi_kiddos_model_Payment_payer" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
         <field:display field="nextFeeDueDate" id="s_com_hmi_kiddos_model_Payment_nextFeeDueDate" object="${payment}" z="+7rF8ifaH27UOhu5wcoDEePlv74="/>
         <field:display calendar="true" dateTimePattern="${child_dob_date_format}" field="nextFeeDueDate" id="s_com_hmi_kiddos_model_Payment_nextFeeDueDate" object="${child}" z="erCEkdsXWMRVyA/G9S1UX81GtvI="/>
         <field:display field="id" id="s_com_hmi_kiddos_model_Payment_receiptNumber" object="${payment}" z="M8dtNzP/B6YJf8mKoCCXgOiExac="/>

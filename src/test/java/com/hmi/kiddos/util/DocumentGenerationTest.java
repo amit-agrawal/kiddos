@@ -1,5 +1,7 @@
 package com.hmi.kiddos.util;
 
+import java.util.Calendar;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,10 @@ public class DocumentGenerationTest {
 	@Test
 	public void createInvoiceTest() {
         Payment obj = dod.getRandomPayment();
-        Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", obj);
+/*        obj.setNextFeeDueAmount(19903);
+        obj.setNextFeeDueDate(Calendar.getInstance());
+        obj.setPayer("Ajay Agrawal");
+*/        Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", obj);
 		docGenerator.generateInvoice(obj);
 	}
 

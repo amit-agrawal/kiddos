@@ -86,20 +86,20 @@ public class PaymentController {
 		payment.setPrograms(programs);
 
 		for (Program program : programs) {
-				Child child = payment.getChild();
-				Admission admission = new Admission();
-				admission.setChild(child);
-				admission.setProgram(program);
-				admission.setAdmissionDate(Calendar.getInstance());
+			Child child = payment.getChild();
+			Admission admission = new Admission();
+			admission.setChild(child);
+			admission.setProgram(program);
+			admission.setAdmissionDate(Calendar.getInstance());
 
-				try {
-					Logger.getLogger(PaymentController.class).info("Creating admission: " + admission + " for payment: " + payment);
-					admission.persist();
-				} catch (Exception ex) {
-					Logger.getLogger(PaymentController.class).error("Exception while creating admission: " + admission,
-							ex);
-				}
+			try {
+				Logger.getLogger(PaymentController.class)
+						.info("Creating admission: " + admission + " for payment: " + payment);
+				admission.persist();
+			} catch (Exception ex) {
+				Logger.getLogger(PaymentController.class).error("Exception while creating admission: " + admission, ex);
 			}
+		}
 	}
 
 	@RequestMapping(params = "form", produces = "text/html")

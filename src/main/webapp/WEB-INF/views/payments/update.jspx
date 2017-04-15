@@ -12,6 +12,8 @@
         <field:datetime dateTimePattern="${payment_paymentdate_date_format}" required="true" field="paymentDate" id="c_com_hmi_kiddos_model_Payment_paymentDate" z="shSVcv/Ph2KgcSCIt8bGehwLxGo="/>
         <field:textarea field="transactionNumber" id="c_com_hmi_kiddos_model_Payment_transactionNumber" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
         <field:textarea field="notes" id="c_com_hmi_kiddos_model_Payment_notes" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+        <field:textarea field="payer" id="c_com_hmi_kiddos_model_Payment_payer" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+		<field:checkbox field="sendMail" id="c_com_hmi_kiddos_model_Payment_sendMail" z="M00kepogL5uu7o/FfYl5XE/YexU="/>
         <field:input field="id" disabled="true" id="c_com_hmi_kiddos_model_Payment_receiptNumber" max="30" z="CVRL69oLwGRMucjA58PUdLhygEo="/>
         <field:input field="amount" id="c_com_hmi_kiddos_model_Payment_amount" max="999999" required="true" validationMessageCode="field_invalid_integer" z="+DWU/lcObhErf38ALhJIYSTaj3M="/>
     </form:update>

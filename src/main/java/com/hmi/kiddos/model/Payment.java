@@ -62,6 +62,19 @@ public class Payment {
 	@Size(max = 100)
 	private String transactionNumber;
 
+	/**
+	 */
+	@Size(max = 200)
+	private String payer;
+
+	public String getPayer() {
+		return payer;
+	}
+
+	public void setPayer(String payer) {
+		this.payer = payer;
+	}
+
 	public Calendar getNextFeeDueDate() {
 		return nextFeeDueDate;
 	}
@@ -69,11 +82,6 @@ public class Payment {
 	public void setNextFeeDueDate(Calendar nextFeeDueDate) {
 		this.nextFeeDueDate = nextFeeDueDate;
 	}
-
-	/**
-	 */
-	@Size(max = 30)
-	private String receiptNumber;
 
 	/**
 	 */
@@ -91,6 +99,18 @@ public class Payment {
 	@Size(max = 500)
 	private String notes;
 
+	/**
+	 */
+	private Boolean sendMail;
+
+	public Boolean getSendMail() {
+		return sendMail;
+	}
+
+	public void setSendMail(Boolean sendMail) {
+		this.sendMail = sendMail;
+	}
+
 	public String getNotes() {
 		return notes;
 	}
@@ -101,7 +121,7 @@ public class Payment {
 
 	/**
 	 */
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Program> programs = new TreeSet<Program>();
 
 	@Transient
@@ -241,19 +261,11 @@ public class Payment {
 		this.transactionNumber = transactionNumber;
 	}
 
-	public String getReceiptNumber() {
-		return this.receiptNumber;
-	}
-
-	public void setReceiptNumber(String receiptNumber) {
-		this.receiptNumber = receiptNumber;
-	}
-
 	@PersistenceContext
 	transient EntityManager entityManager;
 
 	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("amount", "paymentMedium",
-			"paymentDate", "transactionNumber", "receiptNumber", "admissions");
+			"paymentDate", "transactionNumber", "admissions");
 
 	public static final EntityManager entityManager() {
 		EntityManager em = new Payment().entityManager;
@@ -268,8 +280,7 @@ public class Payment {
 	}
 
 	public static List<Payment> findAllPayments() {
-		return entityManager().createQuery("SELECT o FROM Payment o ORDER BY id DESC", Payment.class)
-				.getResultList();
+		return entityManager().createQuery("SELECT o FROM Payment o ORDER BY id DESC", Payment.class).getResultList();
 	}
 
 	public static List<Payment> findAllPayments(String sortFieldName, String sortOrder) {
@@ -284,8 +295,8 @@ public class Payment {
 	}
 
 	public static List<Payment> findPaymentEntries(int firstResult, int maxResults) {
-		return entityManager().createQuery("SELECT o FROM Payment o  ORDER BY id DESC ", Payment.class).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
+		return entityManager().createQuery("SELECT o FROM Payment o  ORDER BY id DESC ", Payment.class)
+				.setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}
 
 	public static List<Payment> findPaymentEntries(int firstResult, int maxResults, String sortFieldName,

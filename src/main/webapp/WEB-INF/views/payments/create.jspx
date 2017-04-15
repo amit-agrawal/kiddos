@@ -11,6 +11,8 @@
         <field:input style="float: right; text-align: right" field="notes" id="c_com_hmi_kiddos_model_Payment_notes" max="500" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
         <field:datetime style="float: left; text-align: left" dateTimePattern="${payment_paymentdate_date_format}" field="nextFeeDueDate" id="c_com_hmi_kiddos_model_Payment_nextFeeDueDate" required="false" z="shSVcv/Ph2KgcSCIt8bGehwLxGo="/>
         <field:input style="float: right; text-align: right" field="nextFeeDueAmount" id="c_com_hmi_kiddos_model_Payment_nextFeeDueAmount" max="999999" required="false" validationMessageCode="field_invalid_integer" z="+DWU/lcObhErf38ALhJIYSTaj3M="/>
+        <field:input  field="payer" id="c_com_hmi_kiddos_model_Payment_payer" max="200" z="cvLYPxPpcNTa2U3tMbw7xi3qPZA="/>
+        <field:checkbox field="sendMail" id="c_com_hmi_kiddos_model_Payment_sendMail" z="M00kepogL5uu7o/FfYl5XE/YexU="/>
         <field:selectcheckbox size="10" field="daycarePrograms" id="c_com_hmi_kiddos_model_Payment_daycarePrograms" itemValue="id" items="${activeDaycarePrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:selectcheckbox size="10" field="preschoolPrograms" id="c_com_hmi_kiddos_model_Payment_preschoolPrograms" itemValue="id" items="${activePreschoolPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>
         <field:selectcheckbox size="10" field="otherPrograms" id="c_com_hmi_kiddos_model_Payment_otherPrograms" itemValue="id" items="${activeOtherPrograms}" multiple="true" path="/programs" z="KIjGcWIqFpyIYcR+d8IhXrRhQGM="/>

@@ -8,11 +8,16 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
+import com.hmi.kiddos.model.Payment;
+
 @Aspect
 @Configurable
 public class MailingAspect {
 	@Autowired
 	private MailUtil mailUtil;
+
+	@Autowired
+	private DocumentGenerator docGenerator;
 
 	@Around("execution(* com.hmi.kiddos.controllers..*(..))")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
@@ -33,7 +38,12 @@ public class MailingAspect {
 				 * 
 				 * }
 				 */
-				mailUtil.sendGmail(className, methodName, objectString);
+				String docPath = null;
+				if (args[0] instanceof Payment && (methodName.equals("create") || methodName.equals("update"))) {
+					Payment payment = (Payment) args[0];
+					docPath = docGenerator.generateInvoice(payment);
+				}
+				mailUtil.sendGmail(className, methodName, objectString, docPath);
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();

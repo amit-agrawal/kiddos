@@ -53,6 +53,12 @@ public class ChildController {
 		return "children/create";
 	}
 
+	@RequestMapping(params = "query", produces = "text/html")
+	public String query(Model uiModel) {
+		populateEditForm(uiModel, new Child());
+		return "/children/query";
+	}
+
 	@RequestMapping(value = "/{id}", produces = "text/html")
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		addDateTimeFormatPatterns(uiModel);
@@ -70,7 +76,8 @@ public class ChildController {
 			Model uiModel) {
 		if (types != null) {
 			uiModel.addAttribute("children", childDao.findAllChildren(types));
-		} else if (page != null || size != null) {
+		} 
+		else if (page != null || size != null) {
 			int sizeNo = size == null ? 1000 : size.intValue();
 			final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
 			uiModel.addAttribute("children",

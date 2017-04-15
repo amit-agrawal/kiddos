@@ -25,7 +25,6 @@ public class PaymentDataOnDemand {
         setAmount(obj, index);
         setPaymentDate(obj, index);
         setPaymentMedium(obj, index);
-        setReceiptNumber(obj, index);
         setTransactionNumber(obj, index);
         return obj;
     }
@@ -46,14 +45,6 @@ public class PaymentDataOnDemand {
 	public void setPaymentMedium(Payment obj, int index) {
         PaymentMedium paymentMedium = PaymentMedium.class.getEnumConstants()[0];
         obj.setPaymentMedium(paymentMedium);
-    }
-
-	public void setReceiptNumber(Payment obj, int index) {
-        String receiptNumber = "receiptNumber_" + index;
-        if (receiptNumber.length() > 30) {
-            receiptNumber = receiptNumber.substring(0, 30);
-        }
-        obj.setReceiptNumber(receiptNumber);
     }
 
 	public void setTransactionNumber(Payment obj, int index) {

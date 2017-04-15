@@ -61,7 +61,7 @@ public class InvoiceBackgroundHandler implements IEventHandler {
 			 * VerticalAlignment.MIDDLE, 45);
 			 */
 			PdfExtGState state = new PdfExtGState();
-			state.setFillOpacity(0.1f);
+			state.setFillOpacity(0.3f);
 			pdfCanvas.saveState().setExtGState(state);
 
 			/*
@@ -76,7 +76,7 @@ public class InvoiceBackgroundHandler implements IEventHandler {
 			// .scale(1.8f, 1.8f)
 			// .setHorizontalAlignment(HorizontalAlignment.CENTER).setTextAlignment(TextAlignment.CENTER);
 
-			pdfCanvas.addImage(logo, 0, 0, pageSize.getWidth(), false);
+			pdfCanvas.addImage(logo, pageSize.getWidth() * 0.1f, pageSize.getWidth() * 0.3f, pageSize.getWidth() * 0.8f, false);
 
 			pdfCanvas.restoreState();
 

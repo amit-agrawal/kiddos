@@ -28,48 +28,26 @@
 		</repository>
 	</repositories>
 	<!-- Profile configuration -->
-	<profiles>
-		<!-- The configuration of the development profile -->
-		<profile>
-			<id>dev</id>
-			<!-- The development profile is active by default -->
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<!-- Specifies the build.profile.id property that must be equal than 
-					the name of the directory that contains the profile specific configuration 
-					file. Because the name of the directory that contains the configuration file 
-					of the development profile is dev, we must set the value of the build.profile.id 
-					property to dev. -->
-				<build.profile.id>dev</build.profile.id>
-			</properties>
-		</profile>
-		<!-- The configuration of the production profile -->
-		<profile>
-			<id>prod</id>
-			<properties>
-				<!-- Specifies the build.profile.id property that must be equal than 
-					the name of the directory that contains the profile specific configuration 
-					file. Because the name of the directory that contains the configuration file 
-					of the production profile is prod, we must set the value of the build.profile.id 
-					property to prod. -->
-				<build.profile.id>prod</build.profile.id>
-			</properties>
-		</profile>
-		<!-- The configuration of the testing profile -->
-		<profile>
-			<id>test</id>
-			<properties>
-				<!-- Specifies the build.profile.id property that must be equal than 
-					the name of the directory that contains the profile specific configuration 
-					file. Because the name of the directory that contains the configuration file 
-					of the testing profile is test, we must set the value of the build.profile.id 
-					property to test. -->
-				<build.profile.id>test</build.profile.id>
-			</properties>
-		</profile>
-	</profiles>
+	<!-- <profiles> The configuration of the development profile <profile> <id>dev</id> 
+		The development profile is active by default <activation> <activeByDefault>true</activeByDefault> 
+		</activation> <properties> Specifies the build.profile.id property that must 
+		be equal than the name of the directory that contains the profile specific 
+		configuration file. Because the name of the directory that contains the configuration 
+		file of the development profile is dev, we must set the value of the build.profile.id 
+		property to dev. <build.profile.id>dev</build.profile.id> </properties> </profile> 
+		The configuration of the production profile <profile> <id>prod</id> <properties> 
+		Specifies the build.profile.id property that must be equal than the name 
+		of the directory that contains the profile specific configuration file. Because 
+		the name of the directory that contains the configuration file of the production 
+		profile is prod, we must set the value of the build.profile.id property to 
+		prod. <build.profile.id>prod</build.profile.id> </properties> </profile> 
+		The configuration of the testing profile <profile> <id>test</id> <properties> 
+		Specifies the build.profile.id property that must be equal than the name 
+		of the directory that contains the profile specific configuration file. Because 
+		the name of the directory that contains the configuration file of the testing 
+		profile is test, we must set the value of the build.profile.id property to 
+		test. <build.profile.id>test</build.profile.id> </properties> </profile> 
+		</profiles> -->
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-maven-release</id>
@@ -455,16 +433,9 @@
 				resource directories are replaced with the property values found from the 
 				profile specific configuration file. -->
 			<resource>
-				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-		<filters>
-			<!-- Ensures that the config.properties file is always loaded from the 
-				configuration directory of the active Maven profile. -->
-			<filter>src/main/resources/profiles/${build.profile.id}/database.properties</filter>
-			<filter>src/main/resources/profiles/${build.profile.id}/email.properties</filter>
-		</filters>
 
 		<plugins>
 			<plugin>
