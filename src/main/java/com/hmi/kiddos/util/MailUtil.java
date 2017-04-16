@@ -97,7 +97,7 @@ public class MailUtil {
 					recepients.append(",").append(mailId);
 
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recepients.toString(), false));
-			message.setSubject(String.format("Receipt for HMI payment"));
+			message.setSubject(String.format("Receipt"));
 
 			if (docPath != null) {
 				Logger.getLogger(MailUtil.class).info("Sending Mail with attachment");

@@ -23,49 +23,39 @@ import com.itextpdf.layout.property.TextAlignment;
 
 @Service
 public class DocumentGenerator {
-	private PdfFont font;
-	private PdfFont bold;
 	private SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
 
-	public DocumentGenerator() {
-		try {
-			font = PdfFontFactory.createFont(FontConstants.HELVETICA);
-			bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
-		} catch (Exception ex) {
-			Logger.getLogger(DocumentGenerator.class).error("Could not load fonts", ex);
-		}
-	}
-
 	public String generateInvoice(Payment payment) {
-		PdfWriter writer = null;
-		Document doc = null;
 		String path = null;
+
 		try {
+			PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA);
+			PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
 			path = "./" + payment.getChild().getFirstName() + "_" + payment.getChild().getLastName() + "_"
 					+ System.currentTimeMillis() + ".pdf";
-			writer = new PdfWriter(path);
+			PdfWriter writer = new PdfWriter(path);
 			PdfDocument pdf = new PdfDocument(writer);
 			pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new InvoiceBackgroundHandler());
-			doc = new Document(pdf);
+			Document doc = new Document(pdf);
 
 			doc.add(new Paragraph("RECEIPT").setFont(bold).setTextAlignment(TextAlignment.CENTER));
-			addHeader(doc);
+			addHeader(doc, bold);
 
-			addDateReceiptNo(payment, doc);
-
-			doc.add(new Paragraph(" "));
-			doc.add(new Paragraph(" "));
-
-			addChildPayerInfo(payment, doc);
-
-			doc.add(new Paragraph(" "));
-
-			addTable(payment, doc);
+			addDateReceiptNo(payment, doc, bold);
 
 			doc.add(new Paragraph(" "));
 			doc.add(new Paragraph(" "));
 
-			addNextDueInfo(payment, doc);
+			addChildPayerInfo(payment, doc, bold);
+
+			doc.add(new Paragraph(" "));
+
+			addTable(payment, doc, font);
+
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+
+			addNextDueInfo(payment, doc, bold);
 
 			doc.close();
 
@@ -75,29 +65,26 @@ public class DocumentGenerator {
 		return path;
 	}
 
-	private SimpleDateFormat addDateReceiptNo(Payment payment, Document doc) {
+	private SimpleDateFormat addDateReceiptNo(Payment payment, Document doc, PdfFont bold) {
 		String dateString = format.format(payment.getPaymentDate().getTime());
 
 		doc.add(new Paragraph(dateString).setFont(bold).setTextAlignment(TextAlignment.RIGHT));
 		String receiptNumber = payment.getId().toString();
-		doc.add(new Paragraph("Receipt Number: " + receiptNumber).setFont(bold)
-				.setTextAlignment(TextAlignment.RIGHT));
+		doc.add(new Paragraph("Receipt Number: " + receiptNumber).setFont(bold).setTextAlignment(TextAlignment.RIGHT));
 		return format;
 	}
 
-	private void addChildPayerInfo(Payment payment, Document doc) {
+	private void addChildPayerInfo(Payment payment, Document doc, PdfFont bold) {
 		if (payment.getPayer() != null) {
-			doc.add(new Paragraph("Name: " + payment.getPayer()).setFont(bold)
-					.setTextAlignment(TextAlignment.LEFT));
+			doc.add(new Paragraph("Name: " + payment.getPayer()).setFont(bold).setTextAlignment(TextAlignment.LEFT));
 		}
 		if (payment.getChild() != null) {
 			String childFullName = payment.getChild().getFirstName() + " " + payment.getChild().getLastName();
-			doc.add(new Paragraph("Child Name: " + childFullName).setFont(bold)
-					.setTextAlignment(TextAlignment.LEFT));
+			doc.add(new Paragraph("Child Name: " + childFullName).setFont(bold).setTextAlignment(TextAlignment.LEFT));
 		}
 	}
 
-	private void addNextDueInfo(Payment payment, Document doc) {
+	private void addNextDueInfo(Payment payment, Document doc, PdfFont bold) {
 		if (payment.getNextFeeDueDate() != null) {
 			String nextDueDateString = format.format(payment.getNextFeeDueDate().getTime());
 			doc.add(new Paragraph("Next Fee Due Date: " + nextDueDateString).setFont(bold)
@@ -110,14 +97,14 @@ public class DocumentGenerator {
 		}
 	}
 
-	private void addTable(Payment payment, Document doc) {
+	private void addTable(Payment payment, Document doc, PdfFont font) {
 		Table table = new Table(new float[] { 4, 2, 3, 3 });
 		table.setWidthPercent(100);
 
-		process(table, "Programs", true);
-		process(table, "Payment Mode", true);
-		process(table, "Transaction/Cheque No.", true);
-		process(table, "Amount(Rs.)", true);
+		process(table, "Programs", true, font);
+		process(table, "Payment Mode", true, font);
+		process(table, "Transaction/Cheque No.", true, font);
+		process(table, "Amount(Rs.)", true, font);
 
 		// Create a List
 		List list = new List().setSymbolIndent(12).setListSymbol("\u2022").setFont(font);
@@ -128,15 +115,15 @@ public class DocumentGenerator {
 
 		table.addCell(list);
 
-		process(table, payment.getPaymentMedium().toString(), false);
-		process(table, payment.getTransactionNumber() == null ? " " : payment.getTransactionNumber(), false);
+		process(table, payment.getPaymentMedium().toString(), false, font);
+		process(table, payment.getTransactionNumber() == null ? " " : payment.getTransactionNumber(), false, font);
 		table.addCell(new Cell().add(new Paragraph(payment.getAmount().toString()).setFont(font))
 				.setTextAlignment(TextAlignment.RIGHT));
 
 		doc.add(table);
 	}
 
-	private void addHeader(Document doc) {
+	private void addHeader(Document doc, PdfFont bold) {
 		doc.add(new Paragraph("Happy Minds International Education LLP").setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
 		doc.add(new Paragraph("201, Jayshree Plaza Near Dreams Mall L.B.S. Marg").setFont(bold)
@@ -147,7 +134,7 @@ public class DocumentGenerator {
 		doc.add(new Paragraph("Email: bhandup@thehappyminds.com").setFont(bold).setTextAlignment(TextAlignment.LEFT));
 	}
 
-	public void process(Table table, String cellData, boolean isHeader) {
+	public void process(Table table, String cellData, boolean isHeader, PdfFont font) {
 		if (isHeader) {
 			table.addHeaderCell(new Cell().add(new Paragraph(cellData).setFont(font)));
 		} else {

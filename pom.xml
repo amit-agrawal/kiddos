@@ -511,7 +511,8 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12</version>
 				<configuration>
-					<printSummary>false</printSummary>
+			        <forkCount>12</forkCount>
+					<printSummary>true</printSummary>
 					<redirectTestOutputToFile>true</redirectTestOutputToFile>
 				</configuration>
 			</plugin>
