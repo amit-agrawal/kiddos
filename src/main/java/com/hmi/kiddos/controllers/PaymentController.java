@@ -32,6 +32,8 @@ import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
 import com.hmi.kiddos.model.PaymentMedium;
 import com.hmi.kiddos.model.Program;
+import com.hmi.kiddos.util.DocumentGenerator;
+import com.hmi.kiddos.util.MailUtil;
 
 @RequestMapping("/payments")
 @Controller
@@ -41,6 +43,12 @@ public class PaymentController {
 
 	@Autowired
 	private ProgramDao programDao;
+
+	@Autowired
+	private DocumentGenerator documentGenerator;
+
+	@Autowired
+	private MailUtil mailUtil;
 
 	@RequestMapping(value = "/getPrograms/{id}", method = RequestMethod.GET)
 	public @ResponseBody HashMap<String, String> getPrograms(@PathVariable("id") Long id, Model uiModel) {
@@ -66,7 +74,18 @@ public class PaymentController {
 
 		createPaymentRelatedAdmissions(payment);
 
+		mailReceipt(payment);
+
 		return "redirect:/payments/" + encodeUrlPathSegment(payment.getId().toString(), httpServletRequest);
+	}
+
+	private void mailReceipt(Payment payment) {
+		if (payment.getSendMail()) {
+			String docPath = null;
+			docPath = documentGenerator.generateInvoice(payment);
+			mailUtil.sendReceipt(docPath, new String[] { payment.getChild().getEmailOne(),
+					payment.getChild().getEmailTwo(), payment.getChild().getEmailThree() });
+		}
 	}
 
 	private void createPaymentRelatedAdmissions(Payment payment) {
@@ -145,6 +164,8 @@ public class PaymentController {
 		uiModel.asMap().clear();
 		createPaymentRelatedAdmissions(payment);
 		payment.merge();
+
+		mailReceipt(payment);
 
 		return "redirect:/payments/" + encodeUrlPathSegment(payment.getId().toString(), httpServletRequest);
 	}

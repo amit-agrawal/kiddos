@@ -1,7 +1,6 @@
 package com.hmi.kiddos.util;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class MailingTest {
 
 	@Test
 	public void sendGmailTest() {
-		mailUtil.sendGmail("AdmissionController", "create", "1,2", null);
+		mailUtil.sendGmail("AdmissionController", "create", "1,2");
 	}
 
 	@Test
@@ -35,7 +34,7 @@ public class MailingTest {
 		Payment obj = dod.getRandomPayment();
 		Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", obj);
 		String docPath = docGenerator.generateInvoice(obj);
-		mailUtil.sendGmail("PaymentController", "create", "1,2", docPath);
+		mailUtil.sendReceipt(docPath, new String[]{});
 	}
 
 }

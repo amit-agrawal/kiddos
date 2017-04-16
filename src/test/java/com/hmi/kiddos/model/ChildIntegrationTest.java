@@ -42,48 +42,6 @@ public class ChildIntegrationTest {
 	ChildDataOnDemand dod;
 
 	@Test
-	@Ignore
-	public void sendMail() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
-		sendGmail();
-
-		long count = childDao.countChildren();
-		Assert.assertTrue("Counter for 'Child' incorrectly reported there were no entries", count > 0);
-	}
-
-	private void sendGmail() {
-		final String username = "amit01@gmail.com";
-		final String password = "no12blame";
-
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
-
-		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("amit01@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("amit01@gmail.com"));
-			message.setSubject("Testing Subject");
-			message.setText("Dear Mail Crawler," + "\n\n No spam to my email, please!");
-
-			Transport.send(message);
-
-			System.out.println("Done");
-
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Test
 	public void testCountChildren() {
 		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		long count = childDao.countChildren();

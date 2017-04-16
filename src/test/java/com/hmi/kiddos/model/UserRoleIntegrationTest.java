@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Configurable
 public class UserRoleIntegrationTest {
-
     @Test
     public void testMarkerMethod() {
     }

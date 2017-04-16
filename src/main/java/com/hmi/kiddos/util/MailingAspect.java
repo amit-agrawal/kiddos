@@ -32,18 +32,7 @@ public class MailingAspect {
 
 				String objectString = args[0].toString();
 
-				/*
-				 * if (methodName.equals("delete")) { Long deletedId = (Long)
-				 * args[0];
-				 * 
-				 * }
-				 */
-				String docPath = null;
-				if (args[0] instanceof Payment && (methodName.equals("create") || methodName.equals("update"))) {
-					Payment payment = (Payment) args[0];
-					docPath = docGenerator.generateInvoice(payment);
-				}
-				mailUtil.sendGmail(className, methodName, objectString, docPath);
+				mailUtil.sendGmail(className, methodName, objectString);
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();

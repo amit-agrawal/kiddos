@@ -21,16 +21,17 @@ public class DocumentGenerationTest {
 	private DocumentGenerator docGenerator;
 
 	@Autowired
-    PaymentDataOnDemand dod;
+	PaymentDataOnDemand dod;
 
 	@Test
 	public void createInvoiceTest() {
-        Payment obj = dod.getRandomPayment();
-/*        obj.setNextFeeDueAmount(19903);
-        obj.setNextFeeDueDate(Calendar.getInstance());
-        obj.setPayer("Ajay Agrawal");
-*/        Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", obj);
-		docGenerator.generateInvoice(obj);
-	}
+		Payment obj = dod.getRandomPayment();
+		obj.setNextFeeDueAmount(19903);
+		obj.setNextFeeDueDate(Calendar.getInstance());
+		obj.setPayer("Ajay");
+		Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", obj);
+		String docPath = docGenerator.generateInvoice(obj);
 
+		Assert.assertNotNull(docPath);
+	}
 }
