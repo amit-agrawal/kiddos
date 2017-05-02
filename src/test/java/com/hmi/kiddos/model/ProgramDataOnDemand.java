@@ -28,12 +28,12 @@ public class ProgramDataOnDemand {
 	@Test
 	public void toStringTestPS() {
 		Program program = new Program();
-		program.setProgramType(ProgramTypes.PRESCHOOL);
+		program.setProgramType("P");
 		program.setType(ProgramTypes.PRESCHOOL.toString());
 		program.setBatch(Batch.MORNING_A.toString());
 		program.setCenter(Centers.Bhandup);
 		program.setFees(1000);
-		program.setTerm(PreSchoolTerms.Term_1_2016_17.toString());
+		program.setTerm("Term_1_2016_17");
 
 		assertEquals("PLAY_GROUP : Term_1_2016_17 : MORNING_A", program + "");
 	}
@@ -54,7 +54,7 @@ public class ProgramDataOnDemand {
 	public void isPreschoolTest() {
 
 		Program program = new Program();
-		program.setProgramType(ProgramTypes.PRESCHOOL);
+		program.setProgramType("P");
 		program.setType(ProgramTypes.PRESCHOOL.toString());
 
 		assertEquals(true, program.isPreSchool());

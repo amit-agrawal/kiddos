@@ -81,7 +81,7 @@ public class MailUtil {
 		}
 	}
 
-	public void sendReceipt(String docPath, String[] mailIds) {
+	public void sendReceipt(String docPath, String[] mailIds, String fullName) {
 		Logger.getLogger(MailUtil.class).info(String.format("Sending receipt with user %s ", username));
 
 		try {
@@ -97,7 +97,7 @@ public class MailUtil {
 					recepients.append(",").append(mailId);
 
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recepients.toString(), false));
-			message.setSubject(String.format("Receipt"));
+			message.setSubject(String.format("Receipt for %s", fullName));
 
 			if (docPath != null) {
 				Logger.getLogger(MailUtil.class).info("Sending Mail with attachment");

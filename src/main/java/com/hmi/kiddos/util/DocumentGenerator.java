@@ -126,7 +126,7 @@ public class DocumentGenerator {
 	private void addHeader(Document doc, PdfFont bold) {
 		doc.add(new Paragraph("Happy Minds International Education LLP").setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph("201, Jayshree Plaza Near Dreams Mall L.B.S. Marg").setFont(bold)
+		doc.add(new Paragraph("201, Jayshree Plaza, Near Dreams Mall, L.B.S. Marg").setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
 		doc.add(new Paragraph("Bhandup (W) Mumbai – 78").setFont(bold).setTextAlignment(TextAlignment.LEFT));
 		doc.add(new Paragraph("Phone: 022 4123 6803, 022 6710 0512").setFont(bold)

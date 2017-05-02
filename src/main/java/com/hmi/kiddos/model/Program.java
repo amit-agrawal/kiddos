@@ -11,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
@@ -46,6 +45,8 @@ public class Program implements Comparable {
 
 	private boolean isCharge = false;
 
+	private String programType;
+	
 	public boolean getIsCharge() {
 		return isCharge;
 	}
@@ -91,10 +92,6 @@ public class Program implements Comparable {
 	 */
 	@NotNull
 	private String term;
-
-	/**
-	 */
-	private ProgramTypes programType;
 
 	/**
 	 */
@@ -160,27 +157,27 @@ public class Program implements Comparable {
 	}
 
 	public boolean isPreSchool() {
-		return programType == ProgramTypes.PRESCHOOL;
+		return "P".equals(programType);
 	}
-				
+
 	/**
 	 */
 	@OneToMany(mappedBy = "program")
 	private Set<Admission> admissions = new TreeSet<Admission>();
 
-	/**
-	 */
+/*	*//**
+	 *//*
 	@ManyToMany(mappedBy = "programs")
 	private Set<Payment> payments = new TreeSet<Payment>();
-
-	public Set<Payment> getPayments() {
+*/
+/*	public Set<Payment> getPayments() {
 		return payments;
 	}
 
 	public void setPayments(Set<Payment> payments) {
 		this.payments = payments;
 	}
-
+*/
 	public String toString() {
 		String output = type + " : " + term;
 		if (batch != null)
@@ -326,11 +323,11 @@ public class Program implements Comparable {
 		this.admissions = admissions;
 	}
 
-	public ProgramTypes getProgramType() {
+	public String getProgramType() {
 		return programType;
 	}
 
-	public void setProgramType(ProgramTypes programType) {
+	public void setProgramType(String programType) {
 		this.programType = programType;
 	}
 

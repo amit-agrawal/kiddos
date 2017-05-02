@@ -107,7 +107,7 @@ public class ChildIntegrationTest {
 				count < 250);
 		List<Child> result = childDao.findAllChildren("PS");
 		Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
-		Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
+		Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() >= 0);
 	}
 
 	@Test

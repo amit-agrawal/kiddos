@@ -34,7 +34,7 @@ public class MailingTest {
 		Payment obj = dod.getRandomPayment();
 		Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", obj);
 		String docPath = docGenerator.generateInvoice(obj);
-		mailUtil.sendReceipt(docPath, new String[]{});
+		mailUtil.sendReceipt(docPath, new String[]{}, "First Middle Last");
 	}
 
 }

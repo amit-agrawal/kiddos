@@ -84,27 +84,12 @@ public class PaymentController {
 			String docPath = null;
 			docPath = documentGenerator.generateInvoice(payment);
 			mailUtil.sendReceipt(docPath, new String[] { payment.getChild().getEmailOne(),
-					payment.getChild().getEmailTwo(), payment.getChild().getEmailThree() });
+					payment.getChild().getEmailTwo(), payment.getChild().getEmailThree() }, payment.getChild().getFullName());
 		}
 	}
 
 	private void createPaymentRelatedAdmissions(Payment payment) {
-		Set<Program> programs = new TreeSet<Program>();
-		if ((payment.getDaycarePrograms() != null) && !payment.getDaycarePrograms().isEmpty())
-			programs.addAll(payment.getDaycarePrograms());
-
-		if ((payment.getOtherPrograms() != null) && !payment.getOtherPrograms().isEmpty())
-			programs.addAll(payment.getOtherPrograms());
-
-		if ((payment.getPreschoolPrograms() != null) && !payment.getPreschoolPrograms().isEmpty())
-			programs.addAll(payment.getPreschoolPrograms());
-
-		if ((payment.getCharges() != null) && !payment.getCharges().isEmpty())
-			programs.addAll(payment.getCharges());
-
-		payment.setPrograms(programs);
-
-		for (Program program : programs) {
+		for (Program program : payment.getPrograms()) {
 			Child child = payment.getChild();
 			Admission admission = new Admission();
 			admission.setChild(child);

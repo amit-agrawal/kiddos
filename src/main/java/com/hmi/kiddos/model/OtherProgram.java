@@ -1,5 +1,10 @@
 package com.hmi.kiddos.model;
 
-public class OtherProgram extends Program {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+//@Entity
+//@DiscriminatorValue("O")
+public class OtherProgram  {
 
 }

@@ -11,6 +11,7 @@ import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
 @Component
@@ -73,7 +74,6 @@ public class PaymentDataOnDemand {
         Payment obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
         obj = Payment.findPayment(id);
-        obj.getPrograms();
         return obj;
     }
 

@@ -1,5 +1,10 @@
 package com.hmi.kiddos.model;
 
-public class DayCareProgram extends Program {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+//@Entity
+//@DiscriminatorValue("D")
+public class DayCareProgram {
 
 }

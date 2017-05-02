@@ -185,6 +185,14 @@ public class Child implements Comparable {
 
 	}
 
+	public String getFullName() {
+		StringBuffer name = new StringBuffer(firstName);
+		if (middleName != null)
+			name.append(" ").append(middleName);
+		name.append(" ").append(lastName);
+		return name.toString();
+	}
+
 	public Set<Payment> getPayments() {
 		return this.payments;
 	}
@@ -299,7 +307,7 @@ public class Child implements Comparable {
 	}
 
 	public boolean hasProgram(String type) {
-		Set<Program> programs = getCurrentPrograms(); 
+		Set<Program> programs = getCurrentPrograms();
 		boolean hasProgram = false;
 		if (type != null & (type.startsWith("PS"))) {
 			for (Program program : programs) {
@@ -327,8 +335,6 @@ public class Child implements Comparable {
 
 		return hasProgram;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

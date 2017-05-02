@@ -18,12 +18,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -101,7 +103,7 @@ public class Payment {
 
 	/**
 	 */
-	private Boolean sendMail;
+	private Boolean sendMail = true;
 
 	public Boolean getSendMail() {
 		return sendMail;
@@ -121,19 +123,28 @@ public class Payment {
 
 	/**
 	 */
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Program> programs = new TreeSet<Program>();
+//	@ManyToMany(fetch = FetchType.EAGER)
+	//@Where(clause="program_type='D'")
+	//private Set<Program> programs = new TreeSet<Program>();
 
-	@Transient
+	@ManyToMany(fetch = FetchType.EAGER)	
+    @Fetch(FetchMode.SELECT)
+	@Where(clause="program_type='D'")
 	private Set<Program> daycarePrograms = new TreeSet<Program>();
 
-	@Transient
+	@ManyToMany(fetch = FetchType.EAGER)	
+    @Fetch(FetchMode.SELECT)
+	@Where(clause="program_type='P'")
 	private Set<Program> preschoolPrograms = new TreeSet<Program>();
 
-	@Transient
+	@ManyToMany(fetch = FetchType.EAGER)	
+    @Fetch(FetchMode.SELECT)
+	@Where(clause="program_type='C'")
 	private Set<Program> charges = new TreeSet<Program>();
 
-	@Transient
+	@ManyToMany(fetch = FetchType.EAGER)	
+    @Fetch(FetchMode.SELECT)
+	@Where(clause="program_type='O'")
 	private Set<Program> otherPrograms = new TreeSet<Program>();
 
 	public Integer getNextFeeDueAmount() {
@@ -176,6 +187,20 @@ public class Payment {
 		this.otherPrograms = otherPrograms;
 	}
 
+	public Set<Program> getPrograms() {
+		Set<Program> programs = new TreeSet<>();
+		if (otherPrograms != null && !otherPrograms.isEmpty())
+			programs.addAll(otherPrograms);
+		if (charges != null && !charges.isEmpty())
+			programs.addAll(charges);
+		if (preschoolPrograms != null && !preschoolPrograms.isEmpty())
+			programs.addAll(preschoolPrograms);
+		if (daycarePrograms != null && !daycarePrograms.isEmpty())
+			programs.addAll(daycarePrograms);
+
+		return programs;
+	}
+	
 	public Child getChild() {
 		return child;
 	}
@@ -184,19 +209,17 @@ public class Payment {
 		this.child = child;
 	}
 
-	public Set<Program> getPrograms() {
-		return programs;
-	}
-
-	public void setPrograms(Set<Program> programs) {
-		this.programs = programs;
-	}
-
 	@Override
 	public String toString() {
 		String output = "Payment [amount=" + amount + ", paymentMedium=" + paymentMedium + ", receiptNumber=" + id;
-		if (programs != null && !programs.isEmpty())
-			output = output + ", Programs:" + programs;
+		if (otherPrograms != null && !otherPrograms.isEmpty())
+			output = output + ", Other Programs:" + otherPrograms;
+		if (charges != null && !charges.isEmpty())
+			output = output + ", Charges:" + charges;
+		if (preschoolPrograms != null && !preschoolPrograms.isEmpty())
+			output = output + ", PreschoolPrograms:" + preschoolPrograms;
+		if (daycarePrograms != null && !daycarePrograms.isEmpty())
+			output = output + ", DaycarePrograms:" + daycarePrograms;
 		if (child != null)
 			output = output + ", Child:" + child;
 

@@ -8,8 +8,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import com.hmi.kiddos.model.Payment;
-
 @Aspect
 @Configurable
 public class MailingAspect {
