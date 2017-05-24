@@ -24,6 +24,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,6 +37,7 @@ import com.hmi.kiddos.dao.ProgramDao;
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "term", "batch", "center", "notes" }) })
 @Audited
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Program implements Comparable {
 	@Transient
 	private Integer kidsCount = 0;

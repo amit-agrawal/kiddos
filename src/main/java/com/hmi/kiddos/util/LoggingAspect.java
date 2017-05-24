@@ -22,6 +22,8 @@ public class LoggingAspect {
 				Logger.getLogger(LoggingAspect.class).info(String.format("Called %s.%s in %d ms",
 						point.getSignature().getDeclaringType().getSimpleName(),
 						MethodSignature.class.cast(point.getSignature()).getMethod().getName(), timeTaken));
+				
+
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();

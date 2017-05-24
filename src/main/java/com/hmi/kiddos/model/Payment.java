@@ -23,8 +23,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -34,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Entity
 @Configurable
 @Audited
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Payment {
 
 	/**

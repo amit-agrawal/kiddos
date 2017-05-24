@@ -21,6 +21,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -33,6 +35,7 @@ import com.hmi.kiddos.dao.AdmissionDao;
 @Configurable
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "child", "program" }) })
 @Audited
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Admission implements Comparable {
 	@Autowired
 	@Transient

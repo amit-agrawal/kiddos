@@ -14,8 +14,8 @@
             <display:column sortable="true" title="Address" property="address" />
             <display:column sortable="true" title="Phone" property="phone" />
             <display:column sortable="true" title="Phone Other" property="phoneHome" />
-            <display:column sortable="true" title="Primary Programs" property="primaryCurrentPrograms" />
-            <display:column sortable="true" title="Secondary Programs" property="secondaryCurrentPrograms" />
+<!--            <display:column sortable="true" title="Primary Programs" property="primaryCurrentPrograms" />
+            <display:column sortable="true" title="Secondary Programs" property="secondaryCurrentPrograms" /> -->
 			<display:column property="showLink" title="Links" sortable="false" media="html"/>
 			<display:setProperty name="export.pdf.filename" value="staffs.pdf"/>
 			<display:setProperty name="export.csv.filename" value="staffs.csv"/>

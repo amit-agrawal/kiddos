@@ -376,6 +376,13 @@
 			<artifactId>hibernate-envers</artifactId>
 			<version>4.3.10.Final</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>4.3.4.Final</version>
+		</dependency>
+
 		<!-- Jackson -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -511,9 +518,11 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12</version>
 				<configuration>
-			        <forkCount>12</forkCount>
+					<parallel>classes</parallel>
+					<threadCount>10</threadCount>
+					<!-- <forkCount>12</forkCount> -->
 					<printSummary>true</printSummary>
-					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+					<redirectTestOutputToFile>false</redirectTestOutputToFile>
 				</configuration>
 			</plugin>
 			<plugin>
