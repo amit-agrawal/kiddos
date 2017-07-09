@@ -110,6 +110,7 @@ public class ChildDao {
 		if (type != null) {
 			for (Child child : children) {
 				if (child.hasProgram(type)) {
+					
 					newList.add(child);
 				}
 			}

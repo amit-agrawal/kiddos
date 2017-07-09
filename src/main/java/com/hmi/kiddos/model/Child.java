@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Set;
 import java.util.TreeSet;
@@ -43,6 +44,23 @@ public class Child implements Comparable {
 
 	@Transient
 	private String age;
+
+	@Transient
+	private String dobToDisplay;
+
+	public String getDobToDisplay() {
+		String output = "";
+		if (dob != null) {
+			LocalDate birthday = getDobAsLocalDate();
+
+			output = birthday.format(DateTimeFormatter.ISO_LOCAL_DATE);
+		}
+		return output;
+	}
+
+	public void setDobToDisplay(String dobToDisplay) {
+		this.dobToDisplay = dobToDisplay;
+	}
 
 	/**
 	 */
@@ -315,14 +333,15 @@ public class Child implements Comparable {
 		if (type != null & (type.startsWith("PS"))) {
 			for (Program program : programs) {
 				if (program.getType().startsWith("Jr") || program.getType().startsWith("Pl")
-						|| program.getType().startsWith("Nu")) {
+						|| program.getType().startsWith("Nu") || program.getType().startsWith("Sr")) {
 					hasProgram = true;
 					break;
 				}
 			}
 		} else if (type != null & (type.startsWith("DC"))) {
 			for (Program program : programs) {
-				if (program.getType().startsWith("DC") || program.getType().startsWith("IC")) {
+				if (program.getIsCharge() == false
+						&& (program.getType().startsWith("DC") || program.getType().startsWith("IC"))) {
 					hasProgram = true;
 					break;
 				}
