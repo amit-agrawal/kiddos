@@ -24,8 +24,13 @@ public class TransportationDataOnDemand {
         setDriverName(obj, index);
         setNotes(obj, index);
         setVan(obj, index);
+        setTransportSide(obj, TransportSide.Pickup);
         return obj;
     }
+
+	private void setTransportSide(Transportation obj, TransportSide pickupDrop) {
+		obj.setPickupDrop(pickupDrop);
+	}
 
 	public void setDriverName(Transportation obj, int index) {
         String driverName = "driverName_" + index;

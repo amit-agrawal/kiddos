@@ -8,10 +8,12 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,7 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "driverName", "van", "notes" }) })
 @Audited
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Transportation implements Comparable {
@@ -80,6 +81,11 @@ public class Transportation implements Comparable {
 
 	/**
 	 */
+	@Size(max = 80)
+	private String driverNumber = "";
+
+	/**
+	 */
 	@Size(max = 400)
 	private String notes;
 
@@ -88,6 +94,13 @@ public class Transportation implements Comparable {
 	@Size(max = 80)
 	private String van;
 
+    @Enumerated
+	private TransportSide pickupDrop;
+
+	/**
+	 */
+	@ManyToOne
+	private Staff nanny;
 
 	public Integer getAllKidsCount() {
 		return children == null ? 0 : children.size();
@@ -318,6 +331,30 @@ public class Transportation implements Comparable {
 			}
 		}
 		return transportationList;
+	}
+
+	public String getDriverNumber() {
+		return driverNumber;
+	}
+
+	public void setDriverNumber(String driverNumber) {
+		this.driverNumber = driverNumber;
+	}
+
+	public TransportSide getPickupDrop() {
+		return pickupDrop;
+	}
+
+	public void setPickupDrop(TransportSide pickupDrop) {
+		this.pickupDrop = pickupDrop;
+	}
+
+	public Staff getNanny() {
+		return nanny;
+	}
+
+	public void setNanny(Staff nanny) {
+		this.nanny = nanny;
 	}
 
 }

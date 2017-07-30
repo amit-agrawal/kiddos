@@ -1,5 +1,5 @@
 package com.hmi.kiddos.model;
 
-public enum TransportType {
+public enum TransportSide {
 	Pickup, Drop
 }

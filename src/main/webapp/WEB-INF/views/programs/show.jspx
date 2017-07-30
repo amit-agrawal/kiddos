@@ -17,10 +17,11 @@
 
 		<display:table id="l_com_hmi_kiddos_model_Child" name="${program.children}" requestURI="/programs/${program.id}" pagesize="100" export="true"  decorator="com.hmi.kiddos.controllers.LinksTableDecorator">
 			<display:column property="counter" title="Sq." sortable="true"/>
+			<display:column property="id" title="Enr. No." sortable="true"/>
 
 			<display:column property="firstName" title="First Name" sortable="true"/>
 			<display:column property="lastName" title="Last Name" sortable="true"/>
-			<display:column property="age" title="Age" sortable="true"/>
+			<display:column property="dobToDisplay" title="D.O.B." sortable="true" />
 			<display:column property="motherName" title="Mother Name" sortable="true"/>
 			<display:column property="fatherName" title="Father Name" sortable="true"/>
 			<display:column property="address" title="Address" sortable="true"/>
