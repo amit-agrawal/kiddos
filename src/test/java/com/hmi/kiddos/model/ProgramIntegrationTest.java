@@ -53,7 +53,6 @@ public class ProgramIntegrationTest {
 
 	@Test
 	public void testFindAllPrograms() {
-		Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
 		long count = programDao.countPrograms();
 		Assert.assertTrue(
 				"Too expensive to perform a find all test for 'Program', as there are " + count
@@ -66,7 +65,6 @@ public class ProgramIntegrationTest {
 
 	@Test
 	public void testFindAllActivePrograms() {
-		Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
 		long count = programDao.countPrograms();
 		Assert.assertTrue(
 				"Too expensive to perform a find all test for 'Program', as there are " + count
@@ -79,7 +77,6 @@ public class ProgramIntegrationTest {
 
 	@Test
 	public void testFindProgramEntries() {
-		Assert.assertNotNull("Data on demand for 'Program' failed to initialize correctly", dod.getRandomProgram());
 		long count = programDao.countPrograms();
 		if (count > 20)
 			count = 20;

@@ -53,7 +53,6 @@ public class PaymentIntegrationTest {
 
 	@Test
 	public void testFindAllPayments() {
-		Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", dod.getRandomPayment());
 		long count = Payment.countPayments();
 		Assert.assertTrue(
 				"Too expensive to perform a find all test for 'Payment', as there are " + count
@@ -66,7 +65,6 @@ public class PaymentIntegrationTest {
 
 	@Test
 	public void testFindPaymentEntries() {
-		Assert.assertNotNull("Data on demand for 'Payment' failed to initialize correctly", dod.getRandomPayment());
 		long count = Payment.countPayments();
 		if (count > 20)
 			count = 20;

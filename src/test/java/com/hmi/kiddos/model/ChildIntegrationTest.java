@@ -34,7 +34,6 @@ public class ChildIntegrationTest {
 
 	@Test
 	public void testCountChildren() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		long count = childDao.countChildren();
 		Assert.assertTrue("Counter for 'Child' incorrectly reported there were no entries", count > 0);
 	}
@@ -52,7 +51,6 @@ public class ChildIntegrationTest {
 
 	@Test
 	public void testFindAllChildren() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		List<Child> result = childDao.findAllChildren();
 		Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
 		Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() > 0);
@@ -60,14 +58,12 @@ public class ChildIntegrationTest {
 
 	@Test
 	public void testFindAllCampChildren() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		List<Child> result = childDao.findAllChildren("Camp");
 		Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
 	}
 
 	@Test
 	public void testFindAllDCChildren() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		List<Child> result = childDao.findAllChildren("DC");
 		Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
 			Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() >= 0);
@@ -75,7 +71,6 @@ public class ChildIntegrationTest {
 
 	@Test
 	public void testFindAllPSChildren() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		List<Child> result = childDao.findAllChildren("PS");
 		Assert.assertNotNull("Find all method for 'Child' illegally returned null", result);
 		Assert.assertTrue("Find all method for 'Child' failed to return any data", result.size() >= 0);
@@ -83,7 +78,6 @@ public class ChildIntegrationTest {
 
 	@Test
 	public void testFindChildEntries() {
-		Assert.assertNotNull("Data on demand for 'Child' failed to initialize correctly", dod.getRandomChild());
 		long count = childDao.countChildren();
 		if (count > 20)
 			count = 20;
