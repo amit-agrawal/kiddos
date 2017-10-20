@@ -1,6 +1,7 @@
 package com.hmi.kiddos.model;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -84,6 +85,10 @@ public class Payment {
 		return nextFeeDueDate;
 	}
 
+	public Date getNextFeeDueDateAsDate() {
+		return (this.nextFeeDueDate == null) ? null : this.nextFeeDueDate.getTime();
+	}
+
 	public void setNextFeeDueDate(Calendar nextFeeDueDate) {
 		this.nextFeeDueDate = nextFeeDueDate;
 	}
@@ -126,26 +131,26 @@ public class Payment {
 
 	/**
 	 */
-//	@ManyToMany(fetch = FetchType.EAGER)
+//	@ManyToMany(fetch = FetchType.LAZY)
 	//@Where(clause="program_type='D'")
 	//private Set<Program> programs = new TreeSet<Program>();
 
-	@ManyToMany(fetch = FetchType.EAGER)	
+	@ManyToMany(fetch = FetchType.LAZY)	
     @Fetch(FetchMode.SELECT)
 	@Where(clause="program_type='D'")
 	private Set<Program> daycarePrograms = new TreeSet<Program>();
 
-	@ManyToMany(fetch = FetchType.EAGER)	
+	@ManyToMany(fetch = FetchType.LAZY)	
     @Fetch(FetchMode.SELECT)
 	@Where(clause="program_type='P'")
 	private Set<Program> preschoolPrograms = new TreeSet<Program>();
 
-	@ManyToMany(fetch = FetchType.EAGER)	
+	@ManyToMany(fetch = FetchType.LAZY)	
     @Fetch(FetchMode.SELECT)
 	@Where(clause="program_type='C'")
 	private Set<Program> charges = new TreeSet<Program>();
 
-	@ManyToMany(fetch = FetchType.EAGER)	
+	@ManyToMany(fetch = FetchType.LAZY)	
     @Fetch(FetchMode.SELECT)
 	@Where(clause="program_type='O'")
 	private Set<Program> otherPrograms = new TreeSet<Program>();

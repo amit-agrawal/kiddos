@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
@@ -32,6 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hmi.kiddos.dao.ProgramDao;
+import com.mysql.jdbc.log.Log;
 
 @Configurable
 @Entity
@@ -49,7 +52,7 @@ public class Program implements Comparable {
 	private boolean isCharge = false;
 
 	private String programType;
-	
+
 	public boolean getIsCharge() {
 		return isCharge;
 	}
@@ -143,12 +146,12 @@ public class Program implements Comparable {
 
 	/**
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)	
 	private Staff teacher;
 
 	/**
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)	
 	private Staff teacherTwo;
 
 	public Staff getTeacherTwo() {
@@ -168,19 +171,17 @@ public class Program implements Comparable {
 	@OneToMany(mappedBy = "program")
 	private Set<Admission> admissions = new TreeSet<Admission>();
 
-/*	*//**
-	 *//*
-	@ManyToMany(mappedBy = "programs")
-	private Set<Payment> payments = new TreeSet<Payment>();
-*/
-/*	public Set<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
-	}
-*/
+	/*	*//**
+			*//*
+			 * @ManyToMany(mappedBy = "programs") private Set<Payment> payments
+			 * = new TreeSet<Payment>();
+			 */
+	/*
+	 * public Set<Payment> getPayments() { return payments; }
+	 * 
+	 * public void setPayments(Set<Payment> payments) { this.payments =
+	 * payments; }
+	 */
 	public String toString() {
 		String output = type + " : " + term;
 		if (batch != null)
@@ -327,6 +328,26 @@ public class Program implements Comparable {
 	}
 
 	public String getProgramType() {
+		if (programType == null) {
+			if (isCharge) {
+				programType = "C";
+			} else if (type != null) {
+				switch (type) {
+				case "DC":
+				case "IC":
+					programType = "D";
+				case "Jr. K.G.":
+				case "Nursery":
+				case "Play Group":
+				case "Sr. K.G.":
+					programType = "P";
+				default:
+					programType = "O";
+				}
+			}
+			Logger.getLogger(Program.class)
+					.info("Calculating program type for type: " + type + " program type: " + programType);
+		}
 		return programType;
 	}
 

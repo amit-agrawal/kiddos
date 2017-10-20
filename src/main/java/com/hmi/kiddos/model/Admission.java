@@ -33,7 +33,6 @@ import com.hmi.kiddos.dao.AdmissionDao;
 
 @Entity
 @Configurable
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "child", "program" }) })
 @Audited
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Admission implements Comparable {

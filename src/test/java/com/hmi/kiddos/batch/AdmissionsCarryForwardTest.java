@@ -28,14 +28,16 @@ public class AdmissionsCarryForwardTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void createNewProgramSetTest() {
 		try {
-			String fromTerm = "September 17";
-			String toTerm = "October 17";
-			Calendar startDate = new GregorianCalendar(2017, 9, 1);
-			Calendar endDate = new GregorianCalendar(2017, 9, 31);
+			String fromTerm = "November 17";
+			String toTerm = "December 17";
+			Calendar startDate = new GregorianCalendar(2017, 11, 1);
+			Calendar endDate = new GregorianCalendar(2017, 11, 31);
 			carryForward.createNextProgramSet(fromTerm, toTerm, startDate, endDate);
+
+		
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}

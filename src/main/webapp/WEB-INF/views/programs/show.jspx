@@ -3,7 +3,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_hmi_kiddos_model_Program" object="${program}" path="/programs" z="user-managed">
-        <field:display field="center" id="s_com_hmi_kiddos_model_Program_center" object="${program}" z="hbj4iEDf/sPwLfy0mrtrVWyfw+Q="/>
         <field:display field="fees" id="s_com_hmi_kiddos_model_Program_fees" object="${program}" z="3Uf/qa88ubsnp/ybgytc3nDbPX8="/>
         <field:display field="notes" id="s_com_hmi_kiddos_model_Program_notes" object="${program}" z="gCz8V1WwwZvk6ikVOqUPYTGx2lU="/>
         <field:display calendar="true" dateTimePattern="${program_duedate_date_format}" field="dueDate" id="s_com_hmi_kiddos_model_Program_dueDate" object="${program}" z="bq+CYw+mLghiZzRdWfVAz3k4uBA="/>

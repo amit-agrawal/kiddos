@@ -3,6 +3,7 @@ package com.hmi.kiddos.util;
 import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.hmi.kiddos.model.Payment;
@@ -24,6 +25,18 @@ import com.itextpdf.layout.property.TextAlignment;
 @Service
 public class DocumentGenerator {
 	private SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+	
+	@Value("${address.first:}")
+	private String addressFirst;
+	
+	@Value("${address.second:}")
+	private String addressSecond;
+	
+	@Value("${address.third:}")
+	private String addressThird;
+	
+	@Value("${address.fourth:}")
+	private String addressFourth;	
 
 	public String generateInvoice(Payment payment) {
 		String path = null;
@@ -126,12 +139,12 @@ public class DocumentGenerator {
 	private void addHeader(Document doc, PdfFont bold) {
 		doc.add(new Paragraph("Happy Minds International Education LLP").setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph("201, Jayshree Plaza, Near Dreams Mall, L.B.S. Marg").setFont(bold)
+		doc.add(new Paragraph(addressFirst).setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph("Bhandup (W) Mumbai – 78").setFont(bold).setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph("Phone: 022 4123 6803, 022 6710 0512").setFont(bold)
+		doc.add(new Paragraph(addressSecond).setFont(bold).setTextAlignment(TextAlignment.LEFT));
+		doc.add(new Paragraph(addressThird).setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph("Email: bhandup@thehappyminds.com").setFont(bold).setTextAlignment(TextAlignment.LEFT));
+		doc.add(new Paragraph(addressFourth).setFont(bold).setTextAlignment(TextAlignment.LEFT));
 	}
 
 	public void process(Table table, String cellData, boolean isHeader, PdfFont font) {

@@ -16,7 +16,10 @@
             <display:column sortable="true" title="Amount" property="amount" />
             <display:column sortable="true" title="Notes" property="notes" />
             <display:column sortable="true" title="Payer" property="payer" />
+            <display:column sortable="true" title="Next Due" property="nextFeeDueDateAsDate"   format="{0,date,dd-MM-yyyy}" />
+
  			<display:column property="showLink" title="Links" sortable="false" media="html"/>
+
 			<display:setProperty name="export.pdf.filename" value="payments.pdf"/>
 			<display:setProperty name="export.csv.filename" value="payments.csv"/>
 

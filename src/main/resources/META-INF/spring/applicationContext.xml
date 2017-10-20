@@ -8,7 +8,7 @@
 		within your classpath, provided they fall under the META-INF/spring directory. 
 		The located property files are parsed and their values can then be used within 
 		application context files in the form of ${propertyKey}. -->
-	<context:property-placeholder location="file:/etc/kiddos/*.properties" />
+	<context:property-placeholder location="file:/etc/kiddos/local/*.properties" />
 	<!-- <context:property-placeholder location="classpath*:META-INF/spring/*.properties" 
 		/> -->
 	<!-- Turn on AspectJ @Configurable support. As a result, any time you instantiate 
