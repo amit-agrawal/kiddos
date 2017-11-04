@@ -46,10 +46,12 @@ public class DocumentGenerator {
 			PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
 			path = "./" + payment.getChild().getFirstName() + "_" + payment.getChild().getLastName() + "_"
 					+ System.currentTimeMillis() + ".pdf";
+
+			path = path.replace(' ', '_');	
 			PdfWriter writer = new PdfWriter(path);
 			PdfDocument pdf = new PdfDocument(writer);
 			pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new InvoiceBackgroundHandler());
-			Document doc = new Document(pdf);
+			Document doc = new Document(pdf); 
 
 			doc.add(new Paragraph("RECEIPT").setFont(bold).setTextAlignment(TextAlignment.CENTER));
 			addHeader(doc, bold);

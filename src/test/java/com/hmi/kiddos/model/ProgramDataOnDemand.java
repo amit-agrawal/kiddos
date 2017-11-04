@@ -28,7 +28,7 @@ public class ProgramDataOnDemand {
 	@Test
 	public void toStringTestPS() {
 		Program program = new Program();
-		program.setProgramType("P");
+		//program.setProgramType("P");
 		program.setType(ProgramTypes.PRESCHOOL.toString());
 		program.setBatch(Batch.MORNING_A.toString());
 		program.setCenter(Centers.Bhandup);
@@ -54,7 +54,7 @@ public class ProgramDataOnDemand {
 	public void isPreschoolTest() {
 
 		Program program = new Program();
-		program.setProgramType("P");
+		//program.setProgramType("P");
 		program.setType(ProgramTypes.PRESCHOOL.toString());
 
 		assertEquals(true, program.isPreSchool());

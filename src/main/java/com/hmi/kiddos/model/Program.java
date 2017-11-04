@@ -51,7 +51,8 @@ public class Program implements Comparable {
 
 	private boolean isCharge = false;
 
-	private String programType;
+	// @Transient
+	// private String programType;
 
 	public boolean getIsCharge() {
 		return isCharge;
@@ -146,12 +147,12 @@ public class Program implements Comparable {
 
 	/**
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Staff teacher;
 
 	/**
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Staff teacherTwo;
 
 	public Staff getTeacherTwo() {
@@ -163,7 +164,7 @@ public class Program implements Comparable {
 	}
 
 	public boolean isPreSchool() {
-		return "P".equals(programType);
+		return "P".equals(getProgramType());
 	}
 
 	/**
@@ -328,31 +329,26 @@ public class Program implements Comparable {
 	}
 
 	public String getProgramType() {
-		if (programType == null) {
-			if (isCharge) {
-				programType = "C";
-			} else if (type != null) {
-				switch (type) {
-				case "DC":
-				case "IC":
-					programType = "D";
-				case "Jr. K.G.":
-				case "Nursery":
-				case "Play Group":
-				case "Sr. K.G.":
-					programType = "P";
-				default:
-					programType = "O";
-				}
+		String programType = "O";
+		if (isCharge) {
+			programType = "C";
+		} else if (type != null) {
+			switch (type) {
+			case "DC":
+			case "IC":
+				programType = "D";
+			case "Jr. K.G.":
+			case "Nursery":
+			case "Play Group":
+			case "Sr. K.G.":
+				programType = "P";
+			default:
+				programType = "O";
 			}
 			Logger.getLogger(Program.class)
 					.info("Calculating program type for type: " + type + " program type: " + programType);
 		}
 		return programType;
-	}
-
-	public void setProgramType(String programType) {
-		this.programType = programType;
 	}
 
 	public void setCharge(boolean isCharge) {

@@ -151,7 +151,7 @@ public class PaymentIntegrationTest {
 		payment.setAmount(1000);
 		payment.setChild(obj.getChild());
 		Program program = pdod.getNewTransientProgram(0);
-		program.setProgramType("D");
+		//program.setProgramType("D");
 		Set<Program> programs = new HashSet<>();
 		programs.add(program);
 		payment.setDaycarePrograms(programs);
