@@ -3,12 +3,36 @@
 <log4j:configuration debug="true"
 	xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
-	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
 	   <param name="append" value="false" />
-	   <param name="maxFileSize" value="10KB" />
+	   <param name="maxFileSize" value="100KB" />
 	   <param name="maxBackupIndex" value="5" />
 	   <!-- For Tomcat -->
-	   <param name="file" value="${catalina.home}/logs/myStruts1App.log" />
+	   <param name="file" value="${catalina.home}/logs/{default.user}.log" />
+	   <layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern"
+			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+	   </layout>
+	</appender>
+
+	<appender name="debugFile" class="org.apache.log4j.RollingFileAppender">
+	   <param name="append" value="false" />
+	   <param name="maxFileSize" value="1MB" />
+	   <param name="maxBackupIndex" value="10" />
+	   <!-- For Tomcat -->
+	   <param name="file" value="${catalina.home}/logs/{default.user}.debug.log" />
+	   <layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern"
+			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+	   </layout>
+	</appender>
+
+	<appender name="sqlFile" class="org.apache.log4j.DailyRollingFileAppender">
+	   <param name="append" value="false" />
+	   <param name="maxFileSize" value="100KB" />
+	   <param name="maxBackupIndex" value="5" />
+	   <!-- For Tomcat -->
+	   <param name="file" value="${catalina.home}/logs/{default.user}.sql.log" />
 	   <layout class="org.apache.log4j.PatternLayout">
 		<param name="ConversionPattern"
 			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
@@ -22,14 +46,20 @@
 	    </layout>
 	</appender>
 
-	<root>
-		<level value="DEBUG" />
-		<appender-ref ref="console" />
-	</root>
+	<logger name="org.hibernate">
+        <level value="DEBUG"/>
+        <appender-ref ref="sqlFile" /> 
+    </logger>
+
+	<logger name="com.hmi">
+        <level value="DEBUG"/>
+        <appender-ref ref="debugFile" /> 
+    </logger>
 	
 	<root>
-		<level value="ERROR" />
+		<level value="INFO" />
 		<appender-ref ref="file" />
+		<appender-ref ref="console" />
 	</root>
 
 </log4j:configuration>

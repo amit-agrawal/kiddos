@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hmi.kiddos.model.enums.PaymentMedium;
+
 @Configurable
 @Component
 public class PaymentDataOnDemand {

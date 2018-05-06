@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,11 +36,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hmi.kiddos.dao.ProgramDao;
-import com.mysql.jdbc.log.Log;
+import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.ProgramTypes;
 
 @Configurable
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "type", "term", "batch", "center", "notes" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "term", "batch", "center", "notes" }) })
 @Audited
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Program implements Comparable {
@@ -66,7 +69,7 @@ public class Program implements Comparable {
 	private Set<Child> children = new TreeSet<Child>();
 
 	public String getName() {
-		String output = type + ", " + term;
+		String output = programTypes.getDisplayName() + ", " + term;
 		if (batch != null)
 			output = output + ", " + batch;
 		return output;
@@ -102,12 +105,19 @@ public class Program implements Comparable {
 
 	/**
 	 */
-	@NotNull
-	private String type;
+	//@NotNull
+	//private String type;
 
 	/**
 	 */
 	private String batch = "Undecided";
+
+	/**
+	 */
+	private String programType;
+
+	@Enumerated(EnumType.STRING)
+	private ProgramTypes programTypes;
 
 	/**
 	 */
@@ -135,6 +145,20 @@ public class Program implements Comparable {
 		this.startDate = startDate;
 	}
 
+	@PrePersist
+	private void updateProgramType() {
+		String programType = "O";
+		if (isCharge) {
+			programType = "C";
+		} else if (programTypes != null) {
+			programType = programTypes.getType();		
+			Logger.getLogger(Program.class)
+					.info("Calculating program type for type: " + programTypes.getDisplayName() 
+					+ " program type: " + programType);
+		}
+		this.programType = programType;
+	}
+	
 	/**
 	 */
 	@Min(1L)
@@ -184,7 +208,7 @@ public class Program implements Comparable {
 	 * payments; }
 	 */
 	public String toString() {
-		String output = type + " : " + term;
+		String output = programTypes.getDisplayName() + " : " + term;
 		if (batch != null)
 			output = output + " : " + batch;
 		return output;
@@ -264,14 +288,14 @@ public class Program implements Comparable {
 		this.term = term;
 	}
 
-	public String getType() {
+/*	public String getType() {
 		return this.type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
 	}
-
+*/
 	public String getBatch() {
 		return this.batch;
 	}
@@ -329,25 +353,6 @@ public class Program implements Comparable {
 	}
 
 	public String getProgramType() {
-		String programType = "O";
-		if (isCharge) {
-			programType = "C";
-		} else if (type != null) {
-			switch (type) {
-			case "DC":
-			case "IC":
-				programType = "D";
-			case "Jr. K.G.":
-			case "Nursery":
-			case "Play Group":
-			case "Sr. K.G.":
-				programType = "P";
-			default:
-				programType = "O";
-			}
-			Logger.getLogger(Program.class)
-					.info("Calculating program type for type: " + type + " program type: " + programType);
-		}
 		return programType;
 	}
 
@@ -385,5 +390,13 @@ public class Program implements Comparable {
 
 	@Column(name = "CREATION_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar creationTS;
+
+	public ProgramTypes getProgramTypes() {
+		return programTypes;
+	}
+
+	public void setProgramTypes(ProgramTypes programTypes) {
+		this.programTypes = programTypes;
+	}
 
 }

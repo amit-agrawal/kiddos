@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
 import com.hmi.kiddos.dao.ChildDao;
+import com.hmi.kiddos.model.enums.Gender;
 
 @Configurable
 @Component

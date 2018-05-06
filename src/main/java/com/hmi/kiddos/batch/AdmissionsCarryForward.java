@@ -7,18 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hmi.kiddos.dao.AdmissionDao;
-import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Admission;
-import com.hmi.kiddos.model.Centers;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Program;
+import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.ProgramTypes;
 
 @Service
 public class AdmissionsCarryForward {
-	@Autowired
-	private ChildDao childDao;
-
 	@Autowired
 	private ProgramDao programDao;
 
@@ -64,7 +61,7 @@ public class AdmissionsCarryForward {
 				toProgram.setDueDate(endDate);
 				toProgram.setNotes(fromProgram.getNotes());
 				toProgram.setTerm(toTerm);
-				toProgram.setType(fromProgram.getType());
+				toProgram.setProgramTypes(fromProgram.getProgramTypes());
 				toProgram.setTeacher(fromProgram.getTeacher());
 				toProgram.setTeacherTwo(fromProgram.getTeacherTwo());
 				toProgram.setFees(fromProgram.getFees());
@@ -80,14 +77,14 @@ public class AdmissionsCarryForward {
 
 	private Program getToTermProgram(Program fromProgram, String toTerm, List<Program> programs) {
 		String batch = fromProgram.getBatch();
-		String type = fromProgram.getType();
+		ProgramTypes type = fromProgram.getProgramTypes();
 		Centers center = fromProgram.getCenter();
 
 		Program toProgram = null;
 
 		for (Program program : programs) {
 			if (batch != null && batch.equals(program.getBatch())) {
-				if (type != null && type.equals(program.getType())) {
+				if (type != null && type.equals(program.getProgramTypes())) {
 					if (center != null && center.equals(program.getCenter()))
 						if (toTerm != null && toTerm.equals(program.getTerm())) {
 							toProgram = program;

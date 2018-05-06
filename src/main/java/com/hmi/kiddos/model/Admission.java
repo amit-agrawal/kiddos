@@ -272,23 +272,9 @@ public class Admission implements Comparable {
 
 	public boolean hasCurrentProgram(String type) {
 		boolean hasProgram = false;
-		if (program.isCurrent()) {
-			if (type != null & (type.startsWith("PS"))) {
-				if (program.getType().startsWith("Jr") || program.getType().startsWith("Pl")
-						|| program.getType().startsWith("Nu")) {
+		if (program.isCurrent() && type.startsWith(program.getProgramTypes().getType())) 
 					hasProgram = true;
-				}
-			} else if (type != null & (type.startsWith("DC"))) {
-				if (program.getType().startsWith("DC") || program.getType().startsWith("IC")) {
-					hasProgram = true;
-				}
-			} else {
-				if (program.getType().startsWith(type)) {
-					hasProgram = true;
-				}
-			}
-		}
-
+			
 		return hasProgram;
 	}
 

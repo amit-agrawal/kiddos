@@ -33,6 +33,8 @@ import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.hmi.kiddos.model.enums.Gender;
+
 @Configurable
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "firstName", "middleName", "lastName", "dob" }) })
@@ -330,28 +332,10 @@ public class Child implements Comparable {
 	public boolean hasProgram(String type) {
 		Set<Program> programs = getCurrentPrograms();
 		boolean hasProgram = false;
-		if (type != null & (type.startsWith("PS"))) {
 			for (Program program : programs) {
-				if (program.getType().startsWith("Jr") || program.getType().startsWith("Pl")
-						|| program.getType().startsWith("Nu") || program.getType().startsWith("Sr")) {
+				if (type.startsWith(program.getProgramTypes().getType())) {
 					hasProgram = true;
 					break;
-				}
-			}
-		} else if (type != null & (type.startsWith("DC"))) {
-			for (Program program : programs) {
-				if (program.getIsCharge() == false
-						&& (program.getType().startsWith("DC") || program.getType().startsWith("IC"))) {
-					hasProgram = true;
-					break;
-				}
-			}
-		} else {
-			for (Program program : programs) {
-				if (program.getType().startsWith(type)) {
-					hasProgram = true;
-					break;
-				}
 			}
 		}
 

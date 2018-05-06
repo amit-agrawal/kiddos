@@ -33,6 +33,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.Department;
+import com.hmi.kiddos.model.enums.Gender;
+
 @Configurable
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"firstName", "middleName", "lastName"})})

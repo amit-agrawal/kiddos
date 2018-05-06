@@ -33,13 +33,13 @@ public class ProgramDao {
 	}
 
 	public List<Program> findAllPrograms() {
-		return entityManager().createQuery("SELECT o FROM Program o order by term, type, batch, notes", Program.class)
+		return entityManager().createQuery("SELECT o FROM Program o order by term, program_types, batch, notes", Program.class)
 				.getResultList();
 	}
 
 	public List<Program> findCurrentFuturePrograms() {
 		return entityManager()
-				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, type, batch, start_date",
+				.createQuery("SELECT o FROM Program o where due_date > current_date order by term, program_types, batch, start_date",
 						Program.class)
 				.getResultList();
 	}

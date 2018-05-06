@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
 import com.hmi.kiddos.dao.AdmissionDao;
+import com.hmi.kiddos.model.enums.ProgramTypes;
 
 @Component
 @Configurable
@@ -30,15 +31,15 @@ public class AdmissionDataOnDemand {
 	@Test
 	public void calculateFeesTest() {
 		Program program = new Program();
-		program.setType("Summer Camp");
+		program.setProgramTypes(ProgramTypes.CAMP);
 		program.setBatch("Morning B1");
 		program.setFees(1900);
 		Program program1 = new Program();
-		program1.setType("Summer Camp");
+		program1.setProgramTypes(ProgramTypes.CAMP);
 		program1.setBatch("Morning B1");
 		program1.setFees(1900);
 		Program program3 = new Program();
-		program3.setType("Summer Camp");
+		program3.setProgramTypes(ProgramTypes.CAMP);
 		program3.setBatch("Morning B1");
 		program3.setFees(1900);
 		

@@ -30,8 +30,8 @@ import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Admission;
 import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
-import com.hmi.kiddos.model.PaymentMedium;
 import com.hmi.kiddos.model.Program;
+import com.hmi.kiddos.model.enums.PaymentMedium;
 import com.hmi.kiddos.util.DocumentGenerator;
 import com.hmi.kiddos.util.MailUtil;
 

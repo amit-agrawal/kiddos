@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.hmi.kiddos.model.Centers;
-import com.hmi.kiddos.model.Department;
-import com.hmi.kiddos.model.Gender;
 import com.hmi.kiddos.model.Staff;
 import com.hmi.kiddos.model.UserRole;
+import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.Department;
+import com.hmi.kiddos.model.enums.Gender;
 
 @RequestMapping("/staffs")
 @Controller

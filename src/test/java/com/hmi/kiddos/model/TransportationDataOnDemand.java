@@ -11,6 +11,8 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
+import com.hmi.kiddos.model.enums.TransportSide;
+
 @Configurable
 @Component
 public class TransportationDataOnDemand {

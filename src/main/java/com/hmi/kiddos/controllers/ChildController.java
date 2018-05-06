@@ -22,8 +22,8 @@ import org.springframework.web.util.WebUtils;
 import com.hmi.kiddos.dao.AdmissionDao;
 import com.hmi.kiddos.dao.ChildDao;
 import com.hmi.kiddos.model.Child;
-import com.hmi.kiddos.model.Gender;
 import com.hmi.kiddos.model.Transportation;
+import com.hmi.kiddos.model.enums.Gender;
 
 @RequestMapping("/children")
 @Controller

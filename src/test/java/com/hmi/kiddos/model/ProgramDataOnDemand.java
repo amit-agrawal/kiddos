@@ -18,6 +18,9 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
 import com.hmi.kiddos.dao.ProgramDao;
+import com.hmi.kiddos.model.enums.Batch;
+import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.ProgramTypes;
 
 @Component
 @Configurable
@@ -29,7 +32,7 @@ public class ProgramDataOnDemand {
 	public void toStringTestPS() {
 		Program program = new Program();
 		//program.setProgramType("P");
-		program.setType(ProgramTypes.PRESCHOOL.toString());
+		program.setProgramTypes(ProgramTypes.PG);
 		program.setBatch(Batch.MORNING_A.toString());
 		program.setCenter(Centers.Bhandup);
 		program.setFees(1000);
@@ -41,13 +44,13 @@ public class ProgramDataOnDemand {
 	@Test
 	public void toStringTestDC() {
 		Program program = new Program();
-		program.setType(ProgramTypes.DAY_CARE.toString());
+		program.setProgramTypes(ProgramTypes.DC);
 		program.setBatch("DAY_CARE : 2016 May : INFANT_EVENING_HALF_DAY_DC");
 		program.setCenter(Centers.Bhandup);
 		program.setFees(1000);
 		program.setTerm("2016 May");
 
-		assertEquals("DAY_CARE : 2016 May : INFANT_EVENING_HALF_DAY_DC", program.toString());
+		assertEquals("DC : 2016 May : INFANT_EVENING_HALF_DAY_DC", program.toString());
 	}
 
 	@Test
@@ -55,7 +58,7 @@ public class ProgramDataOnDemand {
 
 		Program program = new Program();
 		//program.setProgramType("P");
-		program.setType(ProgramTypes.PRESCHOOL.toString());
+		program.setProgramTypes(ProgramTypes.NURSERY);
 
 		assertEquals(true, program.isPreSchool());
 	}
@@ -75,7 +78,6 @@ public class ProgramDataOnDemand {
 		setFees(obj, index);
 		setNotes(obj, index);
 		setTerm(obj, index);
-		setType(obj, index);
 		return obj;
 	}
 
@@ -113,8 +115,8 @@ public class ProgramDataOnDemand {
 	}
 
 	public void setType(Program obj, int index) {
-		String type = "type_" + index;
-		obj.setType(type);
+		ProgramTypes type = ProgramTypes.class.getEnumConstants()[0];
+		obj.setProgramTypes(type);
 	}
 
 	public Program getSpecificProgram(int index) {

@@ -30,6 +30,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hmi.kiddos.model.enums.TransportSide;
+
 @Configurable
 @Entity
 @Audited

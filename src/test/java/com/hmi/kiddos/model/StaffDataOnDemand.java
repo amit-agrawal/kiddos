@@ -12,6 +12,10 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
+import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.Department;
+import com.hmi.kiddos.model.enums.Gender;
+
 @Component
 @Configurable
 public class StaffDataOnDemand {
