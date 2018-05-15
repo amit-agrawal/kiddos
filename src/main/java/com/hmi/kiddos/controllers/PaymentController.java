@@ -4,8 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -182,10 +184,27 @@ public class PaymentController {
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("children", childDao.findAllChildren());
 		uiModel.addAttribute("programs", programDao.findAllPrograms());
-		uiModel.addAttribute("activePreschoolPrograms", programDao.findCurrentFuturePreschoolPrograms());
-		uiModel.addAttribute("activeDaycarePrograms", programDao.findCurrentFutureDaycarePrograms());
-		uiModel.addAttribute("activeCharges", programDao.findCurrentFutureCharges());
-		uiModel.addAttribute("activeOtherPrograms", programDao.findCurrentFutureOtherPrograms());
+		
+		List<Program> currentFuturePrograms = programDao.findCurrentFuturePrograms();
+		uiModel.addAttribute("activePreschoolPrograms", 
+				currentFuturePrograms.stream().
+					filter(program -> program.getProgramTypes().getType().equals("P")).
+					filter(program -> ! program.getIsCharge()).
+					collect(Collectors.toList()));
+		uiModel.addAttribute("activeDaycarePrograms", 
+				currentFuturePrograms.stream().
+				filter(program -> program.getProgramTypes().getType().equals("D")).
+				filter(program -> ! program.getIsCharge()).
+				collect(Collectors.toList()));
+		uiModel.addAttribute("activeCharges", 
+				currentFuturePrograms.stream().
+				filter(program -> program.getIsCharge()).
+				collect(Collectors.toList()));
+		uiModel.addAttribute("activeOtherPrograms", 
+				currentFuturePrograms.stream().
+				filter(program -> program.getProgramTypes().getType().equals("O")).
+				filter(program -> ! program.getIsCharge()).
+				collect(Collectors.toList()));
 		uiModel.addAttribute("paymentmediums", Arrays.asList(PaymentMedium.values()));
 	}
 

@@ -7,7 +7,7 @@
 			<display:column property="counter" title="Sq." sortable="true"/>
 
             <display:column sortable="true" title="Term/Month" property="term" group="1"/>
-            <display:column sortable="true" title="Program" property="type" group="2"/>
+            <display:column sortable="true" title="Program" property="programTypes" group="2"/>
             <display:column sortable="true" title="Batch/Plan" property="batch" />
             <display:column sortable="true" title="Notes" property="notes" />
             <display:column sortable="true" title="Fees" property="fees" />

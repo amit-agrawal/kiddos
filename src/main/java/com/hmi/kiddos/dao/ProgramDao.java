@@ -3,6 +3,7 @@ package com.hmi.kiddos.dao;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -44,10 +45,8 @@ public class ProgramDao {
 				.getResultList();
 	}
 
-	public List<Program> findCurrentFuturePreschoolPrograms() {
-		return entityManager().createQuery(
-				"SELECT o FROM Program o where due_date > current_date and type in ('Jr. K.G.', 'Sr. K.G.', 'Nursery','Play Group') and is_charge = 0 order by batch, type, start_date",
-				Program.class).getResultList();
+/*	public List<Program> findCurrentFuturePreschoolPrograms() {
+		return findCurrentFuturePrograms().stream().filter(program -> program.getProgramType().equals("D")).collect(Collectors.toList());
 	}
 
 	public List<Program> findCurrentFutureDaycarePrograms() {
@@ -67,7 +66,7 @@ public class ProgramDao {
 				"SELECT o FROM Program o where due_date > current_date and type not in ('DC','IC','Jr. K.G.','Sr. K.G.', 'Nursery','Play Group') and is_charge = 0 order by batch, type, start_date",
 				Program.class).getResultList();
 	}
-
+*/
 	public List<Program> findCurrentPrograms() {
 		return entityManager().createQuery(
 				"SELECT o FROM Program o where due_date > current_date and start_date <= current_date and is_charge = 0 order by type, term, batch",

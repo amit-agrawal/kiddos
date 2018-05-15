@@ -33,6 +33,7 @@ import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.google.common.base.Strings;
 import com.hmi.kiddos.model.enums.Gender;
 
 @Configurable
@@ -46,6 +47,9 @@ public class Child implements Comparable {
 
 	@Transient
 	private String age;
+
+	@Transient
+	private String emails;
 
 	@Transient
 	private String dobToDisplay;
@@ -556,4 +560,20 @@ public class Child implements Comparable {
 
 	@Column(name = "CREATION_TS", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar creationTS;
+
+	public String getEmails() {
+		StringBuilder emailString = new StringBuilder();
+		if (! Strings.isNullOrEmpty(emailOne))
+			emailString.append(emailOne);
+		if (! Strings.isNullOrEmpty(emailTwo))
+			emailString.append(", ").append(emailTwo);
+		if (! Strings.isNullOrEmpty(emailThree))
+			emailString.append(", ").append(emailThree);
+		
+		return emailString.toString();
+	}
+
+	public void setEmails(String emails) {
+		this.emails = emails;
+	}
 }

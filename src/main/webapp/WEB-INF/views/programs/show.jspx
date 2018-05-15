@@ -8,7 +8,7 @@
         <field:display calendar="true" dateTimePattern="${program_duedate_date_format}" field="dueDate" id="s_com_hmi_kiddos_model_Program_dueDate" object="${program}" z="bq+CYw+mLghiZzRdWfVAz3k4uBA="/>
         <field:display field="term" id="s_com_hmi_kiddos_model_Program_term" object="${program}" z="bbHud5MCTIsf2SPBYwKOjuwqsaY="/>
         <field:display field="batch" id="s_com_hmi_kiddos_model_Program_batch" object="${program}" z="rkvjrlCguNSQ33bZWKyygYptTBQ="/>
-        <field:display field="type" id="s_com_hmi_kiddos_model_Program_type" object="${program}" z="9SpHRVg8uC9NFOdtwwPDK/wrQkI="/>
+        <field:display field="programTypes" id="s_com_hmi_kiddos_model_Program_type" object="${program}" z="9SpHRVg8uC9NFOdtwwPDK/wrQkI="/>
         <field:display field="isCharge" id="s_com_hmi_kiddos_model_Program_isCharge" object="${program}" z="9SpHRVg8uC9NFOdtwwPDK/wrQkI="/>
         <field:display field="teacher" id="s_com_hmi_kiddos_model_Program_teacher" object="${program}" z="SpE2tvodHAMtrbvA7DRwzdayk9o="/>
         <field:display field="teacherTwo" id="s_com_hmi_kiddos_model_Program_teacher" object="${program}" z="SpE2tvodHAMtrbvA7DRwzdayk9o="/>
@@ -21,15 +21,16 @@
 			<display:column property="firstName" title="First Name" sortable="true"/>
 			<display:column property="lastName" title="Last Name" sortable="true"/>
 			<display:column property="dobToDisplay" title="D.O.B." sortable="true" />
-			<display:column property="motherName" title="Mother Name" sortable="true"/>
-			<display:column property="fatherName" title="Father Name" sortable="true"/>
 			<display:column property="address" title="Address" sortable="true"/>
 			<display:column property="phoneMother" title="Phone Mother" sortable="true"/>
 			<display:column property="phoneFather" title="Phone Father" sortable="true"/>
+			<display:column property="emails" title="Email Ids" sortable="true"/>
+			<display:column property="motherName" title="Mother Name" sortable="true"/>
+			<display:column property="fatherName" title="Father Name" sortable="true"/>
             <display:column property="transportations" title="Transport" sortable="true"/>
 
-			<display:setProperty name="export.pdf.filename" value="${program.type}_${program.term}_${program.batch}_kids.pdf"/>
-			<display:setProperty name="export.csv.filename" value="${program.type}_${program.term}_${program.batch}_kids.csv"/>
+			<display:setProperty name="export.pdf.filename" value="${program.programTypes}_${program.term}_${program.batch}_kids.pdf"/>
+			<display:setProperty name="export.csv.filename" value="${program.programTypes}_${program.term}_${program.batch}_kids.csv"/>
 
 			<display:column property="secondLevelChildShowLink" title="Links" sortable="false" media="html"/>
 

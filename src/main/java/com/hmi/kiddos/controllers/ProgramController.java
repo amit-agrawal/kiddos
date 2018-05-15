@@ -24,6 +24,7 @@ import com.hmi.kiddos.dao.ProgramDao;
 import com.hmi.kiddos.model.Program;
 import com.hmi.kiddos.model.Staff;
 import com.hmi.kiddos.model.enums.Centers;
+import com.hmi.kiddos.model.enums.ProgramTypes;
 
 @RequestMapping("/programs")
 @Controller
@@ -121,6 +122,7 @@ public class ProgramController {
 		addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("admissions", admissionDao.findAllAdmissions());
 		uiModel.addAttribute("centerses", Arrays.asList(Centers.values()));
+		uiModel.addAttribute("types", Arrays.asList(ProgramTypes.values()));
 		uiModel.addAttribute("staffs", Staff.findAllStaffs());
 	}
 

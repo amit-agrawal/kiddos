@@ -17,7 +17,7 @@
         <table:table data="${payment.programs}" id="l_com_hmi_kiddos_model_Program" path="/programs" z="user-managed">
             <table:column id="c_com_hmi_kiddos_model_Program_term" property="term" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
             <table:column id="c_com_hmi_kiddos_model_Program_batch" property="batch" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
-            <table:column id="c_com_hmi_kiddos_model_Program_type" property="type" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
+            <table:column id="c_com_hmi_kiddos_model_Program_type" property="programTypes" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
             <table:column id="c_com_hmi_kiddos_model_Program_fees" property="fees" z="y3VMzgdBrFpViNEBLDWKl0z1G24="/>
        </table:table>
     </page:show>

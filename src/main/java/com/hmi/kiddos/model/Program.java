@@ -41,7 +41,7 @@ import com.hmi.kiddos.model.enums.ProgramTypes;
 
 @Configurable
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "term", "batch", "center", "notes" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "term", "batch", "center", "notes", "programTypes" }) })
 @Audited
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Program implements Comparable {
