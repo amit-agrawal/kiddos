@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -391,6 +392,17 @@ public class Staff implements Comparable {
 
 	public static List<Staff> findAllActiveStaffs() {
         return entityManager().createQuery("SELECT o FROM Staff o where enabled = 1", Staff.class).getResultList();
+    }
+
+	public boolean isTeacherOrTrainer() {
+		return (department == Department.Teacher || department == Department.Trainer);
+	}
+	
+ 	public static List<Staff> findAllActiveTeacherTrainers() {
+        List<Staff> activeStaff = entityManager().createQuery("SELECT o FROM Staff o where enabled = 1", Staff.class).getResultList();
+        return activeStaff.stream()
+        			.filter(staff -> staff.isTeacherOrTrainer())
+        			.collect(Collectors.toList());
     }
 
 	public static List<Staff> findAllStaffs(String sortFieldName, String sortOrder) {

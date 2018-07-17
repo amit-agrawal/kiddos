@@ -123,7 +123,7 @@ public class ProgramController {
 		uiModel.addAttribute("admissions", admissionDao.findAllAdmissions());
 		uiModel.addAttribute("centerses", Arrays.asList(Centers.values()));
 		uiModel.addAttribute("types", Arrays.asList(ProgramTypes.values()));
-		uiModel.addAttribute("staffs", Staff.findAllStaffs());
+		uiModel.addAttribute("staffs", Staff.findAllActiveTeacherTrainers());
 	}
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
