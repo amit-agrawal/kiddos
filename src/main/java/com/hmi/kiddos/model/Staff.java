@@ -1,4 +1,8 @@
 package com.hmi.kiddos.model;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +25,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -151,6 +156,28 @@ public class Staff implements Comparable {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Calendar dob;
+
+	@Transient
+	private String dobToDisplay;
+
+	public String getDobToDisplay() {
+		String output = "";
+		if (dob != null) {
+			LocalDate birthday = getDobAsLocalDate();
+
+			output = birthday.format(DateTimeFormatter.ISO_LOCAL_DATE);
+		}
+		return output;
+	}
+
+	private LocalDate getDobAsLocalDate() {
+		ZonedDateTime zdt = ZonedDateTime.ofInstant(dob.toInstant(), ZoneId.systemDefault());
+		return zdt.toLocalDate();
+	}
+
+	public void setDobToDisplay(String dobToDisplay) {
+		this.dobToDisplay = dobToDisplay;
+	}
 
     /**
      */

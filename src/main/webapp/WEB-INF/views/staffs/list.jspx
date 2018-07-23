@@ -10,7 +10,7 @@
             <display:column sortable="true" title="Last Name" property="lastName" />
             <display:column sortable="true" title="Depart." property="department" />
             <display:column sortable="true" title="Email" property="emailOne" />
-            <!--display:column sortable="true" title="D.O.B." property="dob" /-->
+            <display:column sortable="true" title="Date of Birth" property="dobToDisplay" />
             <display:column sortable="true" title="Address" property="address" />
             <display:column sortable="true" title="Phone" property="phone" />
             <display:column sortable="true" title="Phone Other" property="phoneHome" />
