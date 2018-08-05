@@ -20,6 +20,8 @@ import javax.mail.internet.MimeMultipart;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.hmi.kiddos.model.SalaryInfo;
+
 @Component
 public class MailUtil {
 	/*
@@ -134,6 +136,59 @@ public class MailUtil {
 		}
 	}
 
+	public void sendPaySlip(String docPath, SalaryInfo salaryInfo) {
+		Logger.getLogger(MailUtil.class).info(String.format("Sending payslip with user %s ", username));
+
+		try {
+			Session session = getMailSession();
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			StringBuilder recepients = new StringBuilder();
+			if (notify != null && !notify.isEmpty())
+				recepients.append(notify);
+					
+			recepients.append(",").append(salaryInfo.getEmailId());
+
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recepients.toString(), false));
+			message.setSubject(String.format("%s: Payslip for %s", salaryInfo.getFirstName(), salaryInfo.getMonth()));
+
+			if (docPath != null) {
+				Logger.getLogger(MailUtil.class).info("Sending Mail with attachment");
+
+				// Create the message part
+				BodyPart messageBodyPart = new MimeBodyPart();
+
+				// Now set the actual message
+				messageBodyPart.setText(String.format("Payslip is attached. This is a confidential document."));
+
+				// Create a multipar message
+				Multipart multipart = new MimeMultipart();
+
+				// Set text message part
+				multipart.addBodyPart(messageBodyPart);
+
+				// Part two is attachment
+				messageBodyPart = new MimeBodyPart();
+				DataSource source = new FileDataSource(docPath);
+				messageBodyPart.setDataHandler(new DataHandler(source));
+				messageBodyPart.setFileName(docPath.substring(2, docPath.length()));
+				multipart.addBodyPart(messageBodyPart);
+
+				// Send the complete message parts
+				message.setContent(multipart);
+				Transport.send(message);
+			}
+
+			Logger.getLogger(MailUtil.class).info("Sent Mail");
+		} catch (MessagingException e) {
+			Logger.getLogger(MailUtil.class).error("Error while sending mail", e);
+
+			throw new RuntimeException(e);
+		}
+	}
+
+	
 	private Session getMailSession() {
 		Properties props = gmailProperties();
 

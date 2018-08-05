@@ -34,7 +34,7 @@ import com.hmi.kiddos.model.Child;
 import com.hmi.kiddos.model.Payment;
 import com.hmi.kiddos.model.Program;
 import com.hmi.kiddos.model.enums.PaymentMedium;
-import com.hmi.kiddos.util.DocumentGenerator;
+import com.hmi.kiddos.util.InvoiceDocumentGenerator;
 import com.hmi.kiddos.util.MailUtil;
 
 @RequestMapping("/payments")
@@ -47,7 +47,7 @@ public class PaymentController {
 	private ProgramDao programDao;
 
 	@Autowired
-	private DocumentGenerator documentGenerator;
+	private InvoiceDocumentGenerator documentGenerator;
 
 	@Autowired
 	private MailUtil mailUtil;

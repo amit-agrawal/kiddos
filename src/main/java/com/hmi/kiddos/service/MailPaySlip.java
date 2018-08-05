@@ -1,10 +1,15 @@
 package com.hmi.kiddos.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.hmi.kiddos.model.SalaryInfo;
+import com.hmi.kiddos.util.MailUtil;
 
 public class MailPaySlip {
 
-	
+	@Autowired
+	private MailUtil mailUtil;
+
 	
 	public boolean mailPlaySlip(String docPath, String[] mailIds) {
 		
@@ -12,7 +17,7 @@ public class MailPaySlip {
 	}
 
 	public void mailPaySlipDocToEmployee(String docPath, SalaryInfo salaryInfo) {
-		// TODO Auto-generated method stub
+		mailUtil.sendPaySlip(docPath, salaryInfo);
 		
 	}
 	

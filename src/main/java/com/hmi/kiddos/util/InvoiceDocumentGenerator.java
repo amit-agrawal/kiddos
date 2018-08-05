@@ -23,20 +23,20 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
 @Service
-public class DocumentGenerator {
+public class InvoiceDocumentGenerator {
 	private SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
-	
+
 	@Value("${address.first:}")
 	private String addressFirst;
-	
+
 	@Value("${address.second:}")
 	private String addressSecond;
-	
+
 	@Value("${address.third:}")
 	private String addressThird;
-	
+
 	@Value("${address.fourth:}")
-	private String addressFourth;	
+	private String addressFourth;
 
 	public String generateInvoice(Payment payment) {
 		String path = null;
@@ -47,11 +47,12 @@ public class DocumentGenerator {
 			path = "./" + payment.getChild().getFirstName() + "_" + payment.getChild().getLastName() + "_"
 					+ System.currentTimeMillis() + ".pdf";
 
-			path = path.replace(' ', '_');	
+			path = path.replace(' ', '_');
 			PdfWriter writer = new PdfWriter(path);
 			PdfDocument pdf = new PdfDocument(writer);
-			pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new InvoiceBackgroundHandler());
-			Document doc = new Document(pdf); 
+			pdf.addEventHandler(PdfDocumentEvent.END_PAGE,
+					new PdfDocumentBackgroundHandler("Note: Fees Paid is Non Refundable & Non Transferable"));
+			Document doc = new Document(pdf);
 
 			doc.add(new Paragraph("RECEIPT").setFont(bold).setTextAlignment(TextAlignment.CENTER));
 			addHeader(doc, bold);
@@ -75,7 +76,7 @@ public class DocumentGenerator {
 			doc.close();
 
 		} catch (Exception ex) {
-			Logger.getLogger(DocumentGenerator.class).error("Could not generate receipt", ex);
+			Logger.getLogger(InvoiceDocumentGenerator.class).error("Could not generate receipt", ex);
 		}
 		return path;
 	}
@@ -141,11 +142,9 @@ public class DocumentGenerator {
 	private void addHeader(Document doc, PdfFont bold) {
 		doc.add(new Paragraph("Happy Minds International Education LLP").setFont(bold)
 				.setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph(addressFirst).setFont(bold)
-				.setTextAlignment(TextAlignment.LEFT));
+		doc.add(new Paragraph(addressFirst).setFont(bold).setTextAlignment(TextAlignment.LEFT));
 		doc.add(new Paragraph(addressSecond).setFont(bold).setTextAlignment(TextAlignment.LEFT));
-		doc.add(new Paragraph(addressThird).setFont(bold)
-				.setTextAlignment(TextAlignment.LEFT));
+		doc.add(new Paragraph(addressThird).setFont(bold).setTextAlignment(TextAlignment.LEFT));
 		doc.add(new Paragraph(addressFourth).setFont(bold).setTextAlignment(TextAlignment.LEFT));
 	}
 

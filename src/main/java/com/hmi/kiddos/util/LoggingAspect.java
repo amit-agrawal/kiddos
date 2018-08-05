@@ -16,7 +16,7 @@ public class LoggingAspect {
 		long timeTaken = System.currentTimeMillis() - start;
 		try {
 
-			if (timeTaken > 0) {
+			if (timeTaken > 100) {
 				//String args = Arrays.asList(point.getArgs()).toString();
 				//String args = point.getArgs().toString();
 				Logger.getLogger(LoggingAspect.class).info(String.format("Called %s.%s in %d ms",

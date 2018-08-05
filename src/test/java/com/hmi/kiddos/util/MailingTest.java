@@ -19,7 +19,7 @@ public class MailingTest {
 	private MailUtil mailUtil;
 
 	@Autowired
-	private DocumentGenerator docGenerator;
+	private InvoiceDocumentGenerator docGenerator;
 
 	@Autowired
 	PaymentDataOnDemand dod;

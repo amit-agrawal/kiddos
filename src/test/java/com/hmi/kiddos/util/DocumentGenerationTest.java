@@ -18,7 +18,7 @@ import com.hmi.kiddos.model.PaymentDataOnDemand;
 @Configurable
 public class DocumentGenerationTest {
 	@Autowired
-	private DocumentGenerator docGenerator;
+	private InvoiceDocumentGenerator docGenerator;
 
 	@Autowired
 	PaymentDataOnDemand dod;

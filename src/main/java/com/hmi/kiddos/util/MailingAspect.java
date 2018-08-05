@@ -15,7 +15,7 @@ public class MailingAspect {
 	private MailUtil mailUtil;
 
 	@Autowired
-	private DocumentGenerator docGenerator;
+	private InvoiceDocumentGenerator docGenerator;
 
 	@Around("execution(* com.hmi.kiddos.controllers..*(..))")
 	public Object around(ProceedingJoinPoint point) throws Throwable {

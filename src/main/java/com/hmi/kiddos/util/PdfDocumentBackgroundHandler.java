@@ -20,8 +20,16 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.kernel.pdf.extgstate.PdfExtGState;
 
-public class InvoiceBackgroundHandler implements IEventHandler {
+public class PdfDocumentBackgroundHandler implements IEventHandler {
+	public PdfDocumentBackgroundHandler(String footerNote) {
+		super();
+		this.footerNote = footerNote;
+	}
 
+
+	private String footerNote;
+	
+	
 	@Override
 	public void handleEvent(Event event) {
 		try {
@@ -51,7 +59,7 @@ public class InvoiceBackgroundHandler implements IEventHandler {
             .moveText(pageSize.getWidth() / 2 - 120, pageSize.getTop() - 20)
             .showText("")
             .moveText(10, -pageSize.getTop() + 40)
-            .showText("Note: Fees Paid is Non Refundable & Non Transferable")
+            .showText(footerNote)
             .endText();
             
 			//pdfCanvas.beginText().setFontAndSize(font, 9).moveText(10, 40 - pageSize.getTop())
@@ -60,7 +68,7 @@ public class InvoiceBackgroundHandler implements IEventHandler {
 			pdfCanvas.release();
 
 		} catch (IOException e) {
-			Logger.getLogger(DocumentGenerator.class).error("Could not set background of invoice", e);
+			Logger.getLogger(InvoiceDocumentGenerator.class).error("Could not set background of invoice", e);
 		}
 	}
 }
