@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hmi.kiddos.model.SalaryInfo;
 import com.hmi.kiddos.service.CreatePaySlip;
@@ -28,11 +29,13 @@ public class PaySlipBatch {
 		this.createPaySlip = createPaySlip;
 	}
 
+	@Autowired
 	private MailPaySlip mailPaySlip;
 
+	@Autowired
 	private CreatePaySlip createPaySlip;
 
-	private void runPaySlipBatchProcess(String filePath) {
+	public void runPaySlipBatchProcess(String filePath, boolean sendMail) {
 
 		try {
 			FileInputStream excelFile = new FileInputStream(new File(filePath));
@@ -51,11 +54,15 @@ public class PaySlipBatch {
 					String docPath = createPaySlip.createPaySlipDoc(salaryInfo);
 					Logger.getLogger(PaySlipBatch.class).info(count + " Salary Slip Doc Path is " + docPath);
 
-					if (salaryInfo.getSendMail().trim().equals("Y")) {
-						mailPaySlip.mailPaySlipDocToEmployee(docPath, salaryInfo);
-						Logger.getLogger(PaySlipBatch.class).info(count + " Salary Slip Mailed from path " + docPath);
-					} else {
-						Logger.getLogger(PaySlipBatch.class).warn("Not processing as sendMail flag is: " + salaryInfo.getSendMail());
+					if (sendMail) {
+						if (salaryInfo.getSendMail().trim().equals("Y")) {
+							mailPaySlip.mailPaySlipDocToEmployee(docPath, salaryInfo);
+							Logger.getLogger(PaySlipBatch.class)
+									.info(count + " Salary Slip Mailed from path " + docPath);
+						} else {
+							Logger.getLogger(PaySlipBatch.class)
+									.warn("Not processing as sendMail flag is: " + salaryInfo.getSendMail());
+						}
 					}
 				}
 
@@ -149,11 +156,10 @@ public class PaySlipBatch {
 			salaryInfo.setMonth(currentRow.getCell(24).getStringCellValue());
 
 		if (salaryInfo.getMonth() == null || salaryInfo.getMonth().isEmpty()) {
-			Logger.getLogger(this.getClass())
-					.error("Month is not set for " + salaryInfo.getFirstName());
+			Logger.getLogger(this.getClass()).error("Month is not set for " + salaryInfo.getFirstName());
 			return null;
 		}
-		
+
 		double netCalculatedSalary = salaryInfo.getPayAfterHolidays() - salaryInfo.getPfEmployeeDeduction()
 				- salaryInfo.getPT() + salaryInfo.getOtIncentive() - salaryInfo.getSalaryWithheld();
 
@@ -177,7 +183,7 @@ public class PaySlipBatch {
 
 		PaySlipBatch paySlipBatch = new PaySlipBatch(new MailPaySlip(), new CreatePaySlip());
 
-		paySlipBatch.runPaySlipBatchProcess(args[0]);
+		paySlipBatch.runPaySlipBatchProcess(args[0], false);
 
 	}
 }
