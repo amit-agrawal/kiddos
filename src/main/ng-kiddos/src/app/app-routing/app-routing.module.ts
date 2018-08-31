@@ -8,6 +8,7 @@ import { TransportComponent } from '../transport/transport.component';
 import { ChildComponent } from '../child/child.component';
 import { AdmissionComponent } from '../admission/admission.component';
 import { HomeComponent } from '../home/home.component';
+import { AdmissionEditComponent } from '../admission/admission-edit/admission-edit.component';
 
 
 const appRoutes: Routes = [
@@ -17,7 +18,9 @@ const appRoutes: Routes = [
   {path:'staff', component: StaffComponent},
   {path:'transport', component: TransportComponent},
   {path:'child', component: ChildComponent},
-  {path:'admission', component: AdmissionComponent}
+  {path:'admission', component: AdmissionComponent},
+  {path:'admission/new', component: AdmissionEditComponent},
+  {path:'admission/:id/edit', component: AdmissionEditComponent}
 ];
 
 @NgModule({

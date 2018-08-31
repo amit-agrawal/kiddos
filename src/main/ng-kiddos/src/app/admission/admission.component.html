@@ -1,29 +1,45 @@
 <div class="row">
   <div class="col-md-12">
     <h3>Admission</h3>
-    <p-table [value]="admissions">
+    <p-table #dt [value]="admissions" selectionMode="single" [(selection)]="selectedAdmission">
       <ng-template pTemplate="header">
           <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Age</th>
-              <th>Term/Month</th>
-              <th>Program</th>
-              <th>Batch/Plan</th>
-              <th>Admission Date</th>
+            <th [pSortableColumn]="col.field"  *ngFor="let col of admissionColumns">{{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>            
+          </tr>
+          <tr>             
+            <td *ngFor="let col of admissionColumns">
+                <input type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                     
+            </td>            
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-admission>
-          <tr>
+          <tr [pSelectableRow]="admission">
               <td>{{admission.firstName}}</td>
               <td>{{admission.lastName}}</td>
               <td>{{admission.age}}</td>
-              <td>{{admission.term_month}}</td>
-              <td>{{admission.program}}</td>
-              <td>{{admission.batch_plan}}</td>
+              <td>{{admission.termMonth}}</td>
+              <td>{{admission.program.value}}</td>
+              <td>{{admission.batchPlan}}</td>
               <td>{{admission.admissionDate}}</td>
           </tr>
       </ng-template>
+      <ng-template pTemplate="summary">
+          <div style="text-align: left">
+              Selected Admission: {{selectedAdmission ? selectedAdmission.firstName + ' - ' + selectedAdmission.lastName : 'none'}}
+          </div>
+      </ng-template>
   </p-table>
+  <br>
+  <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-primary" type="button" (click)="onNew()">New Admission</button>
+        &nbsp; &nbsp;
+        <button class="btn btn-primary" type="button" (click)="onEdit()">Edit Selected</button>  
+        &nbsp; &nbsp;
+        <button class="btn btn-primary" type="button" (click)="onDelete()">Delete Selected</button>        
+      </div>
+    </div>
   </div>
 </div>

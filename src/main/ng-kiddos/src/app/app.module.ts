@@ -12,6 +12,11 @@ import { ChildComponent } from './child/child.component';
 import { HomeComponent } from './home/home.component';
 import { AdmissionService } from './admission/admission.service';
 import { TableModule } from 'primeng/table';
+import { AdmissionEditComponent } from './admission/admission-edit/admission-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SrdService } from './shared/srd.service';
+import {DropdownModule } from 'primeng/dropdown';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,15 +27,18 @@ import { TableModule } from 'primeng/table';
     TransportComponent,
     AdmissionComponent,
     ChildComponent,
-    HomeComponent   
+    HomeComponent,
+    AdmissionEditComponent   
   ],
   imports: [
     BrowserModule ,
     AppRoutingModule,
-    TableModule
-    
+    TableModule,
+    ReactiveFormsModule  ,
+    DropdownModule  ,
+    BrowserAnimationsModule     
   ],
-  providers: [AdmissionService],
+  providers: [AdmissionService, SrdService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA ]
 })
