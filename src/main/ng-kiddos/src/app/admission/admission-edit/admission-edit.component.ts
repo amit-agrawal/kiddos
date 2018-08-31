@@ -15,6 +15,7 @@ export class AdmissionEditComponent implements OnInit {
   selectedAdmission : Admission;
   admissionForm : FormGroup;
   programs : SrdData[];
+  program : SrdData;
 
   constructor(private route: ActivatedRoute, 
     private router: Router, 
@@ -74,5 +75,15 @@ export class AdmissionEditComponent implements OnInit {
         this.admissionService.addAdmission(updateAdmission);
       }
         this.router.navigate(['/admission'], {relativeTo: this.route});
+      }
+
+      onCancel()
+      {
+
+      }
+
+      onSubmit()
+      {
+
       }
 }
