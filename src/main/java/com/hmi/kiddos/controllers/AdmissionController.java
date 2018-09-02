@@ -84,6 +84,11 @@ public class AdmissionController {
 		return "admissions/list";
 	}
 
+	@RequestMapping(produces = "text/json")
+	public List<Admission> getAll() {
+		return admissionDao.findAllAdmissions();
+	}
+
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
 	public String update(@Valid Admission admission, BindingResult bindingResult, Model uiModel,
 			HttpServletRequest httpServletRequest) {
