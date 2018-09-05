@@ -8,7 +8,7 @@ import com.hmi.kiddos.util.MailUtil;
 public class MailPaySlip {
 
 	@Autowired
-	private MailUtil mailUtil;
+	private MailUtil mailUtil = new MailUtil();
 
 	
 	public boolean mailPlaySlip(String docPath, String[] mailIds) {

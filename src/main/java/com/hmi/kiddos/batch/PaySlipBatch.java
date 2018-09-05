@@ -100,7 +100,7 @@ public class PaySlipBatch {
 
 		if (salaryInfo.getEmailId() == null || !isValidEmailAddress(salaryInfo.getEmailId())) {
 			Logger.getLogger(PaySlipBatch.class)
-					.warn("Email address not valid, not parsing further " + currentRow.toString());
+					.warn("Email address not valid, not parsing further " + currentRow.getRowNum());
 			return null;
 		}
 
@@ -183,7 +183,7 @@ public class PaySlipBatch {
 
 		PaySlipBatch paySlipBatch = new PaySlipBatch(new MailPaySlip(), new CreatePaySlip());
 
-		paySlipBatch.runPaySlipBatchProcess(args[0], false);
+		paySlipBatch.runPaySlipBatchProcess(args[0], true);
 
 	}
 }
