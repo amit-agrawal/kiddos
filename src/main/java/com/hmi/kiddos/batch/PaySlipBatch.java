@@ -16,17 +16,22 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hmi.kiddos.model.SalaryInfo;
 import com.hmi.kiddos.service.CreatePaySlip;
 import com.hmi.kiddos.service.MailPaySlip;
 
+@Service
 public class PaySlipBatch {
 
 	public PaySlipBatch(MailPaySlip mailPaySlip, CreatePaySlip createPaySlip) {
 		super();
 		this.mailPaySlip = mailPaySlip;
 		this.createPaySlip = createPaySlip;
+	}
+
+	public PaySlipBatch() {
 	}
 
 	@Autowired

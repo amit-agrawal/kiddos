@@ -1,0 +1,79 @@
+
+
+<div class="row">
+  <div class="col-xs-12">
+      <h3 *ngIf="editMode">Edit Admission</h3>
+
+      <h3 *ngIf="!editMode">New Admission</h3>
+      <br>
+    <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-control" formControlName="lastName">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input type="text" id="age" class="form-control" formControlName="age">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="termMonth">Term/Month</label>
+                  <input type="text" id="termMonth" class="form-control" formControlName="termMonth">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="program">Program</label>
+                    <br>
+                    <p-dropdown [options]="programs" formControlName="program" optionLabel="value" id="program" [showClear]="true"
+                    placeholder="Select a Program"></p-dropdown>   
+                    <p>Selected Program: {{program ? program.key : 'none'}}</p>                 
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <label for="batchPlan">Batch/Plan</label>
+                      <input type="text" id="batchPlan" class="form-control" formControlName="batchPlan">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label for="admissionDate">Admission Date</label>
+                        <input type="date" id="admissionDate" class="form-control" formControlName="admissionDate">
+                      </div>
+                    </div>
+                  </div>
+        <div class="row">
+            <div class="col-xs-12">
+              <button type="submit" class="btn btn-success" [disabled]="!admissionForm.valid" (click)="onSave()">Save</button>
+              &nbsp;&nbsp;
+              <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+          </div>
+    </form>
+  </div>
+</div>

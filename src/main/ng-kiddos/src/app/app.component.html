@@ -1,0 +1,37 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a href="" class="navbar-brand">Kiddos</a>
+    </div>
+    <div class="navbar-default">
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink="/payment" routerLinkActive="active">Payment</a>
+        </li>
+        <li>
+            <a routerLink="/program" routerLinkActive="active">Program</a>
+          </li>
+        <li>
+            <a routerLink="/staff" routerLinkActive="active">Staff</a>
+        </li>
+        <li>
+          <a routerLink="/transport" routerLinkActive="active">Transport</a>
+        </li>
+        <li>
+            <a routerLink="/child" routerLinkActive="active">Child</a>
+        </li>
+        <li>
+          <a routerLink="/admission" routerLinkActive="active">Admission</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
