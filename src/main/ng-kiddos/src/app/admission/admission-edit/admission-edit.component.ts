@@ -79,7 +79,7 @@ export class AdmissionEditComponent implements OnInit {
 
       onCancel()
       {
-
+        this.router.navigate(['/admission'], {relativeTo: this.route});
       }
 
       onSubmit()
