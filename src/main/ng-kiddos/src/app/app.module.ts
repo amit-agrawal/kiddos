@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SrdService } from './shared/srd.service';
 import {DropdownModule } from 'primeng/dropdown';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     TableModule,
     ReactiveFormsModule  ,
     DropdownModule  ,
-    BrowserAnimationsModule     
+    BrowserAnimationsModule,
+    //HttpClientModule,
+    HttpModule     
   ],
   providers: [AdmissionService, SrdService],
   bootstrap: [AppComponent],

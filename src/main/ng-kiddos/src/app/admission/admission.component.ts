@@ -16,7 +16,7 @@ export class AdmissionComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.admissions = this.admissionService.getAllAdmissions();
+    this.initAdmissions();
     this.admissionColumns = [
       {field:'firstName', header:'First Name'},
       {field:'lastName', header:'Last Name'},
@@ -24,9 +24,17 @@ export class AdmissionComponent implements OnInit {
       {field:'termMonth', header:'Term Month'},
       {field:'program', header:'Program'},
       {field:'batchPlan', header:'Batch Plan'},
-      {field:'admissionDate', header:'Admission Date'},              
-    ];
-    //console.log(this.admissions);
+      {field:'admissionDate', header:'Admission Date'}              
+    ];    
+  }
+
+  initAdmissions(): void {
+    this.admissionService.getAllAdmissions()
+    .subscribe(data => {
+      console.log(data);
+      this.admissions = data;
+     
+    });
   }
 
   onNew()
@@ -38,6 +46,7 @@ export class AdmissionComponent implements OnInit {
   {
     this.router.navigate([this.selectedAdmission.id, 'edit'], {relativeTo: this.route});
   }
+
   onDelete()
   {
     // todo : add are you sure??
