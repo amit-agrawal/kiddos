@@ -1,6 +1,9 @@
 import { SrdData, SrdService } from "../shared/srd.service";
 import { Injectable } from "@angular/core";
-
+//import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { Headers, Http, Response } from '@angular/http';
+import { Observable, of } from "rxjs";
+import { catchError, map, tap } from 'rxjs/operators';
 
 export class Admission{
     id:number;
@@ -36,9 +39,11 @@ export class Admission{
 @Injectable()
 export class AdmissionService{
 
-    constructor(private srdService: SrdService){}
+    constructor(private srdService: SrdService, 
+        private http: Http){}
 
     admissions: Admission[] = [
+    
         new Admission(1,'Sid',
             'Sharma',
             '3 years 2 months',
@@ -59,13 +64,62 @@ export class AdmissionService{
             'March 16',
             this.srdService.getPrograms()[2],
             'Morning',
-            '2-2-2016')
+            '2-2-2016'),
+            new Admission(3, 'Myra',
+              'Deshpande',
+              '4 years 6 months',
+              'March 16',
+              this.srdService.getPrograms()[2],
+              'Morning',
+              '2-2-2016'),
+              new Admission(3, 'Myra',
+                'Deshpande',
+                '4 years 6 months',
+                'March 16',
+                this.srdService.getPrograms()[2],
+                'Morning',
+                '2-2-2016'),
+                new Admission(3, 'Myra',
+                  'Deshpande',
+                  '4 years 6 months',
+                  'March 16',
+                this.srdService.getPrograms()[2],
+                  'Morning',
+                  '2-2-2016'),
+                  new Admission(3, 'Myra',
+                    'Deshpande',
+                    '4 years 6 months',
+                    'March 16',
+                this.srdService.getPrograms()[2],
+                    'Morning',
+                    '2-2-2016'),
+                    new Admission(3, 'Myra',
+                      'Deshpande',
+                      '4 years 6 months',
+                      'March 16',
+                this.srdService.getPrograms()[2],
+                      'Morning',
+                      '2-2-2016')
     ];
-    getAllAdmissions()
-    {
-        //todo
-       return this.admissions;
+    
+    getAllAdmissions() : Observable<Admission[]>
+    {        
+        var admissionUrl = 'http://localhost:8081/listAdmissions'; 
+        console.log('before call');
+        return this.http.get(admissionUrl)
+        .pipe(map(response => <Admission[]>response.json().admission));                
     }
+
+    private handleError<T> (operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+       
+          // TODO: send the error to remote logging infrastructure
+          console.error(error); // log to console instead
+       
+          // Let the app keep running by returning an empty result.
+          return of(result as T);
+        };
+      }
 
     getAdmissionById(id: number)
     {
