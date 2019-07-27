@@ -111,7 +111,7 @@ public class PaySlipDocumentGenerator {
 		process(table, "Gross CTC", true, font);
 		process(table, "Payable Days", true, font);
 		if (salaryInfo.getOtIncentive() > 0)
-			process(table, "Overtime/Incentive", true, font);
+			process(table, "Overtime/Incentive/Reimbursement/Dues", true, font);
 		if (salaryInfo.getPfGovernmentContribution() > 0)
 			process(table, "PMRPY PF", true, font);
 

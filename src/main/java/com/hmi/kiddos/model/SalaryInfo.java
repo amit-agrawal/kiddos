@@ -167,6 +167,10 @@ public class SalaryInfo {
 		builder.append("SalaryInfo [");
 		if (month != null)
 			builder.append("month=").append(month).append(", ");
+		if (firstName != null)
+			builder.append("firstName=").append(firstName).append(", ");
+		if (lastName != null)
+			builder.append("lastName=").append(lastName);
 		builder.append("basic=").append(basic).append(", netPay=").append(netPay).append(", grossPay=").append(grossPay)
 				.append(", workingDays=").append(workingDays).append(", holidays=").append(holidays)
 				.append(", deductionDays=").append(deductionDays).append(", payAfterHolidays=").append(payAfterHolidays)
@@ -175,15 +179,12 @@ public class SalaryInfo {
 				.append(clConsidered).append(", pfEmployeeDeduction=").append(pfEmployeeDeduction)
 				.append(", pfCompanyDeduction=").append(pfCompanyDeduction).append(", pfGovernmentContribution=")
 				.append(pfGovernmentContribution).append(", otherLeavesConsumed=").append(otherLeavesConsumed)
+				.append(", salaryWithheld=").append(salaryWithheld)
 				.append(", otherLeavesRemaining=").append(otherLeavesRemaining).append(", ");
 		if (remarks != null)
 			builder.append("remarks=").append(remarks).append(", ");
 		if (emailId != null)
 			builder.append("emailId=").append(emailId).append(", ");
-		if (firstName != null)
-			builder.append("firstName=").append(firstName).append(", ");
-		if (lastName != null)
-			builder.append("lastName=").append(lastName);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -48,6 +48,7 @@ public class PaySlipBatch {
 			Sheet datatypeSheet = workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			int count = 0;
+			int mailedCount = 0;
 
 			while (iterator.hasNext()) {
 
@@ -57,26 +58,26 @@ public class PaySlipBatch {
 				if (salaryInfo != null) {
 					count++;
 					String docPath = createPaySlip.createPaySlipDoc(salaryInfo);
-					Logger.getLogger(PaySlipBatch.class).info(count + " Salary Slip Doc Path is " + docPath);
+					//Logger.getLogger(PaySlipBatch.class).info(count + " Salary Slip Doc Path is " + docPath);
 
 					if (sendMail) {
 						if (salaryInfo.getSendMail().trim().equals("Y")) {
 							mailPaySlip.mailPaySlipDocToEmployee(docPath, salaryInfo);
 							Logger.getLogger(PaySlipBatch.class)
 									.info(count + " Salary Slip Mailed from path " + docPath);
-						} else {
-							Logger.getLogger(PaySlipBatch.class)
-									.warn("Not processing as sendMail flag is: " + salaryInfo.getSendMail());
-						}
+							mailedCount++;
+						} 
 					}
 				}
 
-				Logger.getLogger(PaySlipBatch.class).info("Number of salary slips generated: " + count);
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger(PaySlipBatch.class).info("Number of salary slips generated: " + count);
+			Logger.getLogger(PaySlipBatch.class).info("Number of salary slips mailed: " + mailedCount);
+
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(PaySlipBatch.class).error(ex);
+		} catch (IOException ex) {
+			Logger.getLogger(PaySlipBatch.class).error(ex);
 		}
 
 	}
@@ -97,6 +98,13 @@ public class PaySlipBatch {
 		if (currentRow.getCell(3) != null && currentRow.getCell(3).getCellType() == Cell.CELL_TYPE_STRING)
 			salaryInfo.setSendMail(currentRow.getCell(3).getStringCellValue());
 
+		if (salaryInfo.getSendMail() == null || 
+				!(salaryInfo.getSendMail().equals("N") || salaryInfo.getSendMail().equals("Y"))) {
+			//Logger.getLogger(PaySlipBatch.class)
+			//		.info("Send Mail flag not N or Y, not parsing the row further " + currentRow.getRowNum());
+			return null;
+		}
+		
 		if (currentRow.getCell(4) != null && currentRow.getCell(4).getCellType() == Cell.CELL_TYPE_STRING)
 			salaryInfo.setFirstName(currentRow.getCell(4).getStringCellValue());
 
@@ -105,7 +113,7 @@ public class PaySlipBatch {
 
 		if (salaryInfo.getEmailId() == null || !isValidEmailAddress(salaryInfo.getEmailId())) {
 			Logger.getLogger(PaySlipBatch.class)
-					.warn("Email address not valid, not parsing further " + currentRow.getRowNum());
+					.error("Email address not valid, not parsing further " + currentRow.getRowNum());
 			return null;
 		}
 
@@ -152,7 +160,7 @@ public class PaySlipBatch {
 			salaryInfo.setOtherLeavesRemaining(currentRow.getCell(21).getNumericCellValue());
 
 		if (currentRow.getCell(22) != null && currentRow.getCell(22).getCellType() == Cell.CELL_TYPE_NUMERIC)
-			salaryInfo.setOtherLeavesRemaining(currentRow.getCell(22).getNumericCellValue());
+			salaryInfo.setOtherLeavesConsumed(currentRow.getCell(22).getNumericCellValue());
 
 		if (currentRow.getCell(23) != null && currentRow.getCell(23).getCellType() == Cell.CELL_TYPE_NUMERIC)
 			salaryInfo.setSalaryWithheld(currentRow.getCell(23).getNumericCellValue());
@@ -169,15 +177,21 @@ public class PaySlipBatch {
 				- salaryInfo.getPT() + salaryInfo.getOtIncentive() - salaryInfo.getSalaryWithheld();
 
 		Logger.getLogger(this.getClass()).info(salaryInfo);
-
-		if (netCalculatedSalary != salaryInfo.getNetPay()) {
+		
+		double netSalaryDiff = netCalculatedSalary - salaryInfo.getNetPay();
+		
+		if (netSalaryDiff > 1 || netSalaryDiff < -1) {
 			Logger.getLogger(this.getClass())
-					.error("Issue with net salary calculation for " + salaryInfo.getFirstName());
+					.error("Issue with net salary calculation for " + salaryInfo.getFirstName() 
+					+ " Expected Net Pay: " + netCalculatedSalary
+					+ " Actual Net Pay in Sheet: " + salaryInfo.getNetPay());
 			return null;
 		}
 
-		if (salaryInfo.getClConsidered() != salaryInfo.getHolidays() - salaryInfo.getDeductionDays()) {
-			Logger.getLogger(this.getClass()).error("Issue with net CL calculation for " + salaryInfo.getFirstName());
+		if ((salaryInfo.getClConsidered() + salaryInfo.getOtherLeavesConsumed() ) != salaryInfo.getHolidays() - salaryInfo.getDeductionDays()) {
+			Logger.getLogger(this.getClass()).error("Issue with net CL calculation for " + salaryInfo.getFirstName()
+			+ " Expected vacation Considered: " + (salaryInfo.getHolidays() - salaryInfo.getDeductionDays()) 
+			+ " Actual vacation Considered: " + (salaryInfo.getClConsidered()  + salaryInfo.getOtherLeavesConsumed()));
 			return null;
 		}
 
@@ -187,8 +201,10 @@ public class PaySlipBatch {
 	public static void main(String[] args) {
 
 		PaySlipBatch paySlipBatch = new PaySlipBatch(new MailPaySlip(), new CreatePaySlip());
-
-		paySlipBatch.runPaySlipBatchProcess(args[0], true);
+		boolean sendMail = false;
+		if (args.length > 1)
+			sendMail = Boolean.parseBoolean(args[1]);
+		paySlipBatch.runPaySlipBatchProcess(args[0], sendMail);
 
 	}
 }
