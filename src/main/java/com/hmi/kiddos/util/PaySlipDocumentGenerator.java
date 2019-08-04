@@ -6,6 +6,7 @@ import java.util.Calendar;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.hmi.kiddos.batch.PaySlipBatch;
 import com.hmi.kiddos.model.SalaryInfo;
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.events.PdfDocumentEvent;
@@ -40,7 +41,14 @@ public class PaySlipDocumentGenerator {
 		try {
 			PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA);
 			PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
-			path = "/docs/" + salaryInfo.getFirstName() + "_" + salaryInfo.getMonth() + "_" + System.currentTimeMillis()
+			path = PaySlipBatch.PAYSLIP_PATH + "/" 
+					+ salaryInfo.getFirstName() 
+					+ "_" 
+					+ salaryInfo.getMonth() 
+					+ "_" 
+					+ salaryInfo.getYear() 
+					+ "_" 
+					+ System.currentTimeMillis()
 					+ ".pdf";
 
 			path = path.replace(' ', '_');
@@ -57,7 +65,8 @@ public class PaySlipDocumentGenerator {
 
 			doc.add(new Paragraph(" "));
 			doc.add(new Paragraph(" "));
-			doc.add(new Paragraph(salaryInfo.getMonth()).setFont(bold).setTextAlignment(TextAlignment.CENTER));
+			doc.add(new Paragraph(salaryInfo.getMonth() + " " + salaryInfo.getYear())
+					.setFont(bold).setTextAlignment(TextAlignment.CENTER));
 			doc.add(new Paragraph(" "));
 			doc.add(new Paragraph(" "));
 

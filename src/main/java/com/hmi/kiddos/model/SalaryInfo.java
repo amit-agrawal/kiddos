@@ -2,6 +2,7 @@ package com.hmi.kiddos.model;
 
 public class SalaryInfo {
 	private String month;
+	private int year;
 	private double basic;
 	private double netPay;
 	private double grossPay;
@@ -180,11 +181,14 @@ public class SalaryInfo {
 				.append(", pfCompanyDeduction=").append(pfCompanyDeduction).append(", pfGovernmentContribution=")
 				.append(pfGovernmentContribution).append(", otherLeavesConsumed=").append(otherLeavesConsumed)
 				.append(", salaryWithheld=").append(salaryWithheld)
-				.append(", otherLeavesRemaining=").append(otherLeavesRemaining).append(", ");
+				.append(", otherLeavesRemaining=")
+				.append(otherLeavesRemaining)
+				.append(", ").append("Month=").append(month)
+				.append(", ").append("Year=").append(year);
 		if (remarks != null)
-			builder.append("remarks=").append(remarks).append(", ");
+			builder.append(", ").append("remarks=").append(remarks);
 		if (emailId != null)
-			builder.append("emailId=").append(emailId).append(", ");
+			builder.append(", ").append("emailId=").append(emailId);
 		builder.append("]");
 		return builder.toString();
 	}
@@ -199,6 +203,12 @@ public class SalaryInfo {
 	}
 	public void setSendMail(String sendMail) {
 		this.sendMail = sendMail;
+	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
 	}
 	
 	

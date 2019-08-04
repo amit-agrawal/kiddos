@@ -1,5 +1,6 @@
 package com.hmi.kiddos.controllers;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +16,9 @@ public class PaySlipController {
 	@Autowired
 	private PaySlipBatch paySlipBatch;
 	
-	@RequestMapping(value = "/generateAndMail", method = RequestMethod.GET)
-	public void generateAndMailPayslips(@PathVariable("path") String path) {
-		paySlipBatch.runPaySlipBatchProcess(path, true);	
-	}
-
 	@RequestMapping(value = "/generate", method = RequestMethod.GET)
 	public void generatePayslips(@PathVariable("path") String path) {
-		paySlipBatch.runPaySlipBatchProcess(path, false);	
+		Workbook workbook = null;
+		paySlipBatch.runPaySlipBatchProcess(workbook, false);	
 	}
 }

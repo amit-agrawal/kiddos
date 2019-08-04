@@ -24,14 +24,16 @@ import com.hmi.kiddos.model.SalaryInfo;
 
 @Component
 public class MailUtil {
+
 	/*
 	 * private @Value("${email.host}") String host;
 	 * private @Value("${email.protocol}") String protocol;
 	 * private @Value("${email.port}") String port;
 	 */
-	private String username;
-	private String password;
-	private String notify;
+
+	private String username="";
+	private String password="";
+	private String notify="";
 
 	public String getUsername() {
 		return username;
@@ -147,11 +149,12 @@ public class MailUtil {
 			StringBuilder recepients = new StringBuilder();
 			if (notify != null && !notify.isEmpty())
 				recepients.append(notify);
-					
+
 			recepients.append(",").append(salaryInfo.getEmailId());
 
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recepients.toString(), false));
-			message.setSubject(String.format("%s: Payslip for %s", salaryInfo.getFirstName(), salaryInfo.getMonth()));
+			message.setSubject(String.format("%s: Payslip for %s %d", salaryInfo.getFirstName(), salaryInfo.getMonth(),
+					salaryInfo.getYear()));
 
 			if (docPath != null) {
 				Logger.getLogger(MailUtil.class).info("Sending Mail with attachment");
@@ -188,7 +191,6 @@ public class MailUtil {
 		}
 	}
 
-	
 	private Session getMailSession() {
 		Properties props = gmailProperties();
 
