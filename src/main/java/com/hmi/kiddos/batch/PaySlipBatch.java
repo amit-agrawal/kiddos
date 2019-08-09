@@ -234,6 +234,12 @@ public class PaySlipBatch {
 			.warn("Please verify very low net salary of " + netCalculatedSalary + " for : " + salaryInfo.getFirstName() + " : " + salaryInfo);			
 		}
 
+		if (salaryInfo.getPT() != 0 && salaryInfo.getPT() != 200 && salaryInfo.getPT() != 300)
+		{
+			Logger.getLogger(this.getClass())
+					.warn("Please verify PT which is neither 0, 200 or 300:  " + salaryInfo.getPT() + " for : " + salaryInfo.getFirstName() + " : " + salaryInfo);
+		}
+
 		if (salaryInfo.getPayAfterHolidays() > 10000 && salaryInfo.getPT() < 1) {
 			Logger.getLogger(this.getClass())
 			.warn("Please verify zero PT for : " + salaryInfo.getFirstName() + " : " + salaryInfo);			
